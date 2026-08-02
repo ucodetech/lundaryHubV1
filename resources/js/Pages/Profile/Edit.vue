@@ -1,0 +1,84 @@
+<script setup lang="ts">
+import AppLayout from '@/Layouts/AppLayout.vue';
+import { useForm, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
+
+const page = usePage();
+const user = computed(() => page.props.auth?.user);
+
+const form = useForm({
+  first_name: user.value?.first_name ?? '',
+  last_name: user.value?.last_name ?? '',
+  email: user.value?.email ?? '',
+  phone: user.value?.phone ?? '',
+});
+
+const submit = () => {
+  form.patch('/profile');
+};
+</script>
+
+<template>
+  <AppLayout>
+    <div class="max-w-xl mx-auto space-y-6">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-100">Account Settings</h1>
+        <p class="text-xs text-slate-400 mt-1">Manage your personal profile and contact information</p>
+      </div>
+
+      <form @submit.prevent="submit" class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">First Name</label>
+            <input
+              v-model="form.first_name"
+              type="text"
+              required
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Last Name</label>
+            <input
+              v-model="form.last_name"
+              type="text"
+              required
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Email Address</label>
+            <input
+              v-model="form.email"
+              type="email"
+              required
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Phone Number</label>
+            <input
+              v-model="form.phone"
+              type="text"
+              required
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          :disabled="form.processing"
+          class="px-6 py-2.5 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shadow-lg shadow-sky-500/20"
+        >
+          Save Changes
+        </button>
+      </form>
+    </div>
+  </AppLayout>
+</template>
