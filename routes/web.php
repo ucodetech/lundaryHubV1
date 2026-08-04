@@ -86,6 +86,9 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
+    // Alias route for garment tag printing
+    Route::get('/shop/orders/{order}/tag', [\App\Http\Controllers\ShopOrderController::class, 'printTag']);
+
     // Customer Orders & Location Routes
     Route::get('/orders', [\App\Http\Controllers\CustomerOrderController::class, 'index'])->name('orders.index');
     Route::post('/orders', [\App\Http\Controllers\CustomerOrderController::class, 'store'])->name('orders.store');
@@ -117,7 +120,16 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/profile', [RiderProfileController::class, 'update'])->name('profile.update');
         Route::post('/kyc', [RiderProfileController::class, 'uploadKyc'])->name('kyc.upload');
         Route::post('/toggle-online', [RiderProfileController::class, 'toggleOnline'])->name('toggle-online');
+
+        // Rider Payout & Earnings Hub
+        Route::get('/payouts', [\App\Http\Controllers\RiderPayoutController::class, 'index'])->name('payouts.index');
+        Route::post('/payouts', [\App\Http\Controllers\RiderPayoutController::class, 'store'])->name('payouts.store');
     });
+
+    // Shared Bank Account Verification Routes
+    Route::get('/bank-accounts/banks', [\App\Http\Controllers\BankAccountController::class, 'getBanks'])->name('bank-accounts.banks');
+    Route::post('/bank-accounts/resolve', [\App\Http\Controllers\BankAccountController::class, 'resolveAccount'])->name('bank-accounts.resolve');
+    Route::post('/bank-accounts/save', [\App\Http\Controllers\BankAccountController::class, 'saveBankAccount'])->name('bank-accounts.save');
 
     // Super Admin Routes
     Route::middleware(['role:super_admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -131,11 +143,30 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/riders/{rider}/reject', [RiderVerificationController::class, 'reject'])->name('riders.reject');
 
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
         Route::post('/users/{user}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('users.toggle-status');
 
         Route::get('/subscription-plans', [\App\Http\Controllers\AdminSubscriptionPlanController::class, 'index'])->name('subscription-plans.index');
         Route::put('/subscription-plans/{plan}', [\App\Http\Controllers\AdminSubscriptionPlanController::class, 'update'])->name('subscription-plans.update');
+
+        // Admin Dispute Management Command Center
+        Route::get('/disputes', [\App\Http\Controllers\Admin\AdminDisputeController::class, 'index'])->name('disputes.index');
+        Route::post('/disputes/{dispute}/resolve', [\App\Http\Controllers\Admin\AdminDisputeController::class, 'resolve'])->name('disputes.resolve');
+
+        // Admin Payout Settlement Hub
+        Route::get('/payouts', [\App\Http\Controllers\Admin\AdminPayoutController::class, 'index'])->name('payouts.index');
+        Route::post('/payouts/{payout}/approve', [\App\Http\Controllers\Admin\AdminPayoutController::class, 'approve'])->name('payouts.approve');
+        Route::post('/payouts/{payout}/reject', [\App\Http\Controllers\Admin\AdminPayoutController::class, 'reject'])->name('payouts.reject');
     });
+
+    // Referral Hub Routes
+    Route::get('/referrals', [\App\Http\Controllers\ReferralController::class, 'index'])->name('referrals.index');
+
+    // Customer & Shop & Rider Order Dispute Ticket Routes
+    Route::get('/disputes', [\App\Http\Controllers\DisputeController::class, 'index'])->name('disputes.index');
+    Route::post('/disputes', [\App\Http\Controllers\DisputeController::class, 'store'])->name('disputes.store');
+    Route::get('/disputes/{dispute}', [\App\Http\Controllers\DisputeController::class, 'show'])->name('disputes.show');
+    Route::post('/disputes/{dispute}/reply', [\App\Http\Controllers\DisputeController::class, 'reply'])->name('disputes.reply');
 });
 
 require __DIR__.'/auth.php';

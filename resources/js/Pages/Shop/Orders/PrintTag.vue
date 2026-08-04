@@ -15,6 +15,20 @@ const totalItems = (items: Array<any>) => {
   if (!items || !items.length) return 0;
   return items.reduce((sum, item) => sum + Number(item.quantity || 1), 0);
 };
+
+const getItemTotal = (item: any) => {
+  const val = Number(item.subtotal ?? item.total_price ?? (Number(item.unit_price || 0) * Number(item.quantity || 1)));
+  if (isNaN(val)) return '0.00';
+  return val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+};
+
+const triggerPrint = () => {
+  window.print();
+};
+
+const closeWindow = () => {
+  window.close();
+};
 </script>
 
 <template>
@@ -22,13 +36,13 @@ const totalItems = (items: Array<any>) => {
     <!-- Screen Control Bar -->
     <div class="mb-6 flex items-center gap-4 print:hidden">
       <button
-        @click="window.print()"
+        @click="triggerPrint"
         class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 font-bold text-xs shadow-lg hover:scale-105 transition-all flex items-center gap-2"
       >
         🖨️ Print Garment Tag
       </button>
       <button
-        @click="window.close()"
+        @click="closeWindow"
         class="px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold hover:text-white"
       >
         ✕ Close Window
@@ -90,9 +104,9 @@ const totalItems = (items: Array<any>) => {
           >
             <span>
               <strong class="text-slate-200 print:text-black">{{ item.quantity }}x</strong>
-              {{ item.category?.name }} - {{ item.service?.name }}
+              {{ item.category?.name || item.category_name }} - {{ item.service?.name || item.service_name }}
             </span>
-            <span class="text-emerald-400 print:text-black font-bold">₦{{ Number(item.total_price).toLocaleString() }}</span>
+            <span class="text-emerald-400 print:text-black font-bold">₦{{ getItemTotal(item) }}</span>
           </div>
         </div>
       </div>

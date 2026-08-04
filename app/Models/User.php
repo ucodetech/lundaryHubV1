@@ -30,6 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'is_active',
         'phone_verified_at',
+        'referral_code',
+        'bonus_balance',
+        'referred_by_id',
     ];
 
     protected $hidden = [
@@ -47,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
             'role' => UserRole::class,
             'is_active' => 'boolean',
+            'bonus_balance' => 'decimal:2',
         ];
     }
 
@@ -78,5 +82,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function devices(): HasMany
     {
         return $this->hasMany(Device::class);
+    }
+
+    public function bankAccount(): HasOne
+    {
+        return $this->hasOne(UserBankAccount::class);
+    }
+
+    public function bankAccounts(): HasMany
+    {
+        return $this->hasMany(UserBankAccount::class);
+    }
+
+    public function payoutRequests(): HasMany
+    {
+        return $this->hasMany(PayoutRequest::class);
     }
 }

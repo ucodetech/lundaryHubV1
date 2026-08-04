@@ -39,6 +39,18 @@ const formatRoleName = computed(() => {
   }
 });
 
+const ordersHref = computed(() => {
+  if (role.value === UserRole.SHOP_OWNER) return '/shop-admin/orders';
+  if (role.value === UserRole.RIDER) return '/rider/orders';
+  return '/orders';
+});
+
+const ordersLabel = computed(() => {
+  if (role.value === UserRole.SHOP_OWNER) return 'Shop Customer Bookings';
+  if (role.value === UserRole.RIDER) return 'Rider Dispatch Orders';
+  return 'My Laundry Orders';
+});
+
 function closeSidebar() {
   emit('close-mobile');
 }
@@ -110,13 +122,33 @@ function closeSidebar() {
       </Link>
 
       <Link
-        href="/orders"
+        :href="ordersHref"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-        :class="$page.url.startsWith('/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        :class="$page.url.startsWith(ordersHref) ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
       >
         <span class="text-base">📦</span>
-        <span>My Laundry Orders</span>
+        <span>{{ ordersLabel }}</span>
+      </Link>
+
+      <Link
+        href="/referrals"
+        @click="closeSidebar"
+        class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+        :class="$page.url.startsWith('/referrals') ? 'bg-purple-500/10 text-purple-400 font-semibold border border-purple-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+      >
+        <span class="text-base">🎁</span>
+        <span>Referral Rewards</span>
+      </Link>
+
+      <Link
+        href="/disputes"
+        @click="closeSidebar"
+        class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+        :class="$page.url.startsWith('/disputes') ? 'bg-amber-500/10 text-amber-400 font-semibold border border-amber-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+      >
+        <span class="text-base">🛡️</span>
+        <span>My Support Tickets</span>
       </Link>
 
       <!-- Shop Owner Links -->
@@ -203,6 +235,16 @@ function closeSidebar() {
         </Link>
 
         <Link
+          href="/rider/payouts"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/rider/payouts') ? 'bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">💰</span>
+          <span>Earnings & Payouts</span>
+        </Link>
+
+        <Link
           href="/rider/profile"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
@@ -250,6 +292,16 @@ function closeSidebar() {
         </Link>
 
         <Link
+          href="/admin/disputes"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/admin/disputes') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">⚖️</span>
+          <span>Dispute Command Center</span>
+        </Link>
+
+        <Link
           href="/admin/subscription-plans"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
@@ -257,6 +309,16 @@ function closeSidebar() {
         >
           <span class="text-base">⚡</span>
           <span>Subscription Config</span>
+        </Link>
+
+        <Link
+          href="/admin/payouts"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/admin/payouts') ? 'bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">💸</span>
+          <span>Payout Settlements</span>
         </Link>
       </template>
 

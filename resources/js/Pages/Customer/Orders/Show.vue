@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import AppLayout from '@/Layouts/AppLayout.vue';
+import DisputeModal from '@/Components/DisputeModal.vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed, ref, onMounted, onUnmounted } from 'vue';
+
+const showDisputeModal = ref(false);
 
 const props = defineProps<{
   order: any;
@@ -143,13 +146,29 @@ onUnmounted(() => {
           </p>
         </div>
 
-        <Link
-          href="/orders"
-          class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-bold text-slate-300 hover:text-white transition-all"
-        >
-          ← Back to Orders
-        </Link>
+        <div class="flex items-center gap-2">
+          <button
+            @click="showDisputeModal = true"
+            class="px-3.5 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-bold text-amber-400 hover:bg-amber-500/20 transition-all flex items-center gap-1.5"
+          >
+            ⚠️ Report Issue
+          </button>
+
+          <Link
+            href="/orders"
+            class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-bold text-slate-300 hover:text-white transition-all"
+          >
+            ← Back to Orders
+          </Link>
+        </div>
       </div>
+
+      <!-- Dispute Modal Component -->
+      <DisputeModal
+        :order="order"
+        :show="showDisputeModal"
+        @close="showDisputeModal = false"
+      />
 
       <!-- Customer Delivery Consent & Confirmation Banner -->
       <div

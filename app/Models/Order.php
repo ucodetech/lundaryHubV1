@@ -90,6 +90,11 @@ class Order extends Model
         return $this->hasOne(OrderReview::class);
     }
 
+    public function dispute(): HasOne
+    {
+        return $this->hasOne(OrderDispute::class);
+    }
+
     public function logStatusChange(string $toStatus, ?User $user = null, ?string $notes = null): void
     {
         $fromStatus = is_object($this->status) ? $this->status->value : (string) $this->status;

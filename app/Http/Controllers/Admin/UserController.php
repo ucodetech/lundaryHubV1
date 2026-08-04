@@ -49,4 +49,45 @@ class UserController extends Controller
 
         return back()->with('success', "User '{$user->name}' has been {$statusLabel}.");
     }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'phone' => 'required|string|max:20|unique:users,phone',
+            'role' => 'required|string|in:super_admin,support,shop_owner,rider,customer',
+            'password' => 'required|string|min:8',
+        ]);
+
+        $user = User::create([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'password' => \Illuminate\Support\Facades\Hash::make($validated['password']),
+            'role' => $validated['role'],
+            'is_active' => true,
+            'email_verified_at' => now(),
+            'phone_verified_at' => now(),
+        ]);
+
+        try {
+            \Spatie\Permission\Models\Role::firstOrCreate(['name' => $validated['role']]);
+            $user->assignRole($validated['role']);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning("Spatie role assignment notice: " . $e->getMessage());
+        }
+
+        if ($validated['role'] === 'rider') {
+            \App\Models\RiderProfile::create([
+                'user_id' => $user->id,
+                'verification_status' => \App\Enums\KycStatus::APPROVED,
+                'vehicle_type' => 'Motorcycle',
+            ]);
+        }
+
+        return back()->with('success', "🎉 System user '{$user->first_name} {$user->last_name}' ({$user->role}) created successfully!");
+    }
 }

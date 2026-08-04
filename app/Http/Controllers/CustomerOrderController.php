@@ -19,7 +19,7 @@ use Inertia\Response;
 
 class CustomerOrderController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): Response|RedirectResponse
     {
         $user = $request->user();
 
@@ -32,6 +32,11 @@ class CustomerOrderController extends Controller
         ->with(['shop', 'items.category', 'items.service'])
         ->latest()
         ->paginate(10);
+
+        // If the user is a Shop Owner and has 0 personal orders as a customer, redirect to their Shop Orders dashboard
+        if ($user->role === \App\Enums\UserRole::SHOP_OWNER->value && $orders->total() === 0) {
+            return redirect()->route('shop.orders.index');
+        }
 
         return Inertia::render('Customer/Orders/Index', [
             'orders' => $orders,
@@ -239,6 +244,7 @@ class CustomerOrderController extends Controller
             'status' => OrderStatus::COMPLETED,
         ]);
 
+        \App\Services\ReferralService::rewardFirstOrderCompletion($order);
         \App\Services\SmsNotificationService::sendOrderStatusAlert($order, 'order_completed');
 
         return back()->with('success', '🎉 Delivery receipt confirmed! Thank you for using LaundryHub.');

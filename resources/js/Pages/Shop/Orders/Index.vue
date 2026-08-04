@@ -258,20 +258,35 @@ onUnmounted(() => {
                     </select>
 
                     <a
-                      :href="`/shop/orders/${order.id}/tag`"
+                      :href="`/shop-admin/orders/${order.id}/tag`"
                       target="_blank"
                       class="px-2.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
                       title="Print Garment Tag"
                     >
                       🏷️ Tag
                     </a>
+
+                    <Link
+                      :href="`/orders/${order.order_number}`"
+                      target="_blank"
+                      class="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-sky-400 hover:text-sky-300 font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
+                      title="View Full Order Details & Audit Trail"
+                    >
+                      👁️ Details
+                    </Link>
                   </div>
                 </td>
               </tr>
 
               <tr v-if="!orders.data || orders.data.length === 0">
-                <td colspan="6" class="p-8 text-center text-slate-400 text-xs">
-                  No orders recorded yet. Click "+ Log Manual / Legacy Order" above to log walk-in items!
+                <td colspan="6" class="p-12 text-center text-slate-400 text-xs">
+                  <div class="space-y-3 max-w-sm mx-auto">
+                    <span class="text-4xl block">🧺</span>
+                    <h4 class="font-bold text-slate-200 text-sm">No Shop Customer Bookings Yet</h4>
+                    <p class="text-xs text-slate-400">
+                      No customer bookings received yet. Share your storefront link or click <strong>"+ Log Manual / Legacy Order"</strong> above to record walk-in garments!
+                    </p>
+                  </div>
                 </td>
               </tr>
             </tbody>

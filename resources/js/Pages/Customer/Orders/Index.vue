@@ -71,8 +71,25 @@ const formatStatusText = (status: string) => {
           </Link>
         </div>
 
-        <div v-if="!orders.data || orders.data.length === 0" class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-12 text-center text-slate-400 text-xs shadow-xl">
-          No orders placed yet. Visit a dry cleaner storefront to book your first laundry order!
+        <div v-if="!orders.data || orders.data.length === 0" class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-12 text-center text-slate-400 text-xs shadow-xl space-y-4">
+          <span class="text-4xl block">🧺</span>
+          <div class="space-y-1">
+            <h3 class="font-bold text-slate-200 text-sm">No Personal Customer Bookings Placed</h3>
+            <p v-if="$page.props.auth?.user?.role === 'shop_owner'" class="text-xs text-slate-400 max-w-md mx-auto">
+              You have not placed any personal laundry orders as a customer. To manage customer bookings received at your laundry shop, go to <strong>Shop Operations ➔ Shop Orders</strong>.
+            </p>
+            <p v-else class="text-xs text-slate-400 max-w-md mx-auto">
+              No orders placed yet. Visit a dry cleaner storefront to book your first laundry order!
+            </p>
+          </div>
+          <div class="flex items-center justify-center gap-3 pt-2">
+            <Link v-if="$page.props.auth?.user?.role === 'shop_owner'" href="/shop-admin/orders" class="px-5 py-2.5 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shadow-lg hover:scale-105 transition-all">
+              📋 Go to Shop Customer Orders ➔
+            </Link>
+            <Link href="/" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-bold text-xs hover:text-white">
+              Browse Shop Marketplace
+            </Link>
+          </div>
         </div>
       </div>
     </div>

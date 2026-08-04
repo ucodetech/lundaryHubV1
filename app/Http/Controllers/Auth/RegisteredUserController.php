@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
     {
         return Inertia::render('Auth/Register', [
             'defaultRole' => $request->query('role', 'customer'),
+            'initialReferralCode' => $request->query('ref', ''),
         ]);
     }
 
@@ -31,6 +32,7 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'phone' => 'required|string|max:20|unique:'.User::class,
             'role' => 'required|string|in:customer,shop_owner,rider',
+            'referral_code' => 'nullable|string|max:50',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -41,6 +43,7 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'referral_code' => $request->phone, // Set user's own phone number as their unique referral code!
             'role' => $roleEnum,
             'password' => Hash::make($request->password),
             'is_active' => true,
@@ -49,6 +52,10 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->assignRole($roleEnum->value);
+
+        if ($request->filled('referral_code')) {
+            \App\Services\ReferralService::recordRegistration($user, $request->referral_code);
+        }
 
         Auth::login($user);
 

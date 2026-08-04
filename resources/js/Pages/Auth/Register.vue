@@ -4,6 +4,7 @@ import GlobalLoader from '@/Components/GlobalLoader.vue';
 
 const props = defineProps<{
   defaultRole?: string;
+  initialReferralCode?: string;
 }>();
 
 const form = useForm({
@@ -12,6 +13,7 @@ const form = useForm({
   email: '',
   phone: '',
   role: props.defaultRole ?? 'customer',
+  referral_code: props.initialReferralCode ?? '',
   password: '',
   password_confirmation: '',
 });
@@ -133,6 +135,20 @@ const submit = () => {
             />
             <p v-if="form.errors.phone" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.phone }}</p>
           </div>
+        </div>
+
+        <!-- Referral Phone / Code Input -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">
+            Referral Phone Number / Code <span class="text-slate-500 font-normal text-[11px] lowercase">(optional)</span>
+          </label>
+          <input
+            v-model="form.referral_code"
+            type="text"
+            placeholder="e.g. 08012345678"
+            class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm font-mono focus:border-sky-500 focus:ring-0"
+          />
+          <p v-if="form.errors.referral_code" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.referral_code }}</p>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
