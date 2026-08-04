@@ -3,7 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import Badge from '@/Components/Badge.vue';
 import AdvancedFilter, { FilterConfig } from '@/Components/AdvancedFilter.vue';
 import { useForm, router, Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { confirmDialog } from '@/Utils/swal';
 
 const props = defineProps<{
@@ -26,6 +26,25 @@ function closeModal() {
   showModal.value = false;
   selectedShop.value = null;
 }
+
+function getKycDocs(shop: any): Array<any> {
+  if (!shop) return [];
+  return shop.kyc_documents || shop.kycDocuments || [];
+}
+
+// Keep selectedShop reactively updated when props.shops changes
+watch(
+  () => props.shops,
+  (newShops) => {
+    if (selectedShop.value && newShops?.data) {
+      const updated = newShops.data.find((s: any) => s.id === selectedShop.value.id);
+      if (updated) {
+        selectedShop.value = updated;
+      }
+    }
+  },
+  { deep: true }
+);
 
 const filterConfig: FilterConfig[] = [
   {
@@ -63,35 +82,47 @@ const handleFilterChange = (newFilters: Record<string, any>) => {
   });
 };
 
-const verifyShop = async (id: number) => {
+const verifyShop = async (shopId: number) => {
   const confirmed = await confirmDialog(
-    'Verify & Activate Shop?',
-    'Are you sure you want to verify and activate this dry cleaner storefront and unlock operational features?'
+    'Verify Dry Cleaning Shop?',
+    'This will activate the shop storefront, unlock categories & pricing management, provision a 1-Month Free Trial, and generate a Paystack Dedicated Virtual Account.'
   );
+
   if (confirmed) {
-    useForm({}).post(`/admin/shops/${id}/verify`, {
+    router.post(`/admin/shops/${shopId}/verify`, {}, {
+      preserveScroll: true,
       onSuccess: () => {
-        if (selectedShop.value && selectedShop.value.id === id) {
-          selectedShop.value.status = 'active';
-          selectedShop.value.is_verified = true;
-          selectedShop.value.kyc_status = 'approved';
-        }
+        closeModal();
       },
     });
   }
 };
 
-const suspendShop = async (id: number) => {
+const generateVirtualAccount = async (shopId: number) => {
   const confirmed = await confirmDialog(
-    'Suspend Dry Cleaner Shop?',
-    'Are you sure you want to suspend this shop? It will be hidden from customer search results and operational features will be locked.'
+    'Generate Dedicated Virtual Account?',
+    'This will trigger Paystack API to create or assign a Dedicated Virtual Account for direct customer transfer settlements.'
   );
+
   if (confirmed) {
-    useForm({}).post(`/admin/shops/${id}/suspend`, {
+    router.post(`/admin/shops/${shopId}/generate-virtual-account`, {}, {
+      preserveScroll: true,
+    });
+  }
+};
+
+const suspendShop = async (shopId: number) => {
+  const confirmed = await confirmDialog(
+    'Suspend Shop?',
+    'This will temporarily deactivate the shop storefront and block customer order bookings.',
+    'warning'
+  );
+
+  if (confirmed) {
+    router.post(`/admin/shops/${shopId}/suspend`, {}, {
+      preserveScroll: true,
       onSuccess: () => {
-        if (selectedShop.value && selectedShop.value.id === id) {
-          selectedShop.value.status = 'suspended';
-        }
+        closeModal();
       },
     });
   }
@@ -101,98 +132,155 @@ const suspendShop = async (id: number) => {
 <template>
   <AppLayout>
     <div class="space-y-6">
-      <!-- Page Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Dry Cleaner Verification & KYC Audit</h1>
-          <p class="text-xs text-slate-400 mt-1">Review shop registrations, storefront photos, CAC legal documents, and address coordinates</p>
+          <h1 class="text-2xl font-bold text-slate-100">Dry Cleaning Shops Audit</h1>
+          <p class="text-xs text-slate-400 mt-1">Review shop storefront registrations, audit uploaded KYC media, approve shops, and manage Paystack virtual settlement accounts.</p>
+        </div>
+
+        <div class="flex items-center gap-3 text-xs">
+          <span class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300">
+            Total Shops: <strong class="text-sky-400 font-mono">{{ shops.total || 0 }}</strong>
+          </span>
         </div>
       </div>
 
-      <!-- Advanced Filter Component -->
+      <!-- Advanced Filter -->
       <AdvancedFilter
-        v-model="filterState"
-        :filters-config="filterConfig"
-        search-placeholder="Search shop name, email, or phone..."
+        :config="filterConfig"
+        :initial-values="filterState"
         @filter-change="handleFilterChange"
       />
 
-      <!-- Table Container -->
+      <!-- Shops Data Table -->
       <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
-            <tr>
-              <th class="py-3.5 px-6">Shop Name</th>
-              <th class="py-3.5 px-6">Structure</th>
-              <th class="py-3.5 px-6">Owner</th>
-              <th class="py-3.5 px-6">Contact & Location</th>
-              <th class="py-3.5 px-6">Status</th>
-              <th class="py-3.5 px-6 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-700/40">
-            <tr v-for="shop in shops.data" :key="shop.id" class="hover:bg-slate-800/40 transition-colors">
-              <td class="py-4 px-6 font-semibold text-slate-200">
-                <div class="flex items-center gap-2">
-                  <span>{{ shop.name }}</span>
-                  <span v-if="shop.is_verified" class="text-xs text-sky-400" title="Verified Storefront">✓</span>
-                </div>
-                <div class="text-[11px] text-slate-500 font-mono">/shop/{{ shop.slug }}</div>
-              </td>
-              <td class="py-4 px-6 text-xs">
-                <span
-                  class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                  :class="shop.business_type === 'cac_registered' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' : 'bg-slate-800 text-slate-400'"
-                >
-                  {{ shop.business_type === 'cac_registered' ? '🏛️ CAC Registered' : '🏪 Independent' }}
-                </span>
-              </td>
-              <td class="py-4 px-6 text-slate-300 text-xs">
-                <div class="font-medium text-slate-200">{{ shop.owner?.first_name }} {{ shop.owner?.last_name }}</div>
-                <div class="text-slate-400 text-[11px]">{{ shop.owner?.email }}</div>
-              </td>
-              <td class="py-4 px-6 text-slate-400 text-xs">
-                <div>{{ shop.phone }}</div>
-                <div class="text-slate-500 text-[11px] truncate max-w-xs" :title="shop.address">{{ shop.address }}</div>
-              </td>
-              <td class="py-4 px-6">
-                <Badge :status="shop.status" />
-              </td>
-              <td class="py-4 px-6 text-right space-x-2">
-                <!-- View Details Button -->
-                <button
-                  @click="openShopModal(shop)"
-                  class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 transition-all inline-flex items-center gap-1"
-                >
-                  <span>👁️</span>
-                  <span>View Audit</span>
-                </button>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-700/80 bg-slate-900/50 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                <th class="py-3.5 px-4">Shop Details</th>
+                <th class="py-3.5 px-4">Owner</th>
+                <th class="py-3.5 px-4">Paystack Virtual Account</th>
+                <th class="py-3.5 px-4">KYC Audit</th>
+                <th class="py-3.5 px-4">Status</th>
+                <th class="py-3.5 px-4 text-right">Actions</th>
+              </tr>
+            </thead>
 
-                <!-- Status Action Button -->
-                <button
-                  v-if="shop.status !== 'active'"
-                  @click="verifyShop(shop.id)"
-                  class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
-                >
-                  Verify & Activate
-                </button>
-                <button
-                  v-if="shop.status === 'active'"
-                  @click="suspendShop(shop.id)"
-                  class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 transition-all"
-                >
-                  Suspend
-                </button>
-              </td>
-            </tr>
+            <tbody class="divide-y divide-slate-700/50 text-xs">
+              <tr v-for="shop in shops.data" :key="shop.id" class="hover:bg-slate-700/30 transition-colors">
+                <!-- Shop Details -->
+                <td class="py-4 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center font-extrabold text-slate-950 text-base shadow">
+                      {{ shop.name[0] }}
+                    </div>
+                    <div>
+                      <div class="font-bold text-slate-100 text-sm flex items-center gap-1.5">
+                        <span>{{ shop.name }}</span>
+                        <a
+                          :href="`/shop/${shop.slug}`"
+                          target="_blank"
+                          class="text-sky-400 text-[11px] font-normal hover:underline"
+                          title="View Public Storefront"
+                        >
+                          🔗
+                        </a>
+                      </div>
+                      <p class="text-[11px] text-slate-400">{{ shop.address }}</p>
+                    </div>
+                  </div>
+                </td>
 
-            <tr v-if="!shops.data || shops.data.length === 0">
-              <td colspan="6" class="py-12 text-center text-slate-400 text-xs">
-                No dry cleaner shops matching the selected filters.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                <!-- Owner -->
+                <td class="py-4 px-4">
+                  <div v-if="shop.owner">
+                    <div class="font-semibold text-slate-200">{{ shop.owner.first_name }} {{ shop.owner.last_name }}</div>
+                    <div class="text-[11px] text-slate-400 font-mono">{{ shop.phone }}</div>
+                  </div>
+                  <span v-else class="text-slate-500 italic">No Owner Assigned</span>
+                </td>
+
+                <!-- Paystack Virtual Account Details -->
+                <td class="py-4 px-4">
+                  <div v-if="shop.virtual_account || shop.virtualAccount" class="space-y-1">
+                    <span class="text-emerald-400 font-mono font-bold text-xs block">
+                      {{ (shop.virtual_account || shop.virtualAccount).account_number || 'Pending Number' }}
+                    </span>
+                    <span class="text-[10px] text-slate-300 block">
+                      {{ (shop.virtual_account || shop.virtualAccount).bank_name || 'Wema Bank' }}
+                    </span>
+                  </div>
+                  <div v-else class="space-y-1">
+                    <span class="text-amber-400 text-[11px] font-semibold block">Not Provisioned</span>
+                    <button
+                      @click="generateVirtualAccount(shop.id)"
+                      class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold hover:bg-emerald-500/20 transition-all inline-flex items-center gap-1"
+                    >
+                      <span>🏦 Generate Account</span>
+                    </button>
+                  </div>
+                </td>
+
+                <!-- KYC Documents Status -->
+                <td class="py-4 px-4">
+                  <button
+                    @click="openShopModal(shop)"
+                    class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-sky-500 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                  >
+                    <span>📷</span>
+                    <span>KYC Audit ({{ getKycDocs(shop).length }})</span>
+                  </button>
+                </td>
+
+                <!-- Status Badge -->
+                <td class="py-4 px-4">
+                  <Badge :status="shop.status" />
+                </td>
+
+                <!-- Actions -->
+                <td class="py-4 px-4 text-right space-x-2">
+                  <button
+                    @click="openShopModal(shop)"
+                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-700/60 text-slate-200 hover:bg-slate-700 transition-all"
+                  >
+                    Audit
+                  </button>
+
+                  <button
+                    @click="generateVirtualAccount(shop.id)"
+                    class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-all"
+                    title="Generate or Re-sync Paystack Virtual Account"
+                  >
+                    🏦 Account
+                  </button>
+
+                  <button
+                    v-if="shop.status !== 'active'"
+                    @click="verifyShop(shop.id)"
+                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
+                  >
+                    Verify & Activate
+                  </button>
+
+                  <button
+                    v-if="shop.status === 'active'"
+                    @click="suspendShop(shop.id)"
+                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 transition-all"
+                  >
+                    Suspend
+                  </button>
+                </td>
+              </tr>
+
+              <tr v-if="!shops.data || shops.data.length === 0">
+                <td colspan="6" class="py-12 text-center text-slate-400 text-xs">
+                  No dry cleaner shops matching the selected filters.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -236,13 +324,54 @@ const suspendShop = async (id: number) => {
             </div>
           </div>
 
+          <!-- Paystack Virtual Account Card -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Paystack Dedicated Settlement Account</h4>
+              <button
+                @click="generateVirtualAccount(selectedShop.id)"
+                class="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold hover:bg-emerald-500/20 transition-all flex items-center gap-1"
+              >
+                <span>⚡</span>
+                <span>Generate / Re-sync Virtual Account</span>
+              </button>
+            </div>
+
+            <div v-if="selectedShop.virtual_account || selectedShop.virtualAccount" class="bg-slate-950/80 p-4 rounded-xl border border-emerald-500/30 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase block font-sans">Bank Name</span>
+                <strong class="text-slate-200 text-sm block">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).bank_name || 'Wema Bank' }}</strong>
+              </div>
+
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase block font-sans">Account Number</span>
+                <strong class="text-emerald-400 text-base block font-bold">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).account_number || 'Pending' }}</strong>
+              </div>
+
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase block font-sans">Account Name</span>
+                <strong class="text-slate-200 text-xs block truncate">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).account_name || selectedShop.name }}</strong>
+              </div>
+            </div>
+
+            <div v-else class="bg-slate-950/40 p-4 rounded-xl border border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+              <span>No virtual account provisioned yet for this shop.</span>
+              <button
+                @click="generateVirtualAccount(selectedShop.id)"
+                class="px-3 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow hover:scale-105 transition-transform"
+              >
+                Generate Paystack DVA Now
+              </button>
+            </div>
+          </div>
+
           <!-- Storefront Photos Gallery & Documents -->
           <div>
             <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-3">Uploaded KYC Documents & Storefront Media</h4>
 
-            <div v-if="selectedShop.kycDocuments && selectedShop.kycDocuments.length > 0" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div v-if="getKycDocs(selectedShop).length > 0" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div
-                v-for="doc in selectedShop.kycDocuments"
+                v-for="doc in getKycDocs(selectedShop)"
                 :key="doc.id"
                 class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 space-y-2"
               >
@@ -298,22 +427,22 @@ const suspendShop = async (id: number) => {
 
         <!-- Modal Footer Actions -->
         <div class="p-6 border-t border-slate-800/80 bg-slate-950/50 flex flex-wrap items-center justify-between gap-3 sticky bottom-0 z-10">
-          <a
-            :href="`/shop/${selectedShop.slug}`"
-            target="_blank"
-            class="px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 transition-all inline-flex items-center gap-1.5"
-          >
-            <span>🔗 Preview Public Storefront</span>
-          </a>
-
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2">
             <button
               v-if="selectedShop.status !== 'active'"
               @click="verifyShop(selectedShop.id)"
-              class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
+              class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20"
             >
-              Approve KYC & Activate Shop
+              Verify & Approve Shop ✓
             </button>
+
+            <button
+              @click="generateVirtualAccount(selectedShop.id)"
+              class="px-4 py-2 rounded-xl text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30 transition-all"
+            >
+              🏦 Generate / Re-sync DVA
+            </button>
+
             <button
               v-if="selectedShop.status === 'active'"
               @click="suspendShop(selectedShop.id)"
@@ -321,13 +450,11 @@ const suspendShop = async (id: number) => {
             >
               Suspend Shop
             </button>
-            <button
-              @click="closeModal"
-              class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all"
-            >
-              Close
-            </button>
           </div>
+
+          <button @click="closeModal" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+            Close Audit
+          </button>
         </div>
       </div>
     </div>

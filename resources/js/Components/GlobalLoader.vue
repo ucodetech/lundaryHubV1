@@ -6,20 +6,42 @@ const isLoading = ref(false);
 
 let removeStartEventListener: (() => void) | null = null;
 let removeFinishEventListener: (() => void) | null = null;
+let removeInvalidEventListener: (() => void) | null = null;
+let removeExceptionEventListener: (() => void) | null = null;
+let removeNavigateEventListener: (() => void) | null = null;
+let safetyTimer: any = null;
+
+const hideLoader = () => {
+  isLoading.value = false;
+  if (safetyTimer) {
+    clearTimeout(safetyTimer);
+    safetyTimer = null;
+  }
+};
 
 onMounted(() => {
-  removeStartEventListener = router.on('start', () => {
+  removeStartEventListener = router.on('start', (event: any) => {
+    if (event?.detail?.visit?.showProgress === false) {
+      return;
+    }
     isLoading.value = true;
+    if (safetyTimer) clearTimeout(safetyTimer);
+    safetyTimer = setTimeout(hideLoader, 2500); // 2.5s maximum safety fallback
   });
 
-  removeFinishEventListener = router.on('finish', () => {
-    isLoading.value = false;
-  });
+  removeFinishEventListener = router.on('finish', hideLoader);
+  removeInvalidEventListener = router.on('invalid', hideLoader);
+  removeExceptionEventListener = router.on('exception', hideLoader);
+  removeNavigateEventListener = router.on('navigate', hideLoader);
 });
 
 onUnmounted(() => {
   if (removeStartEventListener) removeStartEventListener();
   if (removeFinishEventListener) removeFinishEventListener();
+  if (removeInvalidEventListener) removeInvalidEventListener();
+  if (removeExceptionEventListener) removeExceptionEventListener();
+  if (removeNavigateEventListener) removeNavigateEventListener();
+  hideLoader();
 });
 </script>
 

@@ -5,9 +5,11 @@ import Badge from '@/Components/Badge.vue';
 import BarChart from '@/Components/Charts/BarChart.vue';
 import PieChart from '@/Components/Charts/PieChart.vue';
 import { Link, useForm } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   profile: any;
+  activeSubscription?: any;
   stats?: {
     total_earnings: number;
     total_deliveries: number;
@@ -29,6 +31,17 @@ const toggleForm = useForm({});
 const toggleOnline = () => {
   toggleForm.post('/rider/toggle-online');
 };
+
+const isPassActive = computed(() => {
+  if (!props.activeSubscription) return false;
+  return new Date(props.activeSubscription.ends_at) > new Date();
+});
+
+const daysRemaining = computed(() => {
+  if (!props.activeSubscription) return 0;
+  const diff = new Date(props.activeSubscription.ends_at).getTime() - Date.now();
+  return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+});
 </script>
 
 <template>
@@ -50,6 +63,53 @@ const toggleOnline = () => {
         >
           {{ profile.is_online ? '🔴 Go Offline' : '🟢 Go Online Now' }}
         </button>
+      </div>
+
+      <!-- Rider Pass Status Banner -->
+      <div
+        v-if="activeSubscription"
+        class="rounded-2xl p-5 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl"
+        :class="isPassActive
+          ? (daysRemaining <= 5 ? 'bg-amber-500/5 border-amber-500/30' : 'bg-emerald-500/5 border-emerald-500/20')
+          : 'bg-rose-500/5 border-rose-500/30'"
+      >
+        <div class="flex items-start gap-4">
+          <span class="text-3xl mt-0.5">{{ isPassActive ? (daysRemaining <= 5 ? '⚠️' : '🛵') : '🔴' }}</span>
+          <div>
+            <p class="font-bold text-sm" :class="isPassActive ? (daysRemaining <= 5 ? 'text-amber-400' : 'text-emerald-400') : 'text-rose-400'">
+              {{ isPassActive ? activeSubscription.plan_name : 'Rider Pass Expired' }}
+            </p>
+            <p class="text-xs mt-0.5" :class="isPassActive ? 'text-slate-400' : 'text-rose-400/70'">
+              <template v-if="isPassActive">
+                {{ daysRemaining }} day{{ daysRemaining !== 1 ? 's' : '' }} remaining &bull; Expires {{ new Date(activeSubscription.ends_at).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' }) }}
+              </template>
+              <template v-else>
+                Your pass ended on {{ new Date(activeSubscription.ends_at).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' }) }} — you cannot go online until you renew.
+              </template>
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/rider/subscription"
+          class="shrink-0 px-5 py-2.5 rounded-xl font-bold text-xs shadow-lg transition-all hover:scale-105"
+          :class="isPassActive ? 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500/40 hover:text-emerald-400' : 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-emerald-500/20'"
+        >
+          {{ isPassActive ? '💳 Manage Pass' : '🚀 Renew Pass →' }}
+        </Link>
+      </div>
+
+      <!-- No Pass Warning -->
+      <div v-else-if="profile && profile.kyc_status === 'approved'" class="bg-amber-500/5 border border-amber-500/30 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🛵</span>
+          <div>
+            <p class="font-bold text-sm text-amber-400">No Active Rider Pass</p>
+            <p class="text-xs text-slate-400 mt-0.5">Pay the flat ₦2,000/month pass to activate your dispatch access and start accepting deliveries.</p>
+          </div>
+        </div>
+        <Link href="/rider/subscription" class="shrink-0 px-5 py-2.5 rounded-xl font-bold text-xs bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-lg shadow-emerald-500/20 hover:scale-105 transition-all">
+          💳 Get Rider Pass →
+        </Link>
       </div>
 
       <!-- KYC Verification Alert -->

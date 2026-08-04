@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { confirmDialog } from '@/Utils/swal';
+import { UserRole } from '@/Enums/UserRole';
 
 defineProps<{
   prices: Array<any>;
@@ -14,7 +15,10 @@ defineProps<{
 
 const page = usePage();
 const userRole = computed(() => page.props.auth?.user?.role);
-const isShopOwner = computed(() => userRole.value === 'shop_owner');
+const isShopOwner = computed(() => userRole.value === UserRole.SHOP_OWNER);
+
+const showEditModal = ref(false);
+const editingPrice = ref<any | null>(null);
 
 const form = useForm({
   category_id: null,
@@ -22,10 +26,32 @@ const form = useForm({
   amount: 500,
 });
 
+const editForm = useForm({
+  amount: 0,
+});
+
 const submit = () => {
   form.post('/shop-admin/pricing', {
+    preserveScroll: true,
     onSuccess: () => {
       form.reset();
+    },
+  });
+};
+
+const openEditModal = (price: any) => {
+  editingPrice.value = price;
+  editForm.amount = price.amount;
+  showEditModal.value = true;
+};
+
+const submitEdit = () => {
+  if (!editingPrice.value) return;
+  editForm.put(`/shop-admin/pricing/${editingPrice.value.id}`, {
+    preserveScroll: true,
+    onSuccess: () => {
+      showEditModal.value = false;
+      editingPrice.value = null;
     },
   });
 };
@@ -36,12 +62,16 @@ const deletePrice = async (id: number) => {
     'Are you sure you want to delete this price entry from your catalog?'
   );
   if (confirmed) {
-    useForm({}).delete(`/shop-admin/pricing/${id}`);
+    useForm({}).delete(`/shop-admin/pricing/${id}`, {
+      preserveScroll: true,
+    });
   }
 };
 
 const cloneMasterPrice = (priceId: number) => {
-  useForm({}).post(`/shop-admin/pricing/${priceId}/clone`);
+  useForm({}).post(`/shop-admin/pricing/${priceId}/clone`, {
+    preserveScroll: true,
+  });
 };
 
 const cloneAllMasterTemplates = async () => {
@@ -51,7 +81,9 @@ const cloneAllMasterTemplates = async () => {
     'Yes, Import Catalog'
   );
   if (confirmed) {
-    useForm({}).post('/shop-admin/pricing/clone-all');
+    useForm({}).post('/shop-admin/pricing/clone-all', {
+      preserveScroll: true,
+    });
   }
 };
 </script>
@@ -148,18 +180,27 @@ const cloneAllMasterTemplates = async () => {
                 <th class="py-3.5 px-6">Category</th>
                 <th class="py-3.5 px-6">Service</th>
                 <th class="py-3.5 px-6 text-right">Price (₦)</th>
-                <th class="py-3.5 px-6 text-right">Action</th>
+                <th class="py-3.5 px-6 text-right">Actions</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-700/40">
               <tr v-for="price in prices" :key="price.id" class="hover:bg-slate-800/40 transition-colors">
-                <td class="py-4 px-6 font-semibold text-slate-200">{{ price.category?.name }}</td>
+                <td class="py-4 px-6 font-semibold text-slate-200">
+                  <span v-if="price.category?.icon" class="mr-1.5">{{ price.category.icon }}</span>
+                  <span>{{ price.category?.name }}</span>
+                </td>
                 <td class="py-4 px-6 text-slate-300">{{ price.service?.name }}</td>
                 <td class="py-4 px-6 text-right font-bold text-sky-400">₦{{ Number(price.amount).toLocaleString() }}</td>
-                <td class="py-4 px-6 text-right">
+                <td class="py-4 px-6 text-right space-x-2">
+                  <button
+                    @click="openEditModal(price)"
+                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 transition-all"
+                  >
+                    Edit
+                  </button>
                   <button
                     @click="deletePrice(price.id)"
-                    class="text-xs text-rose-400 hover:text-rose-300 font-semibold"
+                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 transition-all"
                   >
                     Delete
                   </button>
@@ -167,7 +208,7 @@ const cloneAllMasterTemplates = async () => {
               </tr>
               <tr v-if="prices.length === 0">
                 <td colspan="4" class="py-8 text-center text-slate-400 text-xs">
-                  No shop price rules defined. Use the form above to add pricing.
+                  No shop price rules defined. Use the form above to add pricing or click "Import All Master Templates".
                 </td>
               </tr>
             </tbody>
@@ -199,7 +240,10 @@ const cloneAllMasterTemplates = async () => {
             </thead>
             <tbody class="divide-y divide-slate-800/60">
               <tr v-for="mPrice in masterPrices" :key="mPrice.id" class="hover:bg-slate-800/30">
-                <td class="py-3 px-6 text-xs font-medium text-slate-300">{{ mPrice.category?.name }}</td>
+                <td class="py-3 px-6 text-xs font-medium text-slate-300">
+                  <span v-if="mPrice.category?.icon" class="mr-1.5">{{ mPrice.category.icon }}</span>
+                  <span>{{ mPrice.category?.name }}</span>
+                </td>
                 <td class="py-3 px-6 text-xs text-slate-400">{{ mPrice.service?.name }}</td>
                 <td class="py-3 px-6 text-right text-xs font-semibold text-purple-300">₦{{ Number(mPrice.amount).toLocaleString() }}</td>
                 <td v-if="isShopOwner" class="py-3 px-6 text-right">
@@ -213,6 +257,46 @@ const cloneAllMasterTemplates = async () => {
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- Edit Price Rule Modal -->
+      <div v-if="showEditModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
+          <h3 class="text-lg font-bold text-slate-100">Edit Shop Price Rule</h3>
+          <p class="text-xs text-slate-400">
+            Category: <strong class="text-slate-200">{{ editingPrice?.category?.name }}</strong> • Service: <strong class="text-slate-200">{{ editingPrice?.service?.name }}</strong>
+          </p>
+
+          <form @submit.prevent="submitEdit" class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Custom Price Amount (₦) *</label>
+              <input
+                v-model="editForm.amount"
+                type="number"
+                required
+                min="0"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+              />
+            </div>
+
+            <div class="flex justify-end gap-3 pt-2">
+              <button
+                type="button"
+                @click="showEditModal = false"
+                class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                :disabled="editForm.processing"
+                class="px-5 py-2 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shadow-lg shadow-sky-500/20"
+              >
+                Update Price Rule
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

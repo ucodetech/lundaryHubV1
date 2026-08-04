@@ -17,12 +17,17 @@ export interface FilterConfig {
 
 const props = withDefaults(
   defineProps<{
-    filtersConfig: FilterConfig[];
+    filtersConfig?: FilterConfig[];
+    config?: FilterConfig[];
     modelValue?: Record<string, any>;
+    initialValues?: Record<string, any>;
     searchPlaceholder?: string;
   }>(),
   {
+    filtersConfig: () => [],
+    config: () => [],
     modelValue: () => ({}),
+    initialValues: () => ({}),
     searchPlaceholder: 'Search records...',
   }
 );
@@ -33,14 +38,23 @@ const emit = defineEmits<{
   (e: 'reset'): void;
 }>();
 
+const effectiveConfig = computed<FilterConfig[]>(() => {
+  if (props.config && props.config.length > 0) return props.config;
+  return props.filtersConfig || [];
+});
+
+const initialFilterState = computed(() => {
+  return { ...props.initialValues, ...props.modelValue };
+});
+
 // Filter Values state
-const filterValues = ref<Record<string, any>>({ ...props.modelValue });
+const filterValues = ref<Record<string, any>>({ ...initialFilterState.value });
 
 // Active Visible Fields (which filters are currently toggled on)
 const activeFields = ref<Set<string>>(
   new Set(
-    props.filtersConfig
-      .filter((f) => f.defaultVisible || props.modelValue[f.key])
+    (effectiveConfig.value || [])
+      .filter((f) => f && (f.defaultVisible || initialFilterState.value[f.key]))
       .map((f) => f.key)
   )
 );
@@ -60,29 +74,23 @@ function toggleFieldVisibility(key: string) {
   }
 }
 
-function removeFilter(key: string) {
-  activeFields.value.delete(key);
-  delete filterValues.value[key];
-  applyFilters();
-}
-
 function applyFilters() {
-  const cleanValues: Record<string, any> = {};
-  Object.keys(filterValues.value).forEach((key) => {
-    const val = filterValues.value[key];
+  const activePayload: Record<string, any> = {};
+  for (const [key, val] of Object.entries(filterValues.value)) {
     if (val !== '' && val !== null && val !== undefined) {
-      cleanValues[key] = val;
+      activePayload[key] = val;
     }
-  });
-
-  emit('update:modelValue', cleanValues);
-  emit('filter-change', cleanValues);
+  }
+  emit('update:modelValue', activePayload);
+  emit('filter-change', activePayload);
 }
 
-function resetAll() {
+function resetAllFilters() {
   filterValues.value = {};
   activeFields.value = new Set(
-    props.filtersConfig.filter((f) => f.defaultVisible).map((f) => f.key)
+    (effectiveConfig.value || [])
+      .filter((f) => f && f.defaultVisible)
+      .map((f) => f.key)
   );
   emit('update:modelValue', {});
   emit('filter-change', {});
@@ -90,42 +98,20 @@ function resetAll() {
 }
 
 const activeFilterCount = computed(() => {
-  return Object.keys(filterValues.value).filter(
-    (key) => filterValues.value[key] !== '' && filterValues.value[key] !== null && filterValues.value[key] !== undefined
+  return Object.values(filterValues.value).filter(
+    (val) => val !== '' && val !== null && val !== undefined
   ).length;
 });
 
-const activeChips = computed(() => {
-  return Object.keys(filterValues.value)
-    .filter((key) => filterValues.value[key] !== '' && filterValues.value[key] !== null && filterValues.value[key] !== undefined)
-    .map((key) => {
-      const config = props.filtersConfig.find((f) => f.key === key);
-      let displayVal = filterValues.value[key];
-      if (config?.type === 'select' && config.options) {
-        const match = config.options.find((o) => o.value == displayVal);
-        if (match) displayVal = match.label;
-      }
-      return {
-        key,
-        label: config?.label || key,
-        displayValue: displayVal,
-      };
-    });
+const inactiveFilters = computed(() => {
+  return (effectiveConfig.value || []).filter((f) => !activeFields.value.has(f.key));
 });
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    filterValues.value = { ...newVal };
-    Object.keys(newVal).forEach((key) => {
-      if (newVal[key]) activeFields.value.add(key);
-    });
-  },
-  { deep: true }
-);
-
 function handleClickOutside(event: MouseEvent) {
-  if (toggleMenuContainer.value && !toggleMenuContainer.value.contains(event.target as Node)) {
+  if (
+    toggleMenuContainer.value &&
+    !toggleMenuContainer.value.contains(event.target as Node)
+  ) {
     showAddFilterMenu.value = false;
   }
 }
@@ -137,145 +123,138 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
 });
+
+watch(
+  () => initialFilterState.value,
+  (newValues) => {
+    filterValues.value = { ...newValues };
+  },
+  { deep: true }
+);
 </script>
 
 <template>
-  <div class="space-y-3 bg-slate-900/90 border border-slate-800/80 rounded-2xl p-4 shadow-lg backdrop-blur-md">
-    <!-- Top Filter Toolbar -->
+  <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-4 space-y-4 shadow-xl">
+    <!-- Active Filters Bar -->
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <!-- Search Input & Add Filter Button -->
-      <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[280px]">
-        <!-- Global Search Input -->
-        <div class="relative flex-1 min-w-[220px]">
-          <input
-            v-model="filterValues['search']"
-            type="text"
-            :placeholder="searchPlaceholder"
-            @input="applyFilters"
-            class="w-full pl-10 pr-8 py-2 text-xs bg-slate-950/80 border border-slate-800 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
-          />
-          <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <button
-            v-if="filterValues['search']"
-            @click="filterValues['search'] = ''; applyFilters();"
-            class="absolute right-2.5 top-2.5 text-slate-500 hover:text-slate-300 text-xs"
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mr-1">
+          <span>🔍</span>
+          <span>Filters</span>
+          <span
+            v-if="activeFilterCount > 0"
+            class="px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-400 border border-sky-500/30 text-[10px] font-bold font-mono"
           >
-            ✕
-          </button>
-        </div>
+            {{ activeFilterCount }}
+          </span>
+        </span>
 
-        <!-- Add Filter Toggle Button Dropdown -->
-        <div class="relative" ref="toggleMenuContainer">
-          <button
-            @click="showAddFilterMenu = !showAddFilterMenu"
-            class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 transition-all flex items-center gap-2 shadow-sm"
-          >
-            <span>➕ Filter Options</span>
-            <svg class="w-3.5 h-3.5 text-slate-400 transition-transform" :class="showAddFilterMenu ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          <!-- Toggle Filter Dropdown Menu -->
-          <div
-            v-if="showAddFilterMenu"
-            class="absolute left-0 mt-2 w-56 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl overflow-hidden z-40 animate-in fade-in slide-in-from-top-2 duration-150 p-2 space-y-1"
-          >
-            <div class="px-2 py-1 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-              Toggle Available Filters
-            </div>
-            <button
-              v-for="config in filtersConfig.filter(f => f.key !== 'search')"
-              :key="config.key"
-              @click="toggleFieldVisibility(config.key)"
-              class="w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-colors text-left"
-              :class="activeFields.has(config.key) ? 'bg-sky-500/10 text-sky-400 font-semibold' : 'text-slate-300 hover:bg-slate-900'"
-            >
-              <span>{{ config.label }}</span>
-              <span v-if="activeFields.has(config.key)" class="text-sky-400 font-bold">✓</span>
-            </button>
-          </div>
-        </div>
+        <!-- Reset Button -->
+        <button
+          v-if="activeFilterCount > 0"
+          @click="resetAllFilters"
+          class="text-xs font-semibold text-rose-400 hover:text-rose-300 px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 transition-all"
+        >
+          Clear All
+        </button>
       </div>
 
-      <!-- Reset Button -->
-      <button
-        v-if="activeFilterCount > 0"
-        @click="resetAll"
-        class="px-3 py-1.5 rounded-xl text-xs font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500/20 transition-all flex items-center gap-1.5"
-      >
-        <span>Reset Filters</span>
-        <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-rose-500/20 font-bold">{{ activeFilterCount }}</span>
-      </button>
+      <!-- Add Filter Dropdown Button -->
+      <div v-if="inactiveFilters.length > 0" ref="toggleMenuContainer" class="relative">
+        <button
+          @click="showAddFilterMenu = !showAddFilterMenu"
+          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-600 text-xs font-semibold text-slate-200 flex items-center gap-1.5 transition-all"
+        >
+          <span>+</span>
+          <span>Add Filter Field</span>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div
+          v-if="showAddFilterMenu"
+          class="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-30 py-1 overflow-hidden animate-in fade-in zoom-in-95 duration-100"
+        >
+          <div class="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800">
+            Available Filters
+          </div>
+          <button
+            v-for="filter in inactiveFilters"
+            :key="filter.key"
+            @click="toggleFieldVisibility(filter.key); showAddFilterMenu = false"
+            class="w-full text-left px-3 py-2 text-xs text-slate-300 hover:bg-slate-800 hover:text-sky-400 flex items-center justify-between transition-colors"
+          >
+            <span>{{ filter.label }}</span>
+            <span class="text-[10px] text-slate-400 font-mono">+ Add</span>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- Active Filter Controls Row -->
-    <div
-      v-if="filtersConfig.some(f => f.key !== 'search' && activeFields.has(f.key))"
-      class="pt-3 border-t border-slate-800/60 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
-    >
-      <template v-for="config in filtersConfig" :key="config.key">
-        <div v-if="config.key !== 'search' && activeFields.has(config.key)" class="space-y-1">
-          <div class="flex items-center justify-between text-[11px] font-medium text-slate-400 px-0.5">
-            <span>{{ config.label }}</span>
-            <button @click="removeFilter(config.key)" class="text-slate-500 hover:text-rose-400 text-xs">✕</button>
+    <!-- Active Input Fields Grid -->
+    <div v-if="effectiveConfig && effectiveConfig.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pt-1">
+      <template v-for="field in effectiveConfig" :key="field.key">
+        <div v-if="activeFields.has(field.key)" class="space-y-1">
+          <div class="flex items-center justify-between text-[11px]">
+            <label class="font-semibold text-slate-300">{{ field.label }}</label>
+            <button
+              v-if="!field.defaultVisible"
+              @click="toggleFieldVisibility(field.key)"
+              class="text-slate-400 hover:text-slate-200 text-[10px]"
+              title="Remove filter"
+            >
+              ✕
+            </button>
           </div>
 
-          <!-- Select Filter -->
+          <!-- Text Field -->
+          <input
+            v-if="field.type === 'text'"
+            v-model="filterValues[field.key]"
+            type="text"
+            :placeholder="field.placeholder || 'Filter ' + field.label"
+            @input="applyFilters"
+            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
+          />
+
+          <!-- Select Field -->
           <select
-            v-if="config.type === 'select'"
-            v-model="filterValues[config.key]"
+            v-else-if="field.type === 'select'"
+            v-model="filterValues[field.key]"
             @change="applyFilters"
-            class="w-full px-3 py-1.5 text-xs bg-slate-950 border border-slate-800 rounded-xl text-slate-200 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
+            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
           >
-            <option value="">All {{ config.label }}</option>
-            <option v-for="opt in config.options" :key="String(opt.value)" :value="opt.value">
+            <option value="">All {{ field.label }}</option>
+            <option
+              v-for="opt in field.options || []"
+              :key="String(opt.value)"
+              :value="opt.value"
+            >
               {{ opt.label }}
             </option>
           </select>
 
-          <!-- Text Filter -->
-          <input
-            v-else-if="config.type === 'text'"
-            v-model="filterValues[config.key]"
-            type="text"
-            :placeholder="config.placeholder || `Filter by ${config.label}...`"
-            @input="applyFilters"
-            class="w-full px-3 py-1.5 text-xs bg-slate-950 border border-slate-800 rounded-xl text-slate-200 placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
-          />
+          <!-- Boolean Field -->
+          <select
+            v-else-if="field.type === 'boolean'"
+            v-model="filterValues[field.key]"
+            @change="applyFilters"
+            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
+          >
+            <option value="">All</option>
+            <option :value="true">Yes</option>
+            <option :value="false">No</option>
+          </select>
 
-          <!-- Date Filter -->
+          <!-- Date Field -->
           <input
-            v-else-if="config.type === 'date'"
-            v-model="filterValues[config.key]"
+            v-else-if="field.type === 'date'"
+            v-model="filterValues[field.key]"
             type="date"
             @change="applyFilters"
-            class="w-full px-3 py-1.5 text-xs bg-slate-950 border border-slate-800 rounded-xl text-slate-200 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
+            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
           />
         </div>
       </template>
-    </div>
-
-    <!-- Active Filter Badges / Chips Row -->
-    <div v-if="activeChips.length > 0" class="pt-2 flex flex-wrap items-center gap-2">
-      <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Active:</span>
-      <div
-        v-for="chip in activeChips"
-        :key="chip.key"
-        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs bg-sky-500/10 text-sky-400 border border-sky-500/20 font-medium"
-      >
-        <span class="text-slate-400 font-normal">{{ chip.label }}:</span>
-        <span class="font-bold">{{ chip.displayValue }}</span>
-        <button
-          @click="removeFilter(chip.key)"
-          class="hover:text-rose-400 transition-colors ml-0.5 text-xs"
-          title="Remove Filter"
-        >
-          ✕
-        </button>
-      </div>
     </div>
   </div>
 </template>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Services\ShopContext;
+use App\Enums\UserRole;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -33,23 +34,27 @@ class ServiceController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $shop = app(ShopContext::class)->get() ?? $request->user()?->ownedShops()?->firstOrFail();
+        $user = $request->user();
+        $shop = app(ShopContext::class)->get() ?? $user?->ownedShops()?->first();
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'sort_order' => 'nullable|integer',
+            'is_master' => 'nullable|boolean',
         ]);
 
+        $shopId = ($user->hasRole(UserRole::SUPER_ADMIN->value) && ($request->is_master || !$shop)) ? null : $shop?->id;
+
         Service::create([
-            'shop_id' => $shop->id,
+            'shop_id' => $shopId,
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
             'sort_order' => $validated['sort_order'] ?? 0,
             'is_active' => true,
         ]);
 
-        return back()->with('success', 'Service added successfully.');
+        return back()->with('success', $shopId ? 'Service added successfully.' : 'Platform master service template created successfully.');
     }
 
     public function clone(Request $request, Service $service): RedirectResponse
@@ -78,6 +83,10 @@ class ServiceController extends Controller
 
     public function update(Request $request, Service $service): RedirectResponse
     {
+        if (is_null($service->shop_id) && !$request->user()->hasRole(UserRole::SUPER_ADMIN->value)) {
+            return back()->with('error', 'You cannot modify a platform master service template directly.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',

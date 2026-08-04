@@ -26,6 +26,7 @@ class ShopService
             'name' => $data['name'],
             'slug' => $slug,
             'description' => $data['description'] ?? null,
+            'business_type' => $data['business_type'] ?? 'cac_registered',
             'logo' => $data['logo'] ?? null,
             'banner' => $data['banner'] ?? null,
             'phone' => $data['phone'] ?? $owner->phone,
@@ -37,6 +38,7 @@ class ShopService
             'delivery_fee' => $data['delivery_fee'] ?? 0.00,
             'status' => ShopStatus::PENDING,
             'is_verified' => false,
+            'kyc_status' => 'pending',
         ]);
 
         // Default Shop Settings
@@ -73,6 +75,7 @@ class ShopService
         $shop->update([
             'name' => $data['name'] ?? $shop->name,
             'description' => $data['description'] ?? $shop->description,
+            'business_type' => $data['business_type'] ?? $shop->business_type,
             'logo' => $data['logo'] ?? $shop->logo,
             'banner' => $data['banner'] ?? $shop->banner,
             'phone' => $data['phone'] ?? $shop->phone,
@@ -92,6 +95,7 @@ class ShopService
         $shop->update([
             'status' => ShopStatus::ACTIVE,
             'is_verified' => true,
+            'kyc_status' => 'approved',
         ]);
 
         return $shop;

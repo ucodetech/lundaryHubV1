@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DocumentType;
+use App\Enums\SubscriptionStatus;
+use App\Models\Subscription;
+use App\Services\CloudinaryService;
 use App\Services\RiderService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,8 +14,10 @@ use Inertia\Response;
 
 class RiderProfileController extends Controller
 {
-    public function __construct(protected RiderService $riderService)
-    {
+    public function __construct(
+        protected RiderService $riderService,
+        protected CloudinaryService $cloudinaryService
+    ) {
     }
 
     public function show(Request $request): Response
@@ -45,18 +50,22 @@ class RiderProfileController extends Controller
     {
         $request->validate([
             'document_type' => 'required|string',
-            'file' => 'required|image|mimes:jpg,jpeg,png,pdf|max:5120',
+            'file' => 'required|file|mimes:jpg,jpeg,png,pdf,webp|max:10240',
         ]);
 
         $user = $request->user();
         $profile = $user->riderProfile ?? $this->riderService->createProfile($user, []);
 
-        $path = $request->file('file')->store('kyc_documents', 'public');
+        $cloudinaryUrl = $this->cloudinaryService->upload($request->file('file'), "laundryhub/riders/{$profile->id}/kyc");
+
+        if (! $cloudinaryUrl) {
+            return back()->with('error', 'Failed to upload document to Cloudinary storage. Please try again.');
+        }
 
         $docType = DocumentType::from($request->document_type);
-        $this->riderService->uploadKycDocument($profile, $docType, $path);
+        $this->riderService->uploadKycDocument($profile, $docType, $cloudinaryUrl);
 
-        return back()->with('success', 'KYC Document uploaded for verification.');
+        return back()->with('success', 'Rider KYC document uploaded to Cloudinary successfully.');
     }
 
     public function toggleOnline(Request $request): RedirectResponse
@@ -68,8 +77,22 @@ class RiderProfileController extends Controller
             return back()->with('error', 'Rider profile not found.');
         }
 
+        // Only allow going ONLINE if the rider has an active paid subscription
+        if (!$profile->is_online) {
+            $hasActivePass = Subscription::where('user_id', $user->id)
+                ->where('role', 'rider')
+                ->where('status', SubscriptionStatus::ACTIVE)
+                ->where('ends_at', '>', now())
+                ->exists();
+
+            if (!$hasActivePass) {
+                return redirect()->route('rider.subscription')
+                    ->with('warning', '🚫 You need an active Monthly Rider Pass to go online and accept deliveries. Please pay your ₦2,000 monthly pass to get started.');
+            }
+        }
+
         $isOnline = $this->riderService->toggleOnline($profile);
 
-        return back()->with('success', $isOnline ? 'You are now ONLINE' : 'You are now OFFLINE');
+        return back()->with('success', $isOnline ? '🟢 You are now ONLINE and ready for dispatches!' : '🔴 You are now OFFLINE');
     }
 }

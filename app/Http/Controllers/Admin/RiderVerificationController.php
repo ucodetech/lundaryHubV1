@@ -58,7 +58,7 @@ class RiderVerificationController extends Controller
     {
         $this->riderService->approveKyc($rider);
 
-        return back()->with('success', "Rider '{$rider->user->name}' KYC approved.");
+        return back()->with('success', "Rider '{$rider->user->name}' KYC approved! They must purchase a Monthly Rider Pass to go online.");
     }
 
     public function reject(Request $request, RiderProfile $rider): RedirectResponse

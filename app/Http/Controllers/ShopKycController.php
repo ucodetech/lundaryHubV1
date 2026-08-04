@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShopKycDocument;
+use App\Services\CloudinaryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -10,6 +11,10 @@ use Inertia\Response;
 
 class ShopKycController extends Controller
 {
+    public function __construct(protected CloudinaryService $cloudinaryService)
+    {
+    }
+
     public function show(Request $request): Response|RedirectResponse
     {
         $user = $request->user();
@@ -53,22 +58,24 @@ class ShopKycController extends Controller
         foreach ($documentTypes as $docType) {
             if ($request->hasFile($docType)) {
                 $file = $request->file($docType);
-                $path = $file->store("shops/{$shop->id}/kyc", 'public');
+                $cloudinaryUrl = $this->cloudinaryService->upload($file, "laundryhub/shops/{$shop->id}/kyc");
 
-                ShopKycDocument::updateOrCreate(
-                    [
-                        'shop_id' => $shop->id,
-                        'document_type' => $docType,
-                    ],
-                    [
-                        'file_path' => "/storage/{$path}",
-                        'status' => 'pending',
-                        'rejection_reason' => null,
-                    ]
-                );
+                if ($cloudinaryUrl) {
+                    ShopKycDocument::updateOrCreate(
+                        [
+                            'shop_id' => $shop->id,
+                            'document_type' => $docType,
+                        ],
+                        [
+                            'file_path' => $cloudinaryUrl,
+                            'status' => 'pending',
+                            'rejection_reason' => null,
+                        ]
+                    );
+                }
             }
         }
 
-        return back()->with('success', 'Shop KYC verification documents submitted successfully! Super Admin will audit your store.');
+        return back()->with('success', 'Shop KYC verification documents uploaded to Cloudinary successfully! Super Admin will audit your store.');
     }
 }

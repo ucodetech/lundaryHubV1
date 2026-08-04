@@ -13,14 +13,19 @@ class EnsureShopIsVerified
         $user = $request->user();
 
         if ($user && $user->hasRole('shop_owner')) {
+            // Allow access to shop creation, KYC submission, and logout routes
+            if ($request->routeIs('shop.kyc', 'shop.kyc.store', 'shop.create', 'shop.store', 'logout', 'profile.*')) {
+                return $next($request);
+            }
+
             $shop = $user->ownedShops()->first();
 
             if (! $shop) {
-                return redirect()->route('shop.create')->with('error', 'Please create your shop storefront first.');
+                return redirect()->route('shop.create')->with('error', 'Please create your digital storefront first.');
             }
 
-            if (! $shop->is_verified || $shop->status->value !== 'active') {
-                return redirect()->route('shop.kyc')->with('error', 'Operational features (Categories, Services & Pricing) are locked until Super Admin approves your shop KYC verification.');
+            if (! $shop->is_verified || $shop->status->value !== 'active' || $shop->kyc_status !== 'approved') {
+                return redirect()->route('shop.kyc')->with('warning', 'Your shop verification is pending approval. Please upload your store photos and KYC documents to request shop activation.');
             }
         }
 

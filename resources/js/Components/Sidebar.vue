@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import { UserRole } from '@/Enums/UserRole';
 
 defineProps<{
   mobileOpen?: boolean;
@@ -14,11 +15,11 @@ const role = computed(() => user.value?.role);
 
 const roleBadgeColor = computed(() => {
   switch (role.value) {
-    case 'super_admin':
+    case UserRole.SUPER_ADMIN:
       return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-    case 'shop_owner':
+    case UserRole.SHOP_OWNER:
       return 'bg-sky-500/10 text-sky-400 border-sky-500/20';
-    case 'rider':
+    case UserRole.RIDER:
       return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
     default:
       return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
@@ -27,11 +28,11 @@ const roleBadgeColor = computed(() => {
 
 const formatRoleName = computed(() => {
   switch (role.value) {
-    case 'super_admin':
+    case UserRole.SUPER_ADMIN:
       return 'Super Admin';
-    case 'shop_owner':
+    case UserRole.SHOP_OWNER:
       return 'Shop Owner';
-    case 'rider':
+    case UserRole.RIDER:
       return 'Delivery Rider';
     default:
       return 'Customer';
@@ -108,11 +109,31 @@ function closeSidebar() {
         <span>Dashboard</span>
       </Link>
 
+      <Link
+        href="/orders"
+        @click="closeSidebar"
+        class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+        :class="$page.url.startsWith('/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+      >
+        <span class="text-base">📦</span>
+        <span>My Laundry Orders</span>
+      </Link>
+
       <!-- Shop Owner Links -->
-      <template v-if="role === 'shop_owner' || role === 'super_admin'">
+      <template v-if="role === UserRole.SHOP_OWNER || role === UserRole.SUPER_ADMIN">
         <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
           Shop Operations
         </div>
+
+        <Link
+          href="/shop-admin/orders"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/shop-admin/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">📋</span>
+          <span>Shop Orders & Legacy</span>
+        </Link>
 
         <Link
           href="/shop-admin/categories"
@@ -143,13 +164,43 @@ function closeSidebar() {
           <span class="text-base">💳</span>
           <span>Pricing Matrix</span>
         </Link>
+
+        <Link
+          href="/shop-admin/subscription"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/shop-admin/subscription') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">⚡</span>
+          <span>Subscription & Billing</span>
+        </Link>
       </template>
 
       <!-- Rider Links -->
-      <template v-if="role === 'rider'">
+      <template v-if="role === UserRole.RIDER">
         <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
           Rider Center
         </div>
+
+        <Link
+          href="/rider/orders"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/rider/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">📦</span>
+          <span>Pickup & Deliveries</span>
+        </Link>
+
+        <Link
+          href="/rider/subscription"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/rider/subscription') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">💳</span>
+          <span>Monthly Pass</span>
+        </Link>
 
         <Link
           href="/rider/profile"
@@ -163,7 +214,7 @@ function closeSidebar() {
       </template>
 
       <!-- Super Admin Links -->
-      <template v-if="role === 'super_admin'">
+      <template v-if="role === UserRole.SUPER_ADMIN">
         <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
           Platform Admin
         </div>
@@ -196,6 +247,16 @@ function closeSidebar() {
         >
           <span class="text-base">👥</span>
           <span>User Directory</span>
+        </Link>
+
+        <Link
+          href="/admin/subscription-plans"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/admin/subscription-plans') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">⚡</span>
+          <span>Subscription Config</span>
         </Link>
       </template>
 

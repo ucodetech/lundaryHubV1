@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ShopStatus;
+use App\Enums\SubscriptionStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,8 @@ class Shop extends Model
         'longitude',
         'pickup_radius_km',
         'delivery_fee',
+        'offers_home_delivery',
+        'offers_store_pickup',
         'status',
         'is_verified',
         'business_type',
@@ -41,6 +44,8 @@ class Shop extends Model
             'status' => ShopStatus::class,
             'is_verified' => 'boolean',
             'is_cac_verified' => 'boolean',
+            'offers_home_delivery' => 'boolean',
+            'offers_store_pickup' => 'boolean',
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
             'pickup_radius_km' => 'decimal:2',
@@ -81,5 +86,32 @@ class Shop extends Model
     public function prices(): HasMany
     {
         return $this->hasMany(Price::class);
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function virtualAccount(): HasOne
+    {
+        return $this->hasOne(ShopVirtualAccount::class);
+    }
+
+    public function activeSubscription(): ?Subscription
+    {
+        return Subscription::where(function ($query) {
+                $query->where('shop_id', $this->id)->orWhere('user_id', $this->owner_id);
+            })
+            ->where('role', 'shop_owner')
+            ->where('status', SubscriptionStatus::ACTIVE)
+            ->where('ends_at', '>', now())
+            ->latest()
+            ->first();
+    }
+
+    public function hasActiveSubscription(): bool
+    {
+        return $this->activeSubscription() !== null;
     }
 }

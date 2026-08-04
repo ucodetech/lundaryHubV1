@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Price;
 use App\Models\Service;
 use App\Services\ShopContext;
+use App\Enums\UserRole;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -72,6 +73,22 @@ class PriceController extends Controller
         );
 
         return back()->with('success', 'Pricing updated successfully.');
+    }
+
+    public function update(Request $request, Price $price): RedirectResponse
+    {
+        if (is_null($price->shop_id) && !$request->user()->hasRole(UserRole::SUPER_ADMIN->value)) {
+            return back()->with('error', 'You cannot modify a platform master price template directly.');
+        }
+
+        $validated = $request->validate([
+            'amount' => 'required|numeric|min:0',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $price->update($validated);
+
+        return back()->with('success', 'Price rule updated successfully.');
     }
 
     public function clone(Request $request, Price $price): RedirectResponse
