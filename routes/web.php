@@ -202,8 +202,39 @@ Route::middleware(['auth'])->group(function () {
     // Customer & Shop & Rider Order Dispute Ticket Routes
     Route::get('/disputes', [\App\Http\Controllers\DisputeController::class, 'index'])->name('disputes.index');
     Route::post('/disputes', [\App\Http\Controllers\DisputeController::class, 'store'])->name('disputes.store');
-    Route::get('/disputes/{dispute}', [\App\Http\Controllers\DisputeController::class, 'show'])->name('disputes.show');
-    Route::post('/disputes/{dispute}/reply', [\App\Http\Controllers\DisputeController::class, 'reply'])->name('disputes.reply');
+// Web Setup & Migration Route for Shared Hosting (No Terminal / SSH required)
+Route::get('/artisan-setup-laundryhub-2026', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $migrate = \Illuminate\Support\Facades\Artisan::output();
+
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        $seed = \Illuminate\Support\Facades\Artisan::output();
+
+        try {
+            \Illuminate\Support\Facades\Artisan::call('storage:link');
+            $storage = \Illuminate\Support\Facades\Artisan::output();
+        } catch (\Throwable $e) {
+            $storage = 'Storage link notice: ' . $e->getMessage();
+        }
+
+        \Illuminate\Support\Facades\Artisan::call('config:clear');
+        \Illuminate\Support\Facades\Artisan::call('cache:clear');
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '🎉 Production database migrations, seeders, storage link & caches completed successfully!',
+            'migrate_output' => $migrate,
+            'seed_output' => $seed,
+            'storage_output' => $storage,
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+        ], 500);
+    }
 });
 
 require __DIR__.'/auth.php';
+
