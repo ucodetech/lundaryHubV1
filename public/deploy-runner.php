@@ -14,13 +14,16 @@ if ($providedToken !== $secretToken) {
         <h1 style="color:#f43f5e;">403 Access Denied</h1>
         <p style="color:#94a3b8;">Missing or invalid security token query parameter. Pass <code>?token=laundryhub_deploy_secret_2026</code> to access runner.</p>
         </body></html>');
-}
+@set_time_limit(300);
+@ini_set('memory_limit', '512M');
+@ini_set('max_execution_time', '300');
 
 $baseDir = realpath(__DIR__ . '/..');
 chdir($baseDir);
 
 $output = '';
 $action = $_GET['action'] ?? '';
+
 
 function runCommand($cmd, $baseDir)
 {
