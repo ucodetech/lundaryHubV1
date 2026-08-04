@@ -122,6 +122,7 @@ function closeSidebar() {
       </Link>
 
       <Link
+        v-if="role !== UserRole.SUPER_ADMIN"
         :href="ordersHref"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
@@ -142,6 +143,7 @@ function closeSidebar() {
       </Link>
 
       <Link
+        v-if="role !== UserRole.SUPER_ADMIN"
         href="/disputes"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
@@ -152,7 +154,7 @@ function closeSidebar() {
       </Link>
 
       <!-- Shop Owner Links -->
-      <template v-if="role === UserRole.SHOP_OWNER || role === UserRole.SUPER_ADMIN">
+      <template v-if="role === UserRole.SHOP_OWNER">
         <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
           Shop Operations
         </div>
@@ -319,6 +321,16 @@ function closeSidebar() {
         >
           <span class="text-base">💸</span>
           <span>Payout Settlements</span>
+        </Link>
+
+        <Link
+          href="/admin/analytics"
+          @click="closeSidebar"
+          class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
+          :class="$page.url.startsWith('/admin/analytics') ? 'bg-cyan-500/10 text-cyan-400 font-semibold border border-cyan-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        >
+          <span class="text-base">📈</span>
+          <span>Financial Analytics</span>
         </Link>
       </template>
 

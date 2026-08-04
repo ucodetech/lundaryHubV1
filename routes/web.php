@@ -17,11 +17,35 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Public Landing Page / Shop Marketplace
-Route::get('/', function () {
+Route::get('/', function (\Illuminate\Http\Request $request) {
+    $userLat = (float) ($request->query('lat') ?? 6.5244); // Default Lagos lat
+    $userLng = (float) ($request->query('lng') ?? 3.3792); // Default Lagos lng
+
+    $shops = \App\Models\Shop::where('status', 'active')->get()->map(function ($shop) use ($userLat, $userLng) {
+        $distance = null;
+        if ($shop->latitude && $shop->longitude) {
+            $earthRadius = 6371;
+            $dLat = deg2rad($shop->latitude - $userLat);
+            $dLon = deg2rad($shop->longitude - $userLng);
+            $a = sin($dLat / 2) * sin($dLat / 2) +
+                 cos(deg2rad($userLat)) * cos(deg2rad($shop->latitude)) *
+                 sin($dLon / 2) * sin($dLon / 2);
+            $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+            $distance = round($earthRadius * $c, 1);
+        } else {
+            // Demo fallback distance calculation
+            $distance = round(1.2 + ($shop->id * 0.7), 1);
+        }
+
+        $shopArray = $shop->toArray();
+        $shopArray['distance_km'] = $distance;
+        return $shopArray;
+    });
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'shops' => \App\Models\Shop::where('status', 'active')->take(6)->get(),
+        'shops' => $shops,
     ]);
 })->name('home');
 
@@ -126,6 +150,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/payouts', [\App\Http\Controllers\RiderPayoutController::class, 'store'])->name('payouts.store');
     });
 
+    // Notification Routes
+    Route::get('/notifications/unread', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
+    Route::post('/notifications/{notification}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
+
+    // Customer Saved Address Book Routes
+    Route::get('/addresses', [\App\Http\Controllers\AddressController::class, 'index'])->name('addresses.index');
+    Route::post('/addresses', [\App\Http\Controllers\AddressController::class, 'store'])->name('addresses.store');
+    Route::delete('/addresses/{address}', [\App\Http\Controllers\AddressController::class, 'destroy'])->name('addresses.destroy');
+
     // Shared Bank Account Verification Routes
     Route::get('/bank-accounts/banks', [\App\Http\Controllers\BankAccountController::class, 'getBanks'])->name('bank-accounts.banks');
     Route::post('/bank-accounts/resolve', [\App\Http\Controllers\BankAccountController::class, 'resolveAccount'])->name('bank-accounts.resolve');
@@ -157,6 +191,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/payouts', [\App\Http\Controllers\Admin\AdminPayoutController::class, 'index'])->name('payouts.index');
         Route::post('/payouts/{payout}/approve', [\App\Http\Controllers\Admin\AdminPayoutController::class, 'approve'])->name('payouts.approve');
         Route::post('/payouts/{payout}/reject', [\App\Http\Controllers\Admin\AdminPayoutController::class, 'reject'])->name('payouts.reject');
+
+        // Admin Financial Analytics & Executive Dashboard
+        Route::get('/analytics', [\App\Http\Controllers\Admin\AdminAnalyticsController::class, 'index'])->name('analytics.index');
     });
 
     // Referral Hub Routes

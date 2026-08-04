@@ -19,7 +19,7 @@ class BankAccountController extends Controller
     {
         $banks = Cache::remember('nigerian_banks_list', 86400, function () {
             try {
-                $secretKey = config('services.paystack.secret_key') ?? env('PAYSTACK_SECRET_KEY');
+                $secretKey = config('paystack.secretKey');
                 if ($secretKey) {
                     $response = Http::withToken($secretKey)->get('https://api.paystack.co/bank?country=nigeria');
                     if ($response->successful() && isset($response->json()['data'])) {
@@ -81,7 +81,7 @@ class BankAccountController extends Controller
         $bankCode = $validated['bank_code'];
 
         try {
-            $secretKey = config('services.paystack.secret_key') ?? env('PAYSTACK_SECRET_KEY');
+            $secretKey = config('paystack.secretKey');
 
             if ($secretKey) {
                 $response = Http::withToken($secretKey)

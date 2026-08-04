@@ -17,7 +17,16 @@ class RiderPayoutController extends Controller
     {
         $user = $request->user();
 
-        // Calculate total delivery fee earnings from completed orders
+        // Total online delivery fee earnings (Paystack/Wallet) eligible for platform withdrawal
+        $onlineEarned = Order::where('rider_id', $user->id)
+            ->where('status', \App\Enums\OrderStatus::COMPLETED->value)
+            ->where(function ($q) {
+                $q->where('payment_method', '!=', 'cash_on_delivery')
+                  ->whereNotNull('payment_method');
+            })
+            ->sum('delivery_fee');
+
+        // Total delivery fee earnings across all orders (Cash + Online)
         $totalEarned = Order::where('rider_id', $user->id)
             ->where('status', \App\Enums\OrderStatus::COMPLETED->value)
             ->sum('delivery_fee');
@@ -27,7 +36,7 @@ class RiderPayoutController extends Controller
             ->whereIn('status', ['pending', 'approved', 'paid'])
             ->sum('amount');
 
-        $availableBalance = max(0, (float)$totalEarned - (float)$totalWithdrawnOrPending);
+        $availableBalance = max(0, (float)$onlineEarned - (float)$totalWithdrawnOrPending);
 
         $bankAccount = UserBankAccount::where('user_id', $user->id)->first();
 
@@ -52,16 +61,20 @@ class RiderPayoutController extends Controller
             return back()->with('error', 'Please verify and save your bank account details before requesting a withdrawal.');
         }
 
-        // Recalculate available balance
-        $totalEarned = Order::where('rider_id', $user->id)
+        // Recalculate available online balance
+        $onlineEarned = Order::where('rider_id', $user->id)
             ->where('status', \App\Enums\OrderStatus::COMPLETED->value)
+            ->where(function ($q) {
+                $q->where('payment_method', '!=', 'cash_on_delivery')
+                  ->whereNotNull('payment_method');
+            })
             ->sum('delivery_fee');
 
         $totalWithdrawnOrPending = PayoutRequest::where('user_id', $user->id)
             ->whereIn('status', ['pending', 'approved', 'paid'])
             ->sum('amount');
 
-        $availableBalance = max(0, (float)$totalEarned - (float)$totalWithdrawnOrPending);
+        $availableBalance = max(0, (float)$onlineEarned - (float)$totalWithdrawnOrPending);
 
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1000|max:' . $availableBalance,

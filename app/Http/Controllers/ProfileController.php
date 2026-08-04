@@ -16,7 +16,12 @@ class ProfileController extends Controller
 
     public function edit(Request $request): Response
     {
-        return Inertia::render('Profile/Edit');
+        $user = $request->user();
+        $bankAccount = \App\Models\UserBankAccount::where('user_id', $user->id)->first();
+
+        return Inertia::render('Profile/Edit', [
+            'bankAccount' => $bankAccount,
+        ]);
     }
 
     public function update(Request $request): RedirectResponse

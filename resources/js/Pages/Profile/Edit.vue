@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import AppLayout from '@/Layouts/AppLayout.vue';
+import BankAccountForm from '@/Components/BankAccountForm.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
+
+defineProps<{
+  bankAccount?: any;
+}>();
 
 const page = usePage();
 const user = computed(() => page.props.auth?.user);
@@ -20,13 +25,15 @@ const submit = () => {
 
 <template>
   <AppLayout>
-    <div class="max-w-xl mx-auto space-y-6">
+    <div class="max-w-2xl mx-auto space-y-6">
       <div>
         <h1 class="text-2xl font-bold text-slate-100">Account Settings</h1>
-        <p class="text-xs text-slate-400 mt-1">Manage your personal profile and contact information</p>
+        <p class="text-xs text-slate-400 mt-1">Manage your personal profile, contact information, and verified bank details</p>
       </div>
 
-      <form @submit.prevent="submit" class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+      <form @submit.prevent="submit" class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-4 shadow-xl">
+        <h3 class="text-sm font-bold text-slate-100 border-b border-slate-700/60 pb-3">Personal Information</h3>
+
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">First Name</label>
@@ -79,6 +86,9 @@ const submit = () => {
           Save Changes
         </button>
       </form>
+
+      <!-- Bank Account Verification & Settlement Component -->
+      <BankAccountForm :existing-account="bankAccount" />
     </div>
   </AppLayout>
 </template>

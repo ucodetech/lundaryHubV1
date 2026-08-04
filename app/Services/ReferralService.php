@@ -103,6 +103,23 @@ class ReferralService
             'rewarded_at' => now(),
         ]);
 
+        // Send In-App Notifications
+        \App\Services\NotificationService::send(
+            $referrer,
+            "🎁 ₦500 Referral Bonus Credited!",
+            "You earned ₦500 bonus balance because {$customer->first_name} completed their first order!",
+            "/referrals",
+            "referral_bonus"
+        );
+
+        \App\Services\NotificationService::send(
+            $customer,
+            "🎉 ₦200 Welcome Referral Bonus!",
+            "You received ₦200 bonus balance for completing your first laundry order!",
+            "/referrals",
+            "referral_bonus"
+        );
+
         Log::info("Referral rewarded for Order #{$order->order_number}: Referrer #{$referrer->id} (+₦500), Customer #{$customer->id} (+₦200)");
     }
 

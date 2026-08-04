@@ -88,8 +88,12 @@ defineProps<{
           <p class="text-xs text-slate-400 line-clamp-2">{{ shop.description }}</p>
 
           <div class="text-xs text-slate-400 space-y-1">
-            <p>📍 {{ shop.address }}</p>
-            <p>🚚 Delivery Fee: ₦{{ shop.delivery_fee }}</p>
+            <div class="flex items-center justify-between">
+              <p class="truncate">📍 {{ shop.address }}</p>
+              <span v-if="shop.distance_km" class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-400 text-[10px] font-bold shrink-0">
+                {{ shop.distance_km }} km away
+              </span>
+            </div>
           </div>
 
           <Link

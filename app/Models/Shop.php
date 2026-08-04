@@ -98,6 +98,12 @@ class Shop extends Model
         return $this->hasOne(ShopVirtualAccount::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
     public function activeSubscription(): ?Subscription
     {
         return Subscription::where(function ($query) {

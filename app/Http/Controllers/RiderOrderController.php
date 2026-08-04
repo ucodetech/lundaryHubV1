@@ -300,6 +300,14 @@ class RiderOrderController extends Controller
                 'is_dispatch_requested' => false,
             ]);
 
+            \App\Services\NotificationService::send(
+                $order->customer_id,
+                "Garments Delivered to Shop",
+                "Rider {$user->first_name} has delivered your garments to {$order->shop?->name} for cleaning!",
+                "/orders/{$order->id}",
+                "order_status"
+            );
+
             return back()->with('success', "🧺 Garments for Order #{$order->order_number} successfully delivered to the laundry shop! Shop owner notified to begin cleaning.");
         }
 
