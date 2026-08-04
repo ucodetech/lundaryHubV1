@@ -1,0 +1,15 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=$(pwd)
+    - /bin/cp -R public/* $DEPLOYPATH/public/ 2>/dev/null || :
+    - /bin/cp -R app $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp -R bootstrap $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp -R config $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp -R database $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp -R resources $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp -R routes $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp -R vendor $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp .htaccess $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp artisan $DEPLOYPATH/ 2>/dev/null || :
+    - /bin/cp composer.json $DEPLOYPATH/ 2>/dev/null || :
