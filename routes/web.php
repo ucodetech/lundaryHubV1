@@ -215,19 +215,9 @@ Route::get('/artisan-setup-laundryhub-2026', function () {
         \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
         $seed = \Illuminate\Support\Facades\Artisan::output();
 
-        // try {
-        //     \Illuminate\Support\Facades\Artisan::call('storage:link');
-        //     $storage = \Illuminate\Support\Facades\Artisan::output();
-        // } catch (\Throwable $e) {
-        //     $storage = 'Storage link notice: ' . $e->getMessage();
-        // }
-
-        \Illuminate\Support\Facades\Artisan::call('config:clear');
-        \Illuminate\Support\Facades\Artisan::call('cache:clear');
-
         return response()->json([
             'status' => 'success',
-            'message' => '🎉 Production database migrations, seeders, storage link & caches completed successfully!',
+            'message' => '🎉 Production database migrations, seeders & caches completed successfully! (Cloudinary active for media storage)',
             'migrate_output' => $migrate,
             'seed_output' => $seed,
         ]);

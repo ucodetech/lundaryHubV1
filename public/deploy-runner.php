@@ -71,8 +71,6 @@ if ($action === 'composer_install') {
     $output = runCommand("php artisan migrate --force", $baseDir);
 } elseif ($action === 'db_seed') {
     $output = runCommand("php artisan db:seed --force", $baseDir);
-} elseif ($action === 'storage_link') {
-    $output = runCommand("php artisan storage:link", $baseDir);
 } elseif ($action === 'clear_cache') {
     $output = runCommand("php artisan config:clear && php artisan cache:clear && php artisan route:clear && php artisan view:clear", $baseDir);
 } elseif ($action === 'custom' && !empty($_POST['cmd'])) {
@@ -115,7 +113,6 @@ if ($action === 'composer_install') {
             <a class="btn btn-emerald" href="?token=<?= urlencode($secretToken) ?>&action=npm_build">⚡ NPM Build (Vite)</a>
             <a class="btn" href="?token=<?= urlencode($secretToken) ?>&action=migrate">🗄️ Artisan Migrate</a>
             <a class="btn" href="?token=<?= urlencode($secretToken) ?>&action=db_seed">🌱 Artisan DB Seed</a>
-            <a class="btn" href="?token=<?= urlencode($secretToken) ?>&action=storage_link">🔗 Storage Link</a>
             <a class="btn btn-amber" href="?token=<?= urlencode($secretToken) ?>&action=clear_cache">🧹 Clear Caches</a>
         </div>
 
