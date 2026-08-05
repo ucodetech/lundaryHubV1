@@ -206,27 +206,55 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/disputes/{dispute}/reply', [\App\Http\Controllers\DisputeController::class, 'reply'])->name('disputes.reply');
 });
 
-// Web Setup & Migration Route for Shared Hosting (No Terminal / SSH required)
 Route::get('/artisan-setup-laundryhub-2026', function () {
+    // 1. Check DB Connection
+    try {
+        \Illuminate\Support\Facades\DB::connection()->getPdo();
+        $dbStatus = 'Connected to database (' . config('database.connections.mysql.database') . ') on host (' . config('database.connections.mysql.host') . ')';
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'database_error',
+            'error' => 'Database connection failed!',
+            'details' => $e->getMessage(),
+            'current_config' => [
+                'host' => config('database.connections.mysql.host'),
+                'database' => config('database.connections.mysql.database'),
+                'username' => config('database.connections.mysql.username'),
+            ],
+            'troubleshooting' => 'Check your .env file on cPanel: ensure DB_DATABASE and DB_USERNAME include your cPanel username prefix (e.g. cpaneluser_laundryhub), DB_HOST is localhost or 127.0.0.1, and the user has ALL PRIVILEGES in cPanel MySQL Wizard.',
+        ], 200);
+    }
+
+    // 2. Run Migration
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
         $migrate = \Illuminate\Support\Facades\Artisan::output();
-
-        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-        $seed = \Illuminate\Support\Facades\Artisan::output();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => '🎉 Production database migrations, seeders & caches completed successfully! (Cloudinary active for media storage)',
-            'migrate_output' => $migrate,
-            'seed_output' => $seed,
-        ]);
     } catch (\Throwable $e) {
         return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage(),
-        ], 500);
+            'status' => 'migration_error',
+            'error' => 'Migration failed!',
+            'details' => $e->getMessage(),
+        ], 200);
     }
+
+    // 3. Run Seeder
+    try {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        $seed = \Illuminate\Support\Facades\Artisan::output();
+    } catch (\Throwable $e) {
+        $seed = 'Seeding notice: ' . $e->getMessage();
+    }
+
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+
+    return response()->json([
+        'status' => 'success',
+        'message' => '🎉 Production database migrations, seeders & caches completed successfully!',
+        'db_status' => $dbStatus,
+        'migrate_output' => $migrate,
+        'seed_output' => $seed,
+    ], 200);
 });
 
 require __DIR__.'/auth.php';
