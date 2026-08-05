@@ -6,6 +6,8 @@ const showBanner = ref(false);
 const isIos = ref(false);
 const showIosInstructions = ref(false);
 
+const showInstructions = ref(false);
+
 onMounted(() => {
   // Check if user already dismissed or installed app
   const dismissed = localStorage.getItem('laundryhub_pwa_dismissed');
@@ -23,13 +25,12 @@ onMounted(() => {
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt.value = e;
-    showBanner.value = true;
   });
 
-  // Show banner for iOS if not installed
-  if (isIos.value && !isStandalone) {
+  // Always display PWA banner after 1.5s for web visitors
+  setTimeout(() => {
     showBanner.value = true;
-  }
+  }, 1500);
 });
 
 async function installApp() {
@@ -40,8 +41,8 @@ async function installApp() {
       showBanner.value = false;
     }
     deferredPrompt.value = null;
-  } else if (isIos.value) {
-    showIosInstructions.value = !showIosInstructions.value;
+  } else {
+    showInstructions.value = !showInstructions.value;
   }
 }
 
@@ -88,14 +89,23 @@ function dismissBanner() {
         </button>
       </div>
 
-      <!-- iOS Step-by-Step Instructions -->
-      <div v-if="showIosInstructions" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-1.5 animate-in fade-in">
-        <p class="font-bold text-sky-400">📱 How to Install on iOS (Safari):</p>
-        <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-400">
-          <li>Tap the <strong>Share</strong> button at the bottom of Safari.</li>
-          <li>Scroll down and tap <strong>Add to Home Screen ➕</strong>.</li>
-          <li>Tap <strong>Add</strong> in the top right corner.</li>
-        </ol>
+      <!-- Device Step-by-Step Instructions -->
+      <div v-if="showInstructions" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-1.5 animate-in fade-in">
+        <div v-if="isIos">
+          <p class="font-bold text-sky-400 mb-1">📱 How to Install on iOS (Safari):</p>
+          <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-400">
+            <li>Tap the <strong>Share</strong> icon in Safari.</li>
+            <li>Scroll down and tap <strong>Add to Home Screen ➕</strong>.</li>
+            <li>Tap <strong>Add</strong> in top right corner.</li>
+          </ol>
+        </div>
+        <div v-else>
+          <p class="font-bold text-sky-400 mb-1">📲 How to Install App:</p>
+          <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-400">
+            <li>Tap the browser menu icon (<strong>⋮</strong> or <strong>Share</strong>).</li>
+            <li>Select <strong>Install App</strong> or <strong>Add to Home Screen</strong>.</li>
+          </ol>
+        </div>
       </div>
 
       <div class="flex items-center gap-2 pt-1">
@@ -103,7 +113,7 @@ function dismissBanner() {
           @click="installApp"
           class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 font-bold text-xs shadow-lg shadow-sky-500/20 hover:scale-[1.02] active:scale-95 transition-all text-center"
         >
-          {{ isIos ? '📱 How to Install on iOS' : '📲 Install App Now' }}
+          📲 Install App Now
         </button>
         <button
           @click="dismissBanner"
