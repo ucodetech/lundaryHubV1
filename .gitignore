@@ -7,6 +7,9 @@
 .env.production.local
 !.env.example
 
+public/hot
+hot
+
 .DS_Store
 Thumbs.db
 *.log
