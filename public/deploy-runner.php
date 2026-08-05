@@ -22,12 +22,12 @@ chdir($baseDir);
 
 // Define commands
 $commands = [
-    'Composer Install' => 'composer install --optimize-autoloader --no-dev 2>&1',
-    'Run Migrations'   => 'php artisan migrate --force 2>&1',
-    'Run Database Seed'=> 'php artisan db:seed --force 2>&1',
-    'Optimize Clear'   => 'php artisan optimize:clear 2>&1',
-    'NPM Install'      => 'npm install 2>&1',
-    'NPM Build'        => 'npm run build 2>&1'
+    'Composer Install'   => 'composer install --optimize-autoloader --no-dev 2>&1',
+    'Run Migrations'     => 'php artisan migrate --force 2>&1',
+    'Run Database Seed'  => 'php artisan db:seed --class=DatabaseSeeder --force 2>&1',
+    'Optimize Clear'     => 'php artisan optimize:clear 2>&1',
+    'NPM Install'        => 'npm install 2>&1',
+    'NPM Build'          => 'npm run build 2>&1'
 ];
 
 foreach ($commands as $name => $cmd) {
