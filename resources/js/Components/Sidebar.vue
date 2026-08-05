@@ -72,9 +72,11 @@ function closeSidebar() {
     <!-- Brand Header -->
     <div class="h-16 flex items-center justify-between px-5 border-b border-slate-800/80">
       <Link href="/" class="flex items-center gap-3 group" @click="closeSidebar">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center font-black text-slate-950 text-xl shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
-          L
-        </div>
+        <img
+          src="/images/logo.png"
+          alt="LaundryHub"
+          class="w-9 h-9 rounded-xl shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform object-cover border border-sky-500/30"
+        />
         <div class="flex flex-col">
           <span class="font-bold text-base leading-tight bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent">
             LaundryHub

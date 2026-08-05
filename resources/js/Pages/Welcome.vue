@@ -14,11 +14,13 @@ defineProps<{
   <div class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-sky-500 selection:text-slate-950">
     <!-- Navbar -->
     <header class="h-20 border-b border-slate-800/80 px-6 sm:px-12 flex items-center justify-between sticky top-0 bg-slate-950/80 backdrop-blur z-50">
-      <Link href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center font-black text-slate-950 text-xl shadow-lg shadow-sky-500/20">
-          L
-        </div>
-        <span class="font-extrabold text-xl bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent">
+      <Link href="/" class="flex items-center gap-2.5 sm:gap-3">
+        <img
+          src="/images/logo.png"
+          alt="LaundryHub"
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-sky-500/30 object-cover shadow-lg shadow-sky-500/20"
+        />
+        <span class="font-extrabold text-lg sm:text-xl bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent hidden min-[380px]:inline">
           LaundryHub
         </span>
       </Link>
