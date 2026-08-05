@@ -3,6 +3,7 @@ import Footer from '@/Components/Footer.vue';
 import Sidebar from '@/Components/Sidebar.vue';
 import TopBar from '@/Components/TopBar.vue';
 import GlobalLoader from '@/Components/GlobalLoader.vue';
+import PwaInstallBanner from '@/Components/PwaInstallBanner.vue';
 import { usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
@@ -50,8 +51,11 @@ function closeMobileSidebar() {
         <slot />
       </main>
 
-      <!-- App Footer -->
+    <!-- App Footer -->
       <Footer />
     </div>
+
+    <!-- Progressive Web App (PWA) Install Prompt -->
+    <PwaInstallBanner />
   </div>
 </template>
