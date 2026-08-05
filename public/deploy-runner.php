@@ -5,10 +5,7 @@
  * Boots Laravel Framework directly in pure PHP to run migrations and seeders.
  */
 
-if (!isset($_GET['key']) || $_GET['key'] !== 'run-deploy-123') {
-    header('HTTP/1.0 403 Forbidden');
-    die('Unauthorized action.');
-}
+
 
 @set_time_limit(300);
 @ini_set('memory_limit', '512M');
@@ -26,12 +23,12 @@ chdir($baseDir);
 
 try {
     // 1. Boot Laravel Framework directly in PHP (without shell_exec)
-    if (!file_exists($baseDir . '/vendor/autoload.php')) {
+    if (!file_exists($baseDir . '/repositories/lundaryHubV1/vendor/autoload.php')) {
         die("❌ ERROR: vendor/autoload.php not found. Ensure the vendor directory is pulled to cPanel.\n");
     }
 
-    require $baseDir . '/vendor/autoload.php';
-    $app = require_once $baseDir . '/bootstrap/app.php';
+    require $baseDir . '/repositories/lundaryHubV1/vendor/autoload.php';
+    $app = require_once $baseDir . '/repositories/lundaryHubV1/bootstrap/app.php';
 
     // Bootstrap the console kernel
     $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
