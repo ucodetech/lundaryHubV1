@@ -74,7 +74,8 @@ const submitWithdrawal = () => {
           <h3 class="text-base font-bold text-slate-100">Payout Withdrawal History</h3>
         </div>
 
-        <table class="w-full text-left text-sm">
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-sm">
           <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
             <tr>
               <th class="py-3.5 px-6">Payout Reference</th>
@@ -108,7 +109,8 @@ const submitWithdrawal = () => {
               </td>
             </tr>
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
 

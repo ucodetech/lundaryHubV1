@@ -175,7 +175,7 @@ onUnmounted(() => {
 
       <!-- Orders Table -->
       <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-slate-950/80 text-slate-400 uppercase font-semibold border-b border-slate-700/80">

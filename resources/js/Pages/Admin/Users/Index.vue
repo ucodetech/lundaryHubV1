@@ -113,7 +113,7 @@ const submitCreateUser = () => {
       />
 
       <!-- Users Table -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
         <table class="w-full text-left text-sm">
           <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
             <tr>

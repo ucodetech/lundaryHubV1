@@ -173,7 +173,7 @@ const cloneAllMasterTemplates = async () => {
           <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-mono">{{ prices.length }}</span>
         </h2>
 
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
               <tr>
@@ -228,7 +228,7 @@ const cloneAllMasterTemplates = async () => {
           </div>
         </div>
 
-        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-950/80 text-xs uppercase text-slate-400 border-b border-slate-800">
               <tr>

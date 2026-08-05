@@ -88,6 +88,6 @@ class UserController extends Controller
             ]);
         }
 
-        return back()->with('success', "🎉 System user '{$user->first_name} {$user->last_name}' ({$user->role}) created successfully!");
+        return back()->with('success', "🎉 System user '{$user->first_name} {$user->last_name}' ({$user->role->value}) created successfully!");
     }
 }

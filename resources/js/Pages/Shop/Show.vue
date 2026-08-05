@@ -311,7 +311,7 @@ const submitOrderBooking = () => {
       <!-- Pricing Matrix Reference Table -->
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
         <h2 class="text-xl font-bold text-slate-100 mb-4">Complete Services & Price Menu</h2>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-sm">
             <thead class="text-xs uppercase text-slate-400 border-b border-slate-800">
               <tr>

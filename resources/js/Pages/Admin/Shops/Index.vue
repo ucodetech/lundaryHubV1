@@ -154,7 +154,7 @@ const suspendShop = async (shopId: number) => {
 
       <!-- Shops Data Table -->
       <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="border-b border-slate-700/80 bg-slate-900/50 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
