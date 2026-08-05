@@ -104,6 +104,25 @@ watch([isOnline, hasUnactedDispatches, isMuted], ([online, unacted, muted]) => {
   }
 }, { immediate: true });
 
+onMounted(() => {
+  if (typeof window !== 'undefined' && (window as any).Echo) {
+    (window as any).Echo.channel('available-dispatches')
+      .listen('.pickup.requested', () => {
+        playBoltDispatchChime();
+        router.reload({ preserveScroll: true });
+      })
+      .listen('.order.accepted', () => {
+        router.reload({ preserveScroll: true });
+      });
+  }
+});
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined' && (window as any).Echo) {
+    (window as any).Echo.leaveChannel('available-dispatches');
+  }
+});
+
 const toggleOnline = () => {
   playBoltDispatchChime(); // Warm up AudioContext on user click
   useForm({}).post('/rider/toggle-online', {

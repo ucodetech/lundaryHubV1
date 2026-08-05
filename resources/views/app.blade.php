@@ -19,6 +19,10 @@
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        <script>
+            window.PUSHER_APP_KEY = "{{ env('PUSHER_APP_KEY') }}";
+            window.PUSHER_APP_CLUSTER = "{{ env('PUSHER_APP_CLUSTER', 'mt1') }}";
+        </script>
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead

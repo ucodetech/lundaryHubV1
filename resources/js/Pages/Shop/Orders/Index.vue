@@ -105,6 +105,24 @@ const requestRiderPickup = (order: any) => {
   });
 };
 
+onMounted(() => {
+  if (typeof window !== 'undefined' && (window as any).Echo && props.shop?.id) {
+    (window as any).Echo.channel(`shop.${props.shop.id}`)
+      .listen('.bid.submitted', () => {
+        router.reload({ preserveScroll: true });
+      })
+      .listen('.order.accepted', () => {
+        router.reload({ preserveScroll: true });
+      });
+  }
+});
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined' && (window as any).Echo && props.shop?.id) {
+    (window as any).Echo.leaveChannel(`shop.${props.shop.id}`);
+  }
+});
+
 const statusBadgeColor = (status: string) => {
   switch (status) {
     case 'completed': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
