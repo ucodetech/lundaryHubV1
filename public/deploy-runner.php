@@ -68,13 +68,13 @@ try {
     echo "====================================\n";
     echo "Running: Database Seeders\n";
     echo "====================================\n";
-    try {
-        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-        $seedOutput = \Illuminate\Support\Facades\Artisan::output();
-        echo $seedOutput ? $seedOutput : "Seeders completed successfully.\n";
-    } catch (\Throwable $e) {
-        echo "❌ Seeder Error: " . $e->getMessage() . "\n";
-    }
+    // try {
+    //     \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+    //     $seedOutput = \Illuminate\Support\Facades\Artisan::output();
+    //     echo $seedOutput ? $seedOutput : "Seeders completed successfully.\n";
+    // } catch (\Throwable $e) {
+    //     echo "❌ Seeder Error: " . $e->getMessage() . "\n";
+    // }
     echo "\n";
 
     // 5. Clear Caches
