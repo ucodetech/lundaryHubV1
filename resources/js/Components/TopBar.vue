@@ -49,7 +49,7 @@ const user = computed(() => page.props.auth?.user);
         />
       </Link>
 
-      <div>
+      <div class="hidden sm:block">
         <h2 class="text-xs md:text-sm font-medium text-gray-500 dark:text-slate-400 truncate max-w-[130px] sm:max-w-none">
           Welcome, <span class="text-sky-400 font-bold">{{ user?.first_name || 'User' }}</span> 👋
         </h2>
