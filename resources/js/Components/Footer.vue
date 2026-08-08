@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-  <footer class="mt-auto border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-md px-6 py-4 text-xs text-slate-400">
+  <footer class="mt-auto border-t border-gray-200 dark:border-slate-800/80 bg-gray-50 dark:bg-slate-950/60 backdrop-blur-md px-6 py-4 text-xs text-gray-500 dark:text-slate-400">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
       <!-- Left: Branding & Copyright -->
       <div class="flex items-center gap-3">
@@ -24,7 +24,7 @@ import { Link } from '@inertiajs/vue3';
       </div>
 
       <!-- Right: Links -->
-      <div class="flex items-center gap-4 text-slate-400">
+      <div class="flex items-center gap-4 text-gray-500 dark:text-slate-400">
         <Link href="/" class="hover:text-sky-400 transition-colors">Marketplace</Link>
         <span class="text-slate-700">|</span>
         <Link href="/profile" class="hover:text-sky-400 transition-colors">Account</Link>

@@ -250,7 +250,7 @@ watch(
 <template>
   <div class="space-y-4">
     <div class="relative">
-      <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">
+      <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">
         Shop Address (Live Google Places Autocomplete) *
       </label>
 
@@ -263,7 +263,7 @@ watch(
           @input="onAddressInput"
           @blur="onAddressBlur"
           placeholder="Start typing your shop address (e.g. Adeola Odeku Street, Victoria Island)..."
-          class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 pr-24 shadow-inner"
+          class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500 pr-24 shadow-inner"
         />
 
         <button
@@ -276,18 +276,18 @@ watch(
           <span>My GPS</span>
         </button>
       </div>
-      <p class="text-[11px] text-slate-400 mt-1">Live Google Places API enables instant address prediction and geo-coordinates extraction.</p>
+      <p class="text-[11px] text-gray-500 dark:text-slate-400 mt-1">Live Google Places API enables instant address prediction and geo-coordinates extraction.</p>
     </div>
 
     <!-- Live Google Map Canvas with Drag Marker -->
     <div class="space-y-2">
-      <div class="flex items-center justify-between text-xs text-slate-400">
-        <span class="font-semibold text-slate-300">🗺️ Live Google Map Location Pin</span>
+      <div class="flex items-center justify-between text-xs text-gray-500 dark:text-slate-400">
+        <span class="font-semibold text-gray-700 dark:text-slate-300">🗺️ Live Google Map Location Pin</span>
         <span class="text-[11px]">Drag pin to adjust exact shop entrance</span>
       </div>
 
-      <div class="w-full h-48 rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden shadow-xl relative">
-        <div v-if="!isLoaded" class="absolute inset-0 flex items-center justify-center text-xs text-slate-500 bg-slate-950 z-10">
+      <div class="w-full h-48 rounded-2xl border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950 overflow-hidden shadow-xl relative">
+        <div v-if="!isLoaded" class="absolute inset-0 flex items-center justify-center text-xs text-gray-500 dark:text-slate-500 bg-gray-50 dark:bg-slate-950 z-10">
           Loading Google Maps Engine...
         </div>
         <!-- Isolated Map Container: Vue never touches inner Google Maps DOM nodes -->
@@ -298,7 +298,7 @@ watch(
     <!-- Map Coordinates Output Fields -->
     <div class="grid grid-cols-2 gap-4">
       <div>
-        <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Latitude</label>
+        <label class="block text-[11px] font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Latitude</label>
         <input
           :value="latitude ?? ''"
           type="number"
@@ -306,12 +306,12 @@ watch(
           required
           @input="onLatInput"
           placeholder="6.4531"
-          class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs font-mono focus:border-sky-500"
+          class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-800 dark:text-slate-200 text-xs font-mono focus:border-sky-500"
         />
       </div>
 
       <div>
-        <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Longitude</label>
+        <label class="block text-[11px] font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Longitude</label>
         <input
           :value="longitude ?? ''"
           type="number"
@@ -319,7 +319,7 @@ watch(
           required
           @input="onLngInput"
           placeholder="3.3958"
-          class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs font-mono focus:border-sky-500"
+          class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-800 dark:text-slate-200 text-xs font-mono focus:border-sky-500"
         />
       </div>
     </div>

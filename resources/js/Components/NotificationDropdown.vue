@@ -58,7 +58,7 @@ onUnmounted(() => {
   <div class="relative">
     <button
       @click="isOpen = !isOpen"
-      class="relative p-2 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-all focus:outline-none"
+      class="relative p-2 rounded-xl bg-gray-100 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300 hover:text-white hover:bg-slate-800 transition-all focus:outline-none"
     >
       <span class="text-base">🔔</span>
       <span
@@ -72,11 +72,11 @@ onUnmounted(() => {
     <!-- Dropdown Panel -->
     <div
       v-if="isOpen"
-      class="absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl z-50 overflow-hidden space-y-0"
+      class="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700/80 rounded-2xl shadow-2xl z-50 overflow-hidden space-y-0"
     >
-      <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+      <div class="p-4 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between bg-gray-50 dark:bg-slate-950/60">
         <div class="flex items-center gap-2">
-          <span class="text-sm font-bold text-slate-100">Notifications</span>
+          <span class="text-sm font-bold text-gray-900 dark:text-slate-100">Notifications</span>
           <span v-if="unreadCount > 0" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-500/20 text-sky-400">
             {{ unreadCount }} new
           </span>
@@ -91,7 +91,7 @@ onUnmounted(() => {
         </button>
       </div>
 
-      <div class="max-h-80 overflow-y-auto divide-y divide-slate-800/60 custom-scrollbar">
+      <div class="max-h-80 overflow-y-auto divide-y divide-gray-200 dark:divide-slate-800/60 custom-scrollbar">
         <div
           v-for="n in notifications"
           :key="n.id"
@@ -100,17 +100,17 @@ onUnmounted(() => {
           :class="!n.is_read ? 'bg-sky-950/20' : ''"
         >
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-200" :class="!n.is_read ? 'text-sky-300' : ''">
+            <span class="text-xs font-bold text-gray-800 dark:text-slate-200" :class="!n.is_read ? 'text-sky-300' : ''">
               {{ n.title }}
             </span>
-            <span class="text-[10px] text-slate-500 font-mono">
+            <span class="text-[10px] text-gray-500 dark:text-slate-500 font-mono">
               {{ new Date(n.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
             </span>
           </div>
-          <p class="text-xs text-slate-400 line-clamp-2">{{ n.message }}</p>
+          <p class="text-xs text-gray-500 dark:text-slate-400 line-clamp-2">{{ n.message }}</p>
         </div>
 
-        <div v-if="notifications.length === 0" class="p-8 text-center text-slate-500 text-xs">
+        <div v-if="notifications.length === 0" class="p-8 text-center text-gray-500 dark:text-slate-500 text-xs">
           No notifications yet.
         </div>
       </div>

@@ -18,16 +18,26 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 
+        <!-- Theme Initialization -->
+        <script>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
+
         <!-- Scripts -->
         <script>
             window.PUSHER_APP_KEY = "{{ env('PUSHER_APP_KEY') }}";
             window.PUSHER_APP_CLUSTER = "{{ env('PUSHER_APP_CLUSTER', 'mt1') }}";
+            window.VAPID_PUBLIC_KEY = "{{ env('VAPID_PUBLIC_KEY') }}";
         </script>
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased bg-slate-900 text-slate-100 min-h-screen">
+    <body class="font-sans antialiased bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen">
         @inertia
 
         <script>

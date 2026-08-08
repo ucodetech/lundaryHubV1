@@ -156,10 +156,10 @@ onUnmounted(() => {
   <AppLayout>
     <div class="space-y-6">
       <!-- Header -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Shop Order Management</h1>
-          <p class="text-xs text-slate-400 mt-1">
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Shop Order Management</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">
             Track customer bookings, log walk-in legacy garments, link registered users, and dispatch riders
           </p>
         </div>
@@ -174,11 +174,11 @@ onUnmounted(() => {
       </div>
 
       <!-- Orders Table -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
         <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr class="bg-slate-950/80 text-slate-400 uppercase font-semibold border-b border-slate-700/80">
+              <tr class="bg-gray-50 dark:bg-slate-950/80 text-gray-500 dark:text-slate-400 uppercase font-semibold border-b border-gray-200 dark:border-slate-700/80">
                 <th class="p-4">Order # & Date</th>
                 <th class="p-4">Customer</th>
                 <th class="p-4">Fulfillment & Rider</th>
@@ -187,12 +187,12 @@ onUnmounted(() => {
                 <th class="p-4">Status & Action</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-800 text-slate-300">
+            <tbody class="divide-y divide-gray-200 dark:divide-slate-800 text-gray-700 dark:text-slate-300">
               <tr v-for="order in orders.data" :key="order.id" class="hover:bg-slate-900/40 transition-colors">
                 <!-- Order # & Date -->
                 <td class="p-4">
                   <div class="font-mono font-bold text-sky-400 text-sm">#{{ order.order_number }}</div>
-                  <div class="text-[10px] text-slate-400 mt-0.5">{{ new Date(order.created_at).toLocaleString() }}</div>
+                  <div class="text-[10px] text-gray-500 dark:text-slate-400 mt-0.5">{{ new Date(order.created_at).toLocaleString() }}</div>
                   <span v-if="order.is_legacy" class="inline-block mt-1 px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
                     Walk-In / Legacy
                   </span>
@@ -201,12 +201,12 @@ onUnmounted(() => {
                 <!-- Customer -->
                 <td class="p-4">
                   <div v-if="order.customer" class="space-y-0.5">
-                    <span class="font-bold text-slate-100 block">{{ order.customer.first_name }} {{ order.customer.last_name }}</span>
-                    <span class="text-[11px] text-slate-400 font-mono block">📞 {{ order.customer.phone || 'No phone' }}</span>
+                    <span class="font-bold text-gray-900 dark:text-slate-100 block">{{ order.customer.first_name }} {{ order.customer.last_name }}</span>
+                    <span class="text-[11px] text-gray-500 dark:text-slate-400 font-mono block">📞 {{ order.customer.phone || 'No phone' }}</span>
                   </div>
                   <div v-else class="space-y-1">
                     <span class="font-bold text-amber-300 block">{{ order.legacy_customer_name }}</span>
-                    <span class="text-[11px] text-slate-400 font-mono block">📞 {{ order.legacy_customer_phone }}</span>
+                    <span class="text-[11px] text-gray-500 dark:text-slate-400 font-mono block">📞 {{ order.legacy_customer_phone }}</span>
                     <button
                       @click="openLinkModal(order)"
                       class="px-2 py-1 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 text-[10px] font-bold hover:bg-sky-500/20 transition-all inline-flex items-center gap-1"
@@ -218,10 +218,10 @@ onUnmounted(() => {
 
                 <!-- Fulfillment & Rider -->
                 <td class="p-4 space-y-1.5">
-                  <span class="capitalize font-semibold text-slate-200 block">
+                  <span class="capitalize font-semibold text-gray-800 dark:text-slate-200 block">
                     {{ order.fulfillment_type === 'home_delivery' ? '🚚 Home Delivery' : '🏬 Store Self Pickup' }}
                   </span>
-                  <span class="text-[10px] text-slate-400 block truncate max-w-[150px]">
+                  <span class="text-[10px] text-gray-500 dark:text-slate-400 block truncate max-w-[150px]">
                     {{ order.delivery_address || 'At store' }}
                   </span>
 
@@ -246,8 +246,8 @@ onUnmounted(() => {
                 <!-- Items Breakdown -->
                 <td class="p-4">
                   <div class="space-y-1">
-                    <div v-for="item in order.items" :key="item.id" class="text-[11px] text-slate-300">
-                      <span class="font-bold text-slate-100">{{ item.quantity }}x</span> {{ item.category_name }} ({{ item.service_name }})
+                    <div v-for="item in order.items" :key="item.id" class="text-[11px] text-gray-700 dark:text-slate-300">
+                      <span class="font-bold text-gray-900 dark:text-slate-100">{{ item.quantity }}x</span> {{ item.category_name }} ({{ item.service_name }})
                     </div>
                   </div>
                 </td>
@@ -263,7 +263,7 @@ onUnmounted(() => {
                     <select
                       :value="order.status"
                       @change="updateOrderStatus(order, ($event.target as HTMLSelectElement).value)"
-                      class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 border border-slate-700 text-slate-100 focus:border-sky-500"
+                      class="px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 focus:border-sky-500"
                     >
                       <option value="pending">⏳ Pending Review</option>
                       <option value="confirmed">✓ Confirmed</option>
@@ -278,7 +278,7 @@ onUnmounted(() => {
                     <a
                       :href="`/shop-admin/orders/${order.id}/tag`"
                       target="_blank"
-                      class="px-2.5 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
+                      class="px-2.5 py-1.5 rounded-xl bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300 hover:text-white font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
                       title="Print Garment Tag"
                     >
                       🏷️ Tag
@@ -287,7 +287,7 @@ onUnmounted(() => {
                     <Link
                       :href="`/orders/${order.order_number}`"
                       target="_blank"
-                      class="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-sky-400 hover:text-sky-300 font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
+                      class="px-2.5 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-sky-400 hover:text-sky-300 font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
                       title="View Full Order Details & Audit Trail"
                     >
                       👁️ Details
@@ -297,11 +297,11 @@ onUnmounted(() => {
               </tr>
 
               <tr v-if="!orders.data || orders.data.length === 0">
-                <td colspan="6" class="p-12 text-center text-slate-400 text-xs">
+                <td colspan="6" class="p-12 text-center text-gray-500 dark:text-slate-400 text-xs">
                   <div class="space-y-3 max-w-sm mx-auto">
                     <span class="text-4xl block">🧺</span>
-                    <h4 class="font-bold text-slate-200 text-sm">No Shop Customer Bookings Yet</h4>
-                    <p class="text-xs text-slate-400">
+                    <h4 class="font-bold text-gray-800 dark:text-slate-200 text-sm">No Shop Customer Bookings Yet</h4>
+                    <p class="text-xs text-gray-500 dark:text-slate-400">
                       No customer bookings received yet. Share your storefront link or click <strong>"+ Log Manual / Legacy Order"</strong> above to record walk-in garments!
                     </p>
                   </div>
@@ -314,47 +314,47 @@ onUnmounted(() => {
     </div>
 
     <!-- Manual Legacy Order Creation Modal -->
-    <div v-if="showManualModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-      <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-2xl p-6 space-y-6 shadow-2xl my-8">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+    <div v-if="showManualModal" class="fixed inset-0 z-50 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+      <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700/80 rounded-2xl w-full max-w-2xl p-6 space-y-6 shadow-2xl my-8">
+        <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4">
           <div>
-            <h2 class="text-lg font-bold text-slate-100">Log Manual / Legacy Walk-In Order</h2>
-            <p class="text-xs text-slate-400">Record garments received offline before customer registered on LaundryHub</p>
+            <h2 class="text-lg font-bold text-gray-900 dark:text-slate-100">Log Manual / Legacy Walk-In Order</h2>
+            <p class="text-xs text-gray-500 dark:text-slate-400">Record garments received offline before customer registered on LaundryHub</p>
           </div>
-          <button @click="showManualModal = false" class="text-slate-400 hover:text-white text-xl">✕</button>
+          <button @click="showManualModal = false" class="text-gray-500 dark:text-slate-400 hover:text-white text-xl">✕</button>
         </div>
 
         <form @submit.prevent="submitManualOrder" class="space-y-4">
           <!-- Walk-in Customer Info -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Customer Name *</label>
+              <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">Customer Name *</label>
               <input
                 v-model="manualForm.legacy_customer_name"
                 type="text"
                 required
                 placeholder="e.g., Chief Emeka Okafor"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-sky-500"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Customer Phone *</label>
+              <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">Customer Phone *</label>
               <input
                 v-model="manualForm.legacy_customer_phone"
                 type="text"
                 required
                 placeholder="e.g., 08012345678"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs font-mono focus:border-sky-500"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs font-mono focus:border-sky-500"
               />
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Fulfillment Option *</label>
+            <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">Fulfillment Option *</label>
             <select
               v-model="manualForm.fulfillment_type"
-              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-sky-500"
             >
               <option value="store_pickup">🏬 In-Store Self Pickup</option>
               <option value="home_delivery">🚚 Doorstep Home Delivery</option>
@@ -375,7 +375,7 @@ onUnmounted(() => {
             </div>
 
             <!-- Column Header Labels -->
-            <div class="hidden sm:grid grid-cols-12 gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3">
+            <div class="hidden sm:grid grid-cols-12 gap-2 text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider px-3">
               <div class="col-span-4">Category *</div>
               <div class="col-span-3">Service Treatment *</div>
               <div class="col-span-2">Price (₦) *</div>
@@ -386,16 +386,16 @@ onUnmounted(() => {
             <div
               v-for="(item, idx) in manualForm.items"
               :key="idx"
-              class="bg-slate-950 p-3 rounded-xl border border-slate-800 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center text-xs"
+              class="bg-gray-50 dark:bg-slate-950 p-3 rounded-xl border border-gray-200 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center text-xs"
             >
               <!-- Category -->
               <div class="sm:col-span-4">
-                <label class="block sm:hidden text-[10px] font-bold text-slate-400 uppercase mb-1">Category *</label>
+                <label class="block sm:hidden text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase mb-1">Category *</label>
                 <select
                   v-model="item.category_id"
                   @change="handleCategoryServiceChange(idx)"
                   required
-                  class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 text-xs"
+                  class="w-full px-2.5 py-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs"
                 >
                   <option value="" disabled>Select Category</option>
                   <option v-for="c in categories" :key="c.id" :value="c.id">{{ c.icon }} {{ c.name }}</option>
@@ -404,12 +404,12 @@ onUnmounted(() => {
 
               <!-- Service -->
               <div class="sm:col-span-3">
-                <label class="block sm:hidden text-[10px] font-bold text-slate-400 uppercase mb-1">Service *</label>
+                <label class="block sm:hidden text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase mb-1">Service *</label>
                 <select
                   v-model="item.service_id"
                   @change="handleCategoryServiceChange(idx)"
                   required
-                  class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 text-xs"
+                  class="w-full px-2.5 py-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs"
                 >
                   <option value="" disabled>Select Service</option>
                   <option v-for="s in services" :key="s.id" :value="s.id">{{ s.name }}</option>
@@ -418,30 +418,30 @@ onUnmounted(() => {
 
               <!-- Unit Price -->
               <div class="sm:col-span-2">
-                <label class="block sm:hidden text-[10px] font-bold text-slate-400 uppercase mb-1">Price (₦) *</label>
+                <label class="block sm:hidden text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase mb-1">Price (₦) *</label>
                 <div class="relative">
-                  <span class="absolute left-2.5 top-2.5 text-[10px] font-bold text-slate-400">₦</span>
+                  <span class="absolute left-2.5 top-2.5 text-[10px] font-bold text-gray-500 dark:text-slate-400">₦</span>
                   <input
                     v-model.number="item.unit_price"
                     type="number"
                     min="0"
                     required
                     placeholder="Price"
-                    class="w-full pl-6 pr-2 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 font-mono text-xs"
+                    class="w-full pl-6 pr-2 py-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 font-mono text-xs"
                   />
                 </div>
               </div>
 
               <!-- Quantity -->
               <div class="sm:col-span-2">
-                <label class="block sm:hidden text-[10px] font-bold text-slate-400 uppercase mb-1">Quantity *</label>
+                <label class="block sm:hidden text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase mb-1">Quantity *</label>
                 <input
                   v-model.number="item.quantity"
                   type="number"
                   min="1"
                   required
                   placeholder="Qty"
-                  class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 font-mono text-xs text-center"
+                  class="w-full px-2.5 py-2 rounded-lg bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 font-mono text-xs text-center"
                 />
               </div>
 
@@ -459,8 +459,8 @@ onUnmounted(() => {
           </div>
 
           <!-- Total Calculation Banner -->
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between font-mono">
-            <span class="text-xs text-slate-400">Total Calculated Order Value:</span>
+          <div class="bg-gray-50 dark:bg-slate-950 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex items-center justify-between font-mono">
+            <span class="text-xs text-gray-500 dark:text-slate-400">Total Calculated Order Value:</span>
             <span class="text-lg font-bold text-emerald-400">₦{{ manualSubtotal.toLocaleString() }}</span>
           </div>
 
@@ -476,26 +476,26 @@ onUnmounted(() => {
     </div>
 
     <!-- Link Registered Customer Modal -->
-    <div v-if="showLinkModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-md p-6 space-y-4 shadow-2xl">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <h2 class="text-base font-bold text-slate-100">🔗 Link Registered Customer</h2>
-          <button @click="showLinkModal = false" class="text-slate-400 hover:text-white">✕</button>
+    <div v-if="showLinkModal" class="fixed inset-0 z-50 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700/80 rounded-2xl w-full max-w-md p-6 space-y-4 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-gray-900 dark:text-slate-100">🔗 Link Registered Customer</h2>
+          <button @click="showLinkModal = false" class="text-gray-500 dark:text-slate-400 hover:text-white">✕</button>
         </div>
 
-        <p class="text-xs text-slate-400 leading-relaxed">
+        <p class="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">
           Search for the customer by phone number or email address after they have registered on LaundryHub:
         </p>
 
         <form @submit.prevent="submitLinkCustomer" class="space-y-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Customer Phone or Email</label>
+            <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">Customer Phone or Email</label>
             <input
               v-model="linkForm.query"
               type="text"
               required
               placeholder="e.g., 08012345678 or user@email.com"
-              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs font-mono"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs font-mono"
             />
           </div>
 

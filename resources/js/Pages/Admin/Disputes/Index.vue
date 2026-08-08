@@ -69,8 +69,8 @@ const reasonLabel = (reason: string) => {
     <div class="space-y-6">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Dispute & Ticket Command Center</h1>
-          <p class="text-xs text-slate-400 mt-1">Investigate customer, shop, and rider conflict tickets, inspect photo evidence, and execute resolution refunds</p>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Dispute & Ticket Command Center</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Investigate customer, shop, and rider conflict tickets, inspect photo evidence, and execute resolution refunds</p>
         </div>
       </div>
 
@@ -83,9 +83,9 @@ const reasonLabel = (reason: string) => {
       />
 
       <!-- Disputes Table -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
         <table class="w-full text-left text-sm">
-          <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
+          <thead class="bg-white dark:bg-slate-900/80 text-xs uppercase text-gray-500 dark:text-slate-400 border-b border-gray-200 dark:border-slate-700/60">
             <tr>
               <th class="py-3.5 px-6">Ticket ID</th>
               <th class="py-3.5 px-6">Order / Shop</th>
@@ -95,24 +95,24 @@ const reasonLabel = (reason: string) => {
               <th class="py-3.5 px-6 text-right">Action</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-700/40">
+          <tbody class="divide-y divide-gray-200 dark:divide-slate-700/40">
             <tr v-for="dispute in disputes.data" :key="dispute.id" class="hover:bg-slate-800/40 transition-colors">
               <td class="py-4 px-6 font-mono font-bold text-amber-400 text-xs">
                 #{{ dispute.dispute_number }}
               </td>
               <td class="py-4 px-6 text-xs">
                 <span class="font-mono text-sky-400 font-bold">#{{ dispute.order?.order_number }}</span>
-                <span class="text-slate-400 block">{{ dispute.order?.shop?.name }}</span>
+                <span class="text-gray-500 dark:text-slate-400 block">{{ dispute.order?.shop?.name }}</span>
               </td>
               <td class="py-4 px-6 text-xs">
-                <span class="font-bold text-slate-200 block">{{ dispute.reporter?.first_name }} {{ dispute.reporter?.last_name }}</span>
-                <span class="text-slate-400 font-mono text-[10px]">{{ dispute.reporter?.phone }}</span>
+                <span class="font-bold text-gray-800 dark:text-slate-200 block">{{ dispute.reporter?.first_name }} {{ dispute.reporter?.last_name }}</span>
+                <span class="text-gray-500 dark:text-slate-400 font-mono text-[10px]">{{ dispute.reporter?.phone }}</span>
               </td>
               <td class="py-4 px-6 text-xs space-y-0.5">
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-900 border border-slate-700 text-slate-300 inline-block mb-1">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300 inline-block mb-1">
                   {{ reasonLabel(dispute.reason) }}
                 </span>
-                <p class="font-semibold text-slate-200 truncate max-w-xs">{{ dispute.subject }}</p>
+                <p class="font-semibold text-gray-800 dark:text-slate-200 truncate max-w-xs">{{ dispute.subject }}</p>
               </td>
               <td class="py-4 px-6">
                 <Badge :status="dispute.status" />
@@ -128,7 +128,7 @@ const reasonLabel = (reason: string) => {
             </tr>
 
             <tr v-if="!disputes.data || disputes.data.length === 0">
-              <td colspan="6" class="py-12 text-center text-slate-400 text-xs">
+              <td colspan="6" class="py-12 text-center text-gray-500 dark:text-slate-400 text-xs">
                 No dispute tickets matching the selected filters.
               </td>
             </tr>

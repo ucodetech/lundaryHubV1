@@ -134,11 +134,11 @@ watch(
 </script>
 
 <template>
-  <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-4 space-y-4 shadow-xl">
+  <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-4 space-y-4 shadow-xl">
     <!-- Active Filters Bar -->
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5 mr-1">
+        <span class="text-xs font-semibold text-gray-500 dark:text-slate-400 flex items-center gap-1.5 mr-1">
           <span>🔍</span>
           <span>Filters</span>
           <span
@@ -163,7 +163,7 @@ watch(
       <div v-if="inactiveFilters.length > 0" ref="toggleMenuContainer" class="relative">
         <button
           @click="showAddFilterMenu = !showAddFilterMenu"
-          class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-600 text-xs font-semibold text-slate-200 flex items-center gap-1.5 transition-all"
+          class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 hover:border-slate-600 text-xs font-semibold text-gray-800 dark:text-slate-200 flex items-center gap-1.5 transition-all"
         >
           <span>+</span>
           <span>Add Filter Field</span>
@@ -172,19 +172,19 @@ watch(
         <!-- Dropdown Menu -->
         <div
           v-if="showAddFilterMenu"
-          class="absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-30 py-1 overflow-hidden animate-in fade-in zoom-in-95 duration-100"
+          class="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl shadow-2xl z-30 py-1 overflow-hidden animate-in fade-in zoom-in-95 duration-100"
         >
-          <div class="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800">
+          <div class="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 border-b border-gray-200 dark:border-slate-800">
             Available Filters
           </div>
           <button
             v-for="filter in inactiveFilters"
             :key="filter.key"
             @click="toggleFieldVisibility(filter.key); showAddFilterMenu = false"
-            class="w-full text-left px-3 py-2 text-xs text-slate-300 hover:bg-slate-800 hover:text-sky-400 flex items-center justify-between transition-colors"
+            class="w-full text-left px-3 py-2 text-xs text-gray-700 dark:text-slate-300 hover:bg-slate-800 hover:text-sky-400 flex items-center justify-between transition-colors"
           >
             <span>{{ filter.label }}</span>
-            <span class="text-[10px] text-slate-400 font-mono">+ Add</span>
+            <span class="text-[10px] text-gray-500 dark:text-slate-400 font-mono">+ Add</span>
           </button>
         </div>
       </div>
@@ -195,11 +195,11 @@ watch(
       <template v-for="field in effectiveConfig" :key="field.key">
         <div v-if="activeFields.has(field.key)" class="space-y-1">
           <div class="flex items-center justify-between text-[11px]">
-            <label class="font-semibold text-slate-300">{{ field.label }}</label>
+            <label class="font-semibold text-gray-700 dark:text-slate-300">{{ field.label }}</label>
             <button
               v-if="!field.defaultVisible"
               @click="toggleFieldVisibility(field.key)"
-              class="text-slate-400 hover:text-slate-200 text-[10px]"
+              class="text-gray-500 dark:text-slate-400 hover:text-slate-200 text-[10px]"
               title="Remove filter"
             >
               ✕
@@ -213,7 +213,7 @@ watch(
             type="text"
             :placeholder="field.placeholder || 'Filter ' + field.label"
             @input="applyFilters"
-            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
+            class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-sky-500 shadow-inner"
           />
 
           <!-- Select Field -->
@@ -221,7 +221,7 @@ watch(
             v-else-if="field.type === 'select'"
             v-model="filterValues[field.key]"
             @change="applyFilters"
-            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
+            class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-sky-500 shadow-inner"
           >
             <option value="">All {{ field.label }}</option>
             <option
@@ -238,7 +238,7 @@ watch(
             v-else-if="field.type === 'boolean'"
             v-model="filterValues[field.key]"
             @change="applyFilters"
-            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
+            class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-sky-500 shadow-inner"
           >
             <option value="">All</option>
             <option :value="true">Yes</option>
@@ -251,7 +251,7 @@ watch(
             v-model="filterValues[field.key]"
             type="date"
             @change="applyFilters"
-            class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs focus:border-sky-500 shadow-inner"
+            class="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-sky-500 shadow-inner"
           />
         </div>
       </template>

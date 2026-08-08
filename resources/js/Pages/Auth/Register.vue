@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import GlobalLoader from '@/Components/GlobalLoader.vue';
+import { ref } from 'vue';
+
+const showPassword = ref(false);
+const showConfirmPassword = ref(false);
 
 const props = defineProps<{
   defaultRole?: string;
@@ -37,7 +41,7 @@ const submit = () => {
 <template>
   <Head title="Create Account — LaundryHub" />
 
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 selection:bg-sky-500 selection:text-slate-950 relative">
+  <div class="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-100 flex items-center justify-center p-6 selection:bg-sky-500 selection:text-slate-950 relative">
     <GlobalLoader />
 
     <div class="w-full max-w-lg space-y-6">
@@ -50,19 +54,19 @@ const submit = () => {
             LaundryHub
           </span>
         </Link>
-        <h2 class="text-xl font-bold text-slate-200">Join the Laundry Platform</h2>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-slate-200">Join the Laundry Platform</h2>
       </div>
 
-      <form @submit.prevent="submit" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-4 shadow-2xl">
+      <form @submit.prevent="submit" class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-3xl p-8 space-y-4 shadow-2xl">
         <!-- Role Selection -->
         <div>
-          <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">I am registering as:</label>
+          <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-2">I am registering as:</label>
           <div class="grid grid-cols-3 gap-2">
             <button
               type="button"
               @click="selectRole('customer')"
               class="py-2.5 px-3 rounded-xl border text-xs font-bold transition-all text-center"
-              :class="form.role === 'customer' ? 'bg-sky-500/10 border-sky-500 text-sky-400' : 'bg-slate-950 border-slate-800 text-slate-400'"
+              :class="form.role === 'customer' ? 'bg-sky-500/10 border-sky-500 text-sky-400' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400'"
             >
               🙋 Customer
             </button>
@@ -70,7 +74,7 @@ const submit = () => {
               type="button"
               @click="selectRole('shop_owner')"
               class="py-2.5 px-3 rounded-xl border text-xs font-bold transition-all text-center"
-              :class="form.role === 'shop_owner' ? 'bg-sky-500/10 border-sky-500 text-sky-400' : 'bg-slate-950 border-slate-800 text-slate-400'"
+              :class="form.role === 'shop_owner' ? 'bg-sky-500/10 border-sky-500 text-sky-400' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400'"
             >
               🏪 Dry Cleaner
             </button>
@@ -78,101 +82,126 @@ const submit = () => {
               type="button"
               @click="selectRole('rider')"
               class="py-2.5 px-3 rounded-xl border text-xs font-bold transition-all text-center"
-              :class="form.role === 'rider' ? 'bg-sky-500/10 border-sky-500 text-sky-400' : 'bg-slate-950 border-slate-800 text-slate-400'"
+              :class="form.role === 'rider' ? 'bg-sky-500/10 border-sky-500 text-sky-400' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400'"
             >
               🛵 Rider
             </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">First Name *</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">First Name *</label>
             <input
               v-model="form.first_name"
               type="text"
               required
               placeholder="First name"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
+              class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-base sm:text-sm focus:border-sky-500 focus:ring-0"
             />
             <p v-if="form.errors.first_name" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.first_name }}</p>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Last Name *</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Last Name *</label>
             <input
               v-model="form.last_name"
               type="text"
               required
               placeholder="Last name"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
+              class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-base sm:text-sm focus:border-sky-500 focus:ring-0"
             />
             <p v-if="form.errors.last_name" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.last_name }}</p>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Email Address *</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Email Address *</label>
             <input
               v-model="form.email"
               type="email"
               required
               placeholder="name@domain.com"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
+              class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-base sm:text-sm focus:border-sky-500 focus:ring-0"
             />
             <p v-if="form.errors.email" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.email }}</p>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Phone Number *</label>
-            <input
-              v-model="form.phone"
-              type="text"
-              required
-              placeholder="+2348000000000"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
-            />
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Phone Number *</label>
+            <div class="flex items-stretch w-full rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 focus-within:border-sky-500 overflow-hidden transition-colors">
+              <span class="flex items-center px-3 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400 font-bold text-sm">
+                +234
+              </span>
+              <input
+                v-model="form.phone"
+                type="text"
+                required
+                placeholder="8000000000"
+                class="w-full px-4 py-2.5 bg-transparent border-0 text-gray-900 dark:text-slate-100 text-base sm:text-sm focus:ring-0 placeholder:text-slate-600"
+              />
+            </div>
             <p v-if="form.errors.phone" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.phone }}</p>
           </div>
         </div>
 
         <!-- Referral Phone / Code Input -->
         <div>
-          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">
-            Referral Phone Number / Code <span class="text-slate-500 font-normal text-[11px] lowercase">(optional)</span>
+          <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">
+            Referral Phone Number / Code <span class="text-gray-500 dark:text-slate-500 font-normal text-[11px] lowercase">(optional)</span>
           </label>
           <input
             v-model="form.referral_code"
             type="text"
             placeholder="e.g. 08012345678"
-            class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm font-mono focus:border-sky-500 focus:ring-0"
+            class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-base sm:text-sm font-mono focus:border-sky-500 focus:ring-0"
           />
           <p v-if="form.errors.referral_code" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.referral_code }}</p>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Password *</label>
-            <input
-              v-model="form.password"
-              type="password"
-              required
-              placeholder="••••••••"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
-            />
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Password *</label>
+            <div class="relative">
+              <input
+                v-model="form.password"
+                :type="showPassword ? 'text' : 'password'"
+                required
+                placeholder="••••••••"
+                class="w-full px-4 py-2.5 pr-12 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-base sm:text-sm focus:border-sky-500 focus:ring-0"
+              />
+              <button 
+                type="button" 
+                @click="showPassword = !showPassword"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-slate-400 hover:text-slate-200"
+              >
+                <span v-if="showPassword">👁️</span>
+                <span v-else>🙈</span>
+              </button>
+            </div>
             <p v-if="form.errors.password" class="mt-1 text-[11px] text-rose-400 font-semibold">{{ form.errors.password }}</p>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Confirm Password *</label>
-            <input
-              v-model="form.password_confirmation"
-              type="password"
-              required
-              placeholder="••••••••"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
-            />
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Confirm Password *</label>
+            <div class="relative">
+              <input
+                v-model="form.password_confirmation"
+                :type="showConfirmPassword ? 'text' : 'password'"
+                required
+                placeholder="••••••••"
+                class="w-full px-4 py-2.5 pr-12 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-base sm:text-sm focus:border-sky-500 focus:ring-0"
+              />
+              <button 
+                type="button" 
+                @click="showConfirmPassword = !showConfirmPassword"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-slate-400 hover:text-slate-200"
+              >
+                <span v-if="showConfirmPassword">👁️</span>
+                <span v-else>🙈</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -186,7 +215,7 @@ const submit = () => {
         </button>
 
         <div class="text-center pt-2">
-          <p class="text-xs text-slate-400">
+          <p class="text-xs text-gray-500 dark:text-slate-400">
             Already have an account?
             <Link href="/login" class="text-sky-400 font-semibold hover:underline">Sign In</Link>
           </p>

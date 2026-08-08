@@ -38,8 +38,8 @@ const whatsappShareUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
           <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-bold uppercase tracking-wider">
             🎁 Invite Friends & Earn Cash Rewards
           </span>
-          <h1 class="text-2xl sm:text-3xl font-black text-slate-100">LaundryHub Referral Hub</h1>
-          <p class="text-xs sm:text-sm text-slate-300">
+          <h1 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-slate-100">LaundryHub Referral Hub</h1>
+          <p class="text-xs sm:text-sm text-gray-700 dark:text-slate-300">
             Share your unique referral code or link with friends, family, and laundry shop owners. Earn bonus wallet credits directly towards your orders & passes!
           </p>
         </div>
@@ -47,55 +47,55 @@ const whatsappShareUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
 
       <!-- Stats Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl space-y-2">
-          <span class="text-xs text-slate-400 font-bold uppercase">Current Bonus Wallet Balance</span>
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-5 shadow-xl space-y-2">
+          <span class="text-xs text-gray-500 dark:text-slate-400 font-bold uppercase">Current Bonus Wallet Balance</span>
           <div class="text-2xl font-black text-emerald-400">
             ₦{{ Number(bonusBalance).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}
           </div>
-          <span class="text-[10px] text-slate-400 block">Auto-deducted at order checkout / pass purchase</span>
+          <span class="text-[10px] text-gray-500 dark:text-slate-400 block">Auto-deducted at order checkout / pass purchase</span>
         </div>
 
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl space-y-2">
-          <span class="text-xs text-slate-400 font-bold uppercase">Total Referral Rewards Earned</span>
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-5 shadow-xl space-y-2">
+          <span class="text-xs text-gray-500 dark:text-slate-400 font-bold uppercase">Total Referral Rewards Earned</span>
           <div class="text-2xl font-black text-purple-400">
             ₦{{ Number(totalEarned).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}
           </div>
-          <span class="text-[10px] text-slate-400 block">Lifetime earnings from referral bonuses</span>
+          <span class="text-[10px] text-gray-500 dark:text-slate-400 block">Lifetime earnings from referral bonuses</span>
         </div>
 
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-xl space-y-2">
-          <span class="text-xs text-slate-400 font-bold uppercase">Friends & Shops Referred</span>
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-5 shadow-xl space-y-2">
+          <span class="text-xs text-gray-500 dark:text-slate-400 font-bold uppercase">Friends & Shops Referred</span>
           <div class="text-2xl font-black text-sky-400">
             {{ referrals?.total || referrals?.data?.length || 0 }} Users
           </div>
-          <span class="text-[10px] text-slate-400 block">Registered using your referral link/phone</span>
+          <span class="text-[10px] text-gray-500 dark:text-slate-400 block">Registered using your referral link/phone</span>
         </div>
       </div>
 
       <!-- Share Box Card -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
-        <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
+        <h3 class="text-base font-bold text-gray-900 dark:text-slate-100 flex items-center gap-2">
           <span>🔗 Your Unique Referral Link & Code</span>
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Referral Code (Phone Number) -->
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1">
-            <span class="text-[11px] text-slate-400 font-bold uppercase block">Your Referral Phone Code:</span>
+          <div class="bg-gray-50 dark:bg-slate-950 p-4 rounded-xl border border-gray-200 dark:border-slate-800 space-y-1">
+            <span class="text-[11px] text-gray-500 dark:text-slate-400 font-bold uppercase block">Your Referral Phone Code:</span>
             <div class="flex items-center justify-between">
               <span class="text-lg font-mono font-bold text-sky-400">{{ referralCode }}</span>
-              <span class="text-[10px] text-slate-500 font-bold uppercase">Tell friends to enter on signup</span>
+              <span class="text-[10px] text-gray-500 dark:text-slate-500 font-bold uppercase">Tell friends to enter on signup</span>
             </div>
           </div>
 
           <!-- Share Link & WhatsApp -->
           <div class="space-y-2">
-            <span class="text-[11px] text-slate-400 font-bold uppercase block">Shareable Referral Link:</span>
+            <span class="text-[11px] text-gray-500 dark:text-slate-400 font-bold uppercase block">Shareable Referral Link:</span>
             <div class="flex items-center gap-2">
               <input
                 :value="referralLink"
                 readonly
-                class="flex-1 px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 text-xs font-mono select-all"
+                class="flex-1 px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-800 dark:text-slate-200 text-xs font-mono select-all"
               />
               <button
                 @click="copyLink"
@@ -120,31 +120,31 @@ const whatsappShareUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
       </div>
 
       <!-- How it Works Tiers -->
-      <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
-        <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider">How Referral Rewards Work</h3>
+      <div class="bg-gray-100 dark:bg-slate-800/40 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
+        <h3 class="text-sm font-bold text-gray-800 dark:text-slate-200 uppercase tracking-wider">How Referral Rewards Work</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-1.5">
+          <div class="bg-white dark:bg-slate-900/80 p-4 rounded-xl border border-gray-200 dark:border-slate-800 space-y-1.5">
             <div class="flex items-center gap-2 text-sky-400 font-bold text-sm">
               <span>🙋 Recommending a Customer</span>
             </div>
-            <p class="text-slate-300">
+            <p class="text-gray-700 dark:text-slate-300">
               When a friend signs up with your phone number and completes their <strong>first paid laundry order</strong>:
             </p>
-            <ul class="text-slate-400 space-y-1 list-disc pl-4 font-mono text-[11px]">
+            <ul class="text-gray-500 dark:text-slate-400 space-y-1 list-disc pl-4 font-mono text-[11px]">
               <li>You receive <strong class="text-emerald-400">₦500</strong> bonus wallet credit.</li>
               <li>Your friend receives <strong class="text-emerald-400">₦200</strong> bonus wallet credit.</li>
             </ul>
           </div>
 
-          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-1.5">
+          <div class="bg-white dark:bg-slate-900/80 p-4 rounded-xl border border-gray-200 dark:border-slate-800 space-y-1.5">
             <div class="flex items-center gap-2 text-purple-400 font-bold text-sm">
               <span>🏪 Recommending a Dry Cleaner / Shop Owner</span>
             </div>
-            <p class="text-slate-300">
+            <p class="text-gray-700 dark:text-slate-300">
               When a laundry shop owner registers, completes verification, and pays for their <strong>first shop subscription</strong>:
             </p>
-            <ul class="text-slate-400 space-y-1 list-disc pl-4 font-mono text-[11px]">
+            <ul class="text-gray-500 dark:text-slate-400 space-y-1 list-disc pl-4 font-mono text-[11px]">
               <li>You receive <strong class="text-emerald-400">₦1,000</strong> bonus wallet credit.</li>
               <li>The shop owner receives <strong class="text-emerald-400">₦500</strong> subscription discount credit.</li>
             </ul>
@@ -155,18 +155,18 @@ const whatsappShareUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
       <!-- Transaction & Referrals Ledger -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Referrals List -->
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
-          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider">Referred Friends & Shops</h3>
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-gray-800 dark:text-slate-200 uppercase tracking-wider">Referred Friends & Shops</h3>
 
-          <div class="divide-y divide-slate-700/40">
+          <div class="divide-y divide-gray-200 dark:divide-slate-700/40">
             <div
               v-for="ref in referrals.data"
               :key="ref.id"
               class="py-3 flex items-center justify-between gap-3 text-xs"
             >
               <div>
-                <span class="font-bold text-slate-200 block">{{ ref.referred?.first_name }} {{ ref.referred?.last_name }}</span>
-                <span class="text-[10px] text-slate-400 font-mono">{{ ref.referred?.phone }} • Joined {{ new Date(ref.created_at).toLocaleDateString() }}</span>
+                <span class="font-bold text-gray-800 dark:text-slate-200 block">{{ ref.referred?.first_name }} {{ ref.referred?.last_name }}</span>
+                <span class="text-[10px] text-gray-500 dark:text-slate-400 font-mono">{{ ref.referred?.phone }} • Joined {{ new Date(ref.created_at).toLocaleDateString() }}</span>
               </div>
               <span
                 class="px-2.5 py-1 rounded-full text-[10px] font-bold border capitalize"
@@ -176,25 +176,25 @@ const whatsappShareUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
               </span>
             </div>
 
-            <div v-if="!referrals.data || referrals.data.length === 0" class="py-8 text-center text-slate-400 text-xs">
+            <div v-if="!referrals.data || referrals.data.length === 0" class="py-8 text-center text-gray-500 dark:text-slate-400 text-xs">
               No referrals yet. Share your link to start earning!
             </div>
           </div>
         </div>
 
         <!-- Bonus Wallet Ledger -->
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
-          <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider">Bonus Wallet Transactions</h3>
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-gray-800 dark:text-slate-200 uppercase tracking-wider">Bonus Wallet Transactions</h3>
 
-          <div class="divide-y divide-slate-700/40">
+          <div class="divide-y divide-gray-200 dark:divide-slate-700/40">
             <div
               v-for="tx in transactions"
               :key="tx.id"
               class="py-3 flex items-center justify-between gap-3 text-xs"
             >
               <div class="space-y-0.5">
-                <span class="font-semibold text-slate-200 block">{{ tx.description }}</span>
-                <span class="text-[10px] text-slate-400 font-mono">{{ new Date(tx.created_at).toLocaleString() }}</span>
+                <span class="font-semibold text-gray-800 dark:text-slate-200 block">{{ tx.description }}</span>
+                <span class="text-[10px] text-gray-500 dark:text-slate-400 font-mono">{{ new Date(tx.created_at).toLocaleString() }}</span>
               </div>
               <span
                 class="font-mono font-bold text-xs"
@@ -204,7 +204,7 @@ const whatsappShareUrl = `https://api.whatsapp.com/send?text=${whatsappText}`;
               </span>
             </div>
 
-            <div v-if="!transactions || transactions.length === 0" class="py-8 text-center text-slate-400 text-xs">
+            <div v-if="!transactions || transactions.length === 0" class="py-8 text-center text-gray-500 dark:text-slate-400 text-xs">
               No bonus transactions recorded yet.
             </div>
           </div>

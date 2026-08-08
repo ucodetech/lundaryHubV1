@@ -56,9 +56,9 @@ onUnmounted(() => {
   >
     <div
       v-if="isLoading"
-      class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-950/75 backdrop-blur-sm pointer-events-auto"
+      class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-50 dark:bg-slate-950/75 backdrop-blur-sm pointer-events-auto"
     >
-      <div class="relative flex flex-col items-center space-y-4 bg-slate-900/90 border border-slate-800 p-8 rounded-3xl shadow-2xl">
+      <div class="relative flex flex-col items-center space-y-4 bg-white dark:bg-slate-900/90 border border-gray-200 dark:border-slate-800 p-8 rounded-3xl shadow-2xl">
         <!-- Glowing Pulse Ring -->
         <div class="relative flex items-center justify-center">
           <div class="w-16 h-16 rounded-full border-4 border-sky-500/20 border-t-sky-400 animate-spin"></div>
@@ -68,8 +68,8 @@ onUnmounted(() => {
         </div>
 
         <div class="text-center space-y-1">
-          <p class="text-sm font-bold text-slate-100 tracking-wide">Processing Request...</p>
-          <p class="text-xs text-slate-400">Please wait a moment while LaundryHub connects</p>
+          <p class="text-sm font-bold text-gray-900 dark:text-slate-100 tracking-wide">Processing Request...</p>
+          <p class="text-xs text-gray-500 dark:text-slate-400">Please wait a moment while LaundryHub connects</p>
         </div>
       </div>
     </div>

@@ -113,8 +113,8 @@ const cloneCategory = (categoryId: number) => {
       <!-- Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Item Categories</h1>
-          <p class="text-xs text-slate-400 mt-1">Manage custom item categories or clone from platform master templates</p>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Item Categories</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Manage custom item categories or clone from platform master templates</p>
         </div>
 
         <button
@@ -128,14 +128,14 @@ const cloneCategory = (categoryId: number) => {
 
       <!-- Section 1: Active Shop Categories (If shop exists or is shop owner) -->
       <div v-if="shop || isShopOwner" class="space-y-3">
-        <h2 class="text-sm font-bold text-slate-200 flex items-center gap-2">
+        <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200 flex items-center gap-2">
           <span>🏪 My Shop Categories</span>
           <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-mono">{{ categories.length }}</span>
         </h2>
 
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
           <table class="w-full text-left text-sm border-collapse">
-            <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
+            <thead class="bg-white dark:bg-slate-900/80 text-xs uppercase text-gray-500 dark:text-slate-400 border-b border-gray-200 dark:border-slate-700/60">
               <tr>
                 <th class="py-3.5 px-6">Order</th>
                 <th class="py-3.5 px-6">Category Name</th>
@@ -143,10 +143,10 @@ const cloneCategory = (categoryId: number) => {
                 <th class="py-3.5 px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700/40 text-xs">
+            <tbody class="divide-y divide-gray-200 dark:divide-slate-700/40 text-xs">
               <tr v-for="cat in categories" :key="cat.id" class="hover:bg-slate-800/40 transition-colors">
-                <td class="py-4 px-6 text-slate-400 font-mono">{{ cat.sort_order }}</td>
-                <td class="py-4 px-6 font-semibold text-slate-200">
+                <td class="py-4 px-6 text-gray-500 dark:text-slate-400 font-mono">{{ cat.sort_order }}</td>
+                <td class="py-4 px-6 font-semibold text-gray-800 dark:text-slate-200">
                   <span v-if="cat.icon" class="mr-2 text-base">{{ cat.icon }}</span>
                   <span>{{ cat.name }}</span>
                 </td>
@@ -171,7 +171,7 @@ const cloneCategory = (categoryId: number) => {
                 </td>
               </tr>
               <tr v-if="categories.length === 0">
-                <td colspan="4" class="py-8 text-center text-slate-400 text-xs">
+                <td colspan="4" class="py-8 text-center text-gray-500 dark:text-slate-400 text-xs">
                   No categories in your shop catalog.
                 </td>
               </tr>
@@ -181,14 +181,14 @@ const cloneCategory = (categoryId: number) => {
       </div>
 
       <!-- Section 2: Platform Master Templates Catalog -->
-      <div v-if="masterCategories && masterCategories.length > 0" class="space-y-3 pt-4 border-t border-slate-800/80">
+      <div v-if="masterCategories && masterCategories.length > 0" class="space-y-3 pt-4 border-t border-gray-200 dark:border-slate-800/80">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 class="text-sm font-bold text-purple-300 flex items-center gap-2">
               <span>📋 Platform Master Category Templates</span>
               <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20">Admin Templates</span>
             </h2>
-            <p class="text-xs text-slate-400 mt-0.5">Platform default category template catalog</p>
+            <p class="text-xs text-gray-500 dark:text-slate-400 mt-0.5">Platform default category template catalog</p>
           </div>
 
           <button
@@ -204,15 +204,15 @@ const cloneCategory = (categoryId: number) => {
           <div
             v-for="masterCat in masterCategories"
             :key="masterCat.id"
-            class="bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-lg transition-all group"
+            class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-800 hover:border-purple-500/40 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-lg transition-all group"
           >
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-lg">
                 {{ masterCat.icon || '🏷️' }}
               </div>
               <div>
-                <p class="text-xs font-bold text-slate-200 group-hover:text-purple-300 transition-colors">{{ masterCat.name }}</p>
-                <span class="text-[10px] text-slate-500">Order {{ masterCat.sort_order }}</span>
+                <p class="text-xs font-bold text-gray-800 dark:text-slate-200 group-hover:text-purple-300 transition-colors">{{ masterCat.name }}</p>
+                <span class="text-[10px] text-gray-500 dark:text-slate-500">Order {{ masterCat.sort_order }}</span>
               </div>
             </div>
 
@@ -246,25 +246,25 @@ const cloneCategory = (categoryId: number) => {
       </div>
 
       <!-- Add Category Modal -->
-      <div v-if="showAddModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
-          <h3 class="text-lg font-bold text-slate-100">
+      <div v-if="showAddModal" class="fixed inset-0 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-slate-100">
             {{ isCreatingMaster ? 'Add Platform Master Category Template' : 'Add New Category' }}
           </h3>
           <form @submit.prevent="submit" class="space-y-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Category Name *</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Category Name *</label>
               <input
                 v-model="form.name"
                 type="text"
                 required
                 placeholder="e.g., Shirts, Native Wear, Duvet"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Select Garment Icon</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Select Garment Icon</label>
               <div class="grid grid-cols-6 gap-2 mb-2">
                 <button
                   v-for="item in iconPresets"
@@ -273,7 +273,7 @@ const cloneCategory = (categoryId: number) => {
                   @click="form.icon = item.icon"
                   :title="item.label"
                   class="h-10 rounded-xl text-lg flex items-center justify-center transition-all border"
-                  :class="form.icon === item.icon ? 'bg-sky-500/20 border-sky-500 text-sky-400 scale-105 shadow-md shadow-sky-500/20' : 'bg-slate-950 border-slate-800 text-slate-300 hover:bg-slate-800 hover:border-slate-700'"
+                  :class="form.icon === item.icon ? 'bg-sky-500/20 border-sky-500 text-sky-400 scale-105 shadow-md shadow-sky-500/20' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-700 dark:text-slate-300 hover:bg-slate-800 hover:border-slate-700'"
                 >
                   {{ item.icon }}
                 </button>
@@ -283,16 +283,16 @@ const cloneCategory = (categoryId: number) => {
                 v-model="form.icon"
                 type="text"
                 placeholder="Or type custom emoji..."
-                class="w-full px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Display Sort Order</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Display Sort Order</label>
               <input
                 v-model="form.sort_order"
                 type="number"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
@@ -300,7 +300,7 @@ const cloneCategory = (categoryId: number) => {
               <button
                 type="button"
                 @click="showAddModal = false"
-                class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200"
+                class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-500 dark:text-slate-400 hover:text-slate-200"
               >
                 Cancel
               </button>
@@ -317,22 +317,22 @@ const cloneCategory = (categoryId: number) => {
       </div>
 
       <!-- Edit Category Modal -->
-      <div v-if="showEditModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
-          <h3 class="text-lg font-bold text-slate-100">Edit Category</h3>
+      <div v-if="showEditModal" class="fixed inset-0 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-slate-100">Edit Category</h3>
           <form @submit.prevent="submitEdit" class="space-y-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Category Name *</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Category Name *</label>
               <input
                 v-model="editForm.name"
                 type="text"
                 required
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Select Garment Icon</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Select Garment Icon</label>
               <div class="grid grid-cols-6 gap-2 mb-2">
                 <button
                   v-for="item in iconPresets"
@@ -341,7 +341,7 @@ const cloneCategory = (categoryId: number) => {
                   @click="editForm.icon = item.icon"
                   :title="item.label"
                   class="h-10 rounded-xl text-lg flex items-center justify-center transition-all border"
-                  :class="editForm.icon === item.icon ? 'bg-sky-500/20 border-sky-500 text-sky-400 scale-105 shadow-md shadow-sky-500/20' : 'bg-slate-950 border-slate-800 text-slate-300 hover:bg-slate-800 hover:border-slate-700'"
+                  :class="editForm.icon === item.icon ? 'bg-sky-500/20 border-sky-500 text-sky-400 scale-105 shadow-md shadow-sky-500/20' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-700 dark:text-slate-300 hover:bg-slate-800 hover:border-slate-700'"
                 >
                   {{ item.icon }}
                 </button>
@@ -351,16 +351,16 @@ const cloneCategory = (categoryId: number) => {
                 v-model="editForm.icon"
                 type="text"
                 placeholder="Or type custom emoji..."
-                class="w-full px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Display Sort Order</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Display Sort Order</label>
               <input
                 v-model="editForm.sort_order"
                 type="number"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
@@ -368,7 +368,7 @@ const cloneCategory = (categoryId: number) => {
               <button
                 type="button"
                 @click="showEditModal = false"
-                class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200"
+                class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-500 dark:text-slate-400 hover:text-slate-200"
               >
                 Cancel
               </button>

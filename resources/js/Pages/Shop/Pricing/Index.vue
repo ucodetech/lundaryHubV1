@@ -94,8 +94,8 @@ const cloneAllMasterTemplates = async () => {
       <!-- Header -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Pricing Engine</h1>
-          <p class="text-xs text-slate-400 mt-1">Set custom Category × Service prices or clone master platform templates</p>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Pricing Engine</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Set custom Category × Service prices or clone master platform templates</p>
         </div>
 
         <!-- Import All Button (Only visible for Shop Owners) -->
@@ -110,16 +110,16 @@ const cloneAllMasterTemplates = async () => {
       </div>
 
       <!-- Add Price Form -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl">
-        <h3 class="font-bold text-slate-200 text-sm mb-4">Set Price Rule</h3>
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl">
+        <h3 class="font-bold text-gray-800 dark:text-slate-200 text-sm mb-4">Set Price Rule</h3>
 
         <form @submit.prevent="submit" class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Category *</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Category *</label>
             <select
               v-model="form.category_id"
               required
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+              class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
             >
               <option :value="null" disabled>Select Category...</option>
               <option v-for="cat in categories" :key="cat.id" :value="cat.id">
@@ -129,11 +129,11 @@ const cloneAllMasterTemplates = async () => {
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Service *</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Service *</label>
             <select
               v-model="form.service_id"
               required
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+              class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
             >
               <option :value="null" disabled>Select Service...</option>
               <option v-for="srv in services" :key="srv.id" :value="srv.id">
@@ -143,14 +143,14 @@ const cloneAllMasterTemplates = async () => {
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Price (₦) *</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Price (₦) *</label>
             <input
               v-model="form.amount"
               type="number"
               required
               min="0"
               placeholder="500"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+              class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
             />
           </div>
 
@@ -168,14 +168,14 @@ const cloneAllMasterTemplates = async () => {
 
       <!-- Section 1: Active Shop Pricing Table -->
       <div class="space-y-3">
-        <h2 class="text-sm font-bold text-slate-200 flex items-center gap-2">
+        <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200 flex items-center gap-2">
           <span>💳 Active Shop Price Rules</span>
           <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-mono">{{ prices.length }}</span>
         </h2>
 
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
+        <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
           <table class="w-full text-left text-sm">
-            <thead class="bg-slate-900/80 text-xs uppercase text-slate-400 border-b border-slate-700/60">
+            <thead class="bg-white dark:bg-slate-900/80 text-xs uppercase text-gray-500 dark:text-slate-400 border-b border-gray-200 dark:border-slate-700/60">
               <tr>
                 <th class="py-3.5 px-6">Category</th>
                 <th class="py-3.5 px-6">Service</th>
@@ -183,13 +183,13 @@ const cloneAllMasterTemplates = async () => {
                 <th class="py-3.5 px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700/40">
+            <tbody class="divide-y divide-gray-200 dark:divide-slate-700/40">
               <tr v-for="price in prices" :key="price.id" class="hover:bg-slate-800/40 transition-colors">
-                <td class="py-4 px-6 font-semibold text-slate-200">
+                <td class="py-4 px-6 font-semibold text-gray-800 dark:text-slate-200">
                   <span v-if="price.category?.icon" class="mr-1.5">{{ price.category.icon }}</span>
                   <span>{{ price.category?.name }}</span>
                 </td>
-                <td class="py-4 px-6 text-slate-300">{{ price.service?.name }}</td>
+                <td class="py-4 px-6 text-gray-700 dark:text-slate-300">{{ price.service?.name }}</td>
                 <td class="py-4 px-6 text-right font-bold text-sky-400">₦{{ Number(price.amount).toLocaleString() }}</td>
                 <td class="py-4 px-6 text-right space-x-2">
                   <button
@@ -207,7 +207,7 @@ const cloneAllMasterTemplates = async () => {
                 </td>
               </tr>
               <tr v-if="prices.length === 0">
-                <td colspan="4" class="py-8 text-center text-slate-400 text-xs">
+                <td colspan="4" class="py-8 text-center text-gray-500 dark:text-slate-400 text-xs">
                   No shop price rules defined. Use the form above to add pricing or click "Import All Master Templates".
                 </td>
               </tr>
@@ -217,20 +217,20 @@ const cloneAllMasterTemplates = async () => {
       </div>
 
       <!-- Section 2: Platform Master Default Pricing Matrix -->
-      <div v-if="masterPrices && masterPrices.length > 0" class="space-y-3 pt-4 border-t border-slate-800/80">
+      <div v-if="masterPrices && masterPrices.length > 0" class="space-y-3 pt-4 border-t border-gray-200 dark:border-slate-800/80">
         <div class="flex items-center justify-between">
           <div>
             <h2 class="text-sm font-bold text-purple-300 flex items-center gap-2">
               <span>📋 Platform Master Pricing Templates</span>
               <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20">Admin Catalog</span>
             </h2>
-            <p class="text-xs text-slate-400 mt-0.5">Platform default price rules template matrix</p>
+            <p class="text-xs text-gray-500 dark:text-slate-400 mt-0.5">Platform default price rules template matrix</p>
           </div>
         </div>
 
-        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
+        <div class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-800 rounded-2xl overflow-hidden overflow-x-auto custom-scrollbar shadow-xl">
           <table class="w-full text-left text-sm">
-            <thead class="bg-slate-950/80 text-xs uppercase text-slate-400 border-b border-slate-800">
+            <thead class="bg-gray-50 dark:bg-slate-950/80 text-xs uppercase text-gray-500 dark:text-slate-400 border-b border-gray-200 dark:border-slate-800">
               <tr>
                 <th class="py-3 px-6">Category Template</th>
                 <th class="py-3 px-6">Service Template</th>
@@ -238,13 +238,13 @@ const cloneAllMasterTemplates = async () => {
                 <th v-if="isShopOwner" class="py-3 px-6 text-right">Action</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-800/60">
+            <tbody class="divide-y divide-gray-200 dark:divide-slate-800/60">
               <tr v-for="mPrice in masterPrices" :key="mPrice.id" class="hover:bg-slate-800/30">
-                <td class="py-3 px-6 text-xs font-medium text-slate-300">
+                <td class="py-3 px-6 text-xs font-medium text-gray-700 dark:text-slate-300">
                   <span v-if="mPrice.category?.icon" class="mr-1.5">{{ mPrice.category.icon }}</span>
                   <span>{{ mPrice.category?.name }}</span>
                 </td>
-                <td class="py-3 px-6 text-xs text-slate-400">{{ mPrice.service?.name }}</td>
+                <td class="py-3 px-6 text-xs text-gray-500 dark:text-slate-400">{{ mPrice.service?.name }}</td>
                 <td class="py-3 px-6 text-right text-xs font-semibold text-purple-300">₦{{ Number(mPrice.amount).toLocaleString() }}</td>
                 <td v-if="isShopOwner" class="py-3 px-6 text-right">
                   <button
@@ -261,22 +261,22 @@ const cloneAllMasterTemplates = async () => {
       </div>
 
       <!-- Edit Price Rule Modal -->
-      <div v-if="showEditModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
-          <h3 class="text-lg font-bold text-slate-100">Edit Shop Price Rule</h3>
-          <p class="text-xs text-slate-400">
-            Category: <strong class="text-slate-200">{{ editingPrice?.category?.name }}</strong> • Service: <strong class="text-slate-200">{{ editingPrice?.service?.name }}</strong>
+      <div v-if="showEditModal" class="fixed inset-0 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-slate-100">Edit Shop Price Rule</h3>
+          <p class="text-xs text-gray-500 dark:text-slate-400">
+            Category: <strong class="text-gray-800 dark:text-slate-200">{{ editingPrice?.category?.name }}</strong> • Service: <strong class="text-gray-800 dark:text-slate-200">{{ editingPrice?.service?.name }}</strong>
           </p>
 
           <form @submit.prevent="submitEdit" class="space-y-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Custom Price Amount (₦) *</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Custom Price Amount (₦) *</label>
               <input
                 v-model="editForm.amount"
                 type="number"
                 required
                 min="0"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               />
             </div>
 
@@ -284,7 +284,7 @@ const cloneAllMasterTemplates = async () => {
               <button
                 type="button"
                 @click="showEditModal = false"
-                class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200"
+                class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-500 dark:text-slate-400 hover:text-slate-200"
               >
                 Cancel
               </button>

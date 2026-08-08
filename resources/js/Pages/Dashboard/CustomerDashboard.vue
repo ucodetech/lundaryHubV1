@@ -92,11 +92,11 @@ const filteredShops = computed(() => {
   <AppLayout>
     <div class="space-y-8 max-w-6xl mx-auto">
       <!-- Customer Location & Streamline Banner -->
-      <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
             <span class="text-xl">📍</span>
-            <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider">Your Location & Service Area</h2>
+            <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200 uppercase tracking-wider">Your Location & Service Area</h2>
           </div>
 
           <div v-if="customerLocation?.address" class="text-xs text-sky-400 font-semibold flex items-center gap-2">
@@ -115,7 +115,7 @@ const filteredShops = computed(() => {
           <button
             @click="autoDetectGps"
             :disabled="isLocating"
-            class="px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 hover:bg-slate-700 transition-all flex items-center gap-1.5 disabled:opacity-60"
+            class="px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-xs font-bold text-gray-800 dark:text-slate-200 hover:bg-slate-700 transition-all flex items-center gap-1.5 disabled:opacity-60"
           >
             <span>⚡</span>
             <span>{{ isLocating ? 'Detecting GPS...' : 'Use GPS' }}</span>
@@ -131,20 +131,20 @@ const filteredShops = computed(() => {
       </div>
 
       <!-- Marketplace Header & Strict Location Tabs -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 dark:border-slate-800 pb-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Dry Cleaners Marketplace</h1>
-          <p class="text-xs text-slate-400 mt-1">Book professional garment cleaning from verified shops in your area</p>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Dry Cleaners Marketplace</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Book professional garment cleaning from verified shops in your area</p>
         </div>
 
-        <div class="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-1 text-xs">
+        <div class="flex items-center bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-1 text-xs">
           <button
             @click="activeFilter = 'nearby'"
             class="px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5"
-            :class="activeFilter === 'nearby' ? 'bg-sky-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-slate-200'"
+            :class="activeFilter === 'nearby' ? 'bg-sky-500 text-slate-950 shadow-md' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200'"
           >
             <span>📍 In My City / Area</span>
-            <span v-if="nearbyCount > 0" class="px-1.5 py-0.2 rounded text-[10px]" :class="activeFilter === 'nearby' ? 'bg-slate-950/20 text-slate-950 font-extrabold' : 'bg-slate-800 text-sky-400'">
+            <span v-if="nearbyCount > 0" class="px-1.5 py-0.2 rounded text-[10px]" :class="activeFilter === 'nearby' ? 'bg-gray-50 dark:bg-slate-950/20 text-slate-950 font-extrabold' : 'bg-gray-100 dark:bg-slate-800 text-sky-400'">
               {{ nearbyCount }}
             </span>
           </button>
@@ -152,7 +152,7 @@ const filteredShops = computed(() => {
           <button
             @click="activeFilter = 'doorstep'"
             class="px-3 py-1.5 rounded-lg font-bold transition-all"
-            :class="activeFilter === 'doorstep' ? 'bg-sky-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-slate-200'"
+            :class="activeFilter === 'doorstep' ? 'bg-sky-500 text-slate-950 shadow-md' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200'"
           >
             🚚 Doorstep Only
           </button>
@@ -160,7 +160,7 @@ const filteredShops = computed(() => {
           <button
             @click="activeFilter = 'all'"
             class="px-3 py-1.5 rounded-lg font-bold transition-all"
-            :class="activeFilter === 'all' ? 'bg-sky-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-slate-200'"
+            :class="activeFilter === 'all' ? 'bg-sky-500 text-slate-950 shadow-md' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200'"
           >
             🌐 All Shops ({{ shops.length }})
           </button>
@@ -178,13 +178,13 @@ const filteredShops = computed(() => {
         <div
           v-for="shop in filteredShops"
           :key="shop.id"
-          class="bg-slate-900/90 border border-slate-800 hover:border-sky-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-xl space-y-4"
+          class="bg-white dark:bg-slate-900/90 border border-gray-200 dark:border-slate-800 hover:border-sky-500/40 rounded-2xl p-5 flex flex-col justify-between transition-all shadow-xl space-y-4"
         >
           <div class="space-y-3">
             <div class="flex items-start justify-between">
               <div>
-                <h3 class="font-bold text-lg text-slate-100">{{ shop.name }}</h3>
-                <p class="text-xs text-slate-400 mt-0.5">📍 {{ shop.address }}</p>
+                <h3 class="font-bold text-lg text-gray-900 dark:text-slate-100">{{ shop.name }}</h3>
+                <p class="text-xs text-gray-500 dark:text-slate-400 mt-0.5">📍 {{ shop.address }}</p>
               </div>
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
                 Verified
@@ -196,7 +196,7 @@ const filteredShops = computed(() => {
               <span
                 v-if="shop.distance_km !== null"
                 class="px-2.5 py-1 rounded-lg font-mono font-bold border text-[11px]"
-                :class="shop.distance_km <= 50 ? 'bg-sky-500/10 text-sky-300 border-sky-500/20' : 'bg-slate-800 text-slate-400 border-slate-700'"
+                :class="shop.distance_km <= 50 ? 'bg-sky-500/10 text-sky-300 border-sky-500/20' : 'bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-400 border-gray-200 dark:border-slate-700'"
               >
                 📍 {{ shop.distance_km }} km away {{ shop.distance_km > 50 ? '(Different City)' : '' }}
               </span>
@@ -224,22 +224,22 @@ const filteredShops = computed(() => {
               </span>
             </div>
 
-            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">{{ shop.description || 'Professional dry cleaning and garment care services.' }}</p>
+            <p class="text-xs text-gray-500 dark:text-slate-400 line-clamp-2 leading-relaxed">{{ shop.description || 'Professional dry cleaning and garment care services.' }}</p>
 
-            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs space-y-1 font-mono">
-              <div class="flex justify-between text-slate-300">
+            <div class="bg-gray-50 dark:bg-slate-950 p-3 rounded-xl border border-gray-200 dark:border-slate-800 text-xs space-y-1 font-mono">
+              <div class="flex justify-between text-gray-700 dark:text-slate-300">
                 <span>Delivery Fee:</span>
                 <span class="text-emerald-400 font-bold">₦{{ Number(shop.delivery_fee).toLocaleString() }}</span>
               </div>
-              <div class="flex justify-between text-slate-400 text-[11px]">
+              <div class="flex justify-between text-gray-500 dark:text-slate-400 text-[11px]">
                 <span>Service Radius:</span>
                 <span>Within {{ shop.pickup_radius_km }} km</span>
               </div>
             </div>
           </div>
 
-          <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
-            <span class="text-xs font-semibold text-slate-300">⭐ 4.9 (Verified)</span>
+          <div class="pt-4 border-t border-gray-200 dark:border-slate-800 flex items-center justify-between">
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300">⭐ 4.9 (Verified)</span>
             <Link
               :href="`/shop/${shop.slug}`"
               class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 font-bold text-xs shadow-lg shadow-sky-500/20 hover:scale-105 transition-transform"
@@ -249,10 +249,10 @@ const filteredShops = computed(() => {
           </div>
         </div>
 
-        <div v-if="!filteredShops || filteredShops.length === 0" class="col-span-full bg-slate-900 border border-slate-800 rounded-2xl p-12 text-center space-y-3">
+        <div v-if="!filteredShops || filteredShops.length === 0" class="col-span-full bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-12 text-center space-y-3">
           <span class="text-4xl block">🏬</span>
-          <h3 class="text-base font-bold text-slate-200">No Dry Cleaners Matching Selected Filter</h3>
-          <p class="text-xs text-slate-400 max-w-md mx-auto">
+          <h3 class="text-base font-bold text-gray-800 dark:text-slate-200">No Dry Cleaners Matching Selected Filter</h3>
+          <p class="text-xs text-gray-500 dark:text-slate-400 max-w-md mx-auto">
             Try expanding your search or updating your delivery location address above.
           </p>
         </div>
@@ -260,19 +260,19 @@ const filteredShops = computed(() => {
     </div>
 
     <!-- Customer Address Update Modal -->
-    <div v-if="showLocationModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-lg p-6 space-y-5 shadow-2xl">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+    <div v-if="showLocationModal" class="fixed inset-0 z-50 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700/80 rounded-2xl w-full max-w-lg p-6 space-y-5 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-3">
           <div>
-            <h2 class="text-base font-bold text-slate-100">📍 Update Delivery Location</h2>
-            <p class="text-xs text-slate-400">Set your delivery address to streamline nearby dry cleaners</p>
+            <h2 class="text-base font-bold text-gray-900 dark:text-slate-100">📍 Update Delivery Location</h2>
+            <p class="text-xs text-gray-500 dark:text-slate-400">Set your delivery address to streamline nearby dry cleaners</p>
           </div>
-          <button @click="showLocationModal = false" class="text-slate-400 hover:text-white text-lg">✕</button>
+          <button @click="showLocationModal = false" class="text-gray-500 dark:text-slate-400 hover:text-white text-lg">✕</button>
         </div>
 
         <form @submit.prevent="submitLocation" class="space-y-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Street Address or Landmark *</label>
+            <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">Street Address or Landmark *</label>
             <GoogleAddressInput
               v-model:address="locationForm.address"
               v-model:latitude="locationForm.latitude"
@@ -283,22 +283,22 @@ const filteredShops = computed(() => {
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">City / Region</label>
+              <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">City / Region</label>
               <input
                 v-model="locationForm.city"
                 type="text"
                 placeholder="e.g., Ikeja, Lagos"
-                class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Auto GPS Pin</label>
+              <label class="block text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase mb-1">Auto GPS Pin</label>
               <button
                 type="button"
                 @click="autoDetectGps"
                 :disabled="isLocating"
-                class="w-full py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs font-bold text-sky-400 hover:bg-slate-800 transition-colors flex items-center justify-center gap-1 disabled:opacity-60"
+                class="w-full py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-xs font-bold text-sky-400 hover:bg-slate-800 transition-colors flex items-center justify-center gap-1 disabled:opacity-60"
               >
                 <span>⚡</span>
                 <span>{{ isLocating ? 'Detecting...' : 'Fetch My GPS' }}</span>

@@ -63,7 +63,7 @@ function dismissBanner() {
   >
     <div
       v-if="showBanner"
-      class="fixed bottom-4 right-4 left-4 sm:left-auto sm:w-96 z-50 p-4 rounded-2xl bg-slate-900/95 border border-sky-500/30 backdrop-blur-xl shadow-2xl shadow-sky-500/10 text-slate-100 space-y-3"
+      class="fixed bottom-4 right-4 left-4 sm:left-auto sm:w-96 z-50 p-4 rounded-2xl bg-white dark:bg-slate-900/95 border border-sky-500/30 backdrop-blur-xl shadow-2xl shadow-sky-500/10 text-gray-900 dark:text-slate-100 space-y-3"
     >
       <div class="flex items-start justify-between gap-3">
         <div class="flex items-center gap-3">
@@ -71,18 +71,18 @@ function dismissBanner() {
             🧺
           </div>
           <div>
-            <h4 class="font-bold text-sm text-slate-100 flex items-center gap-1.5">
+            <h4 class="font-bold text-sm text-gray-900 dark:text-slate-100 flex items-center gap-1.5">
               <span>Install LaundryHub App</span>
               <span class="px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-400 text-[10px] uppercase font-mono font-bold">PWA</span>
             </h4>
-            <p class="text-xs text-slate-400 mt-0.5">
+            <p class="text-xs text-gray-500 dark:text-slate-400 mt-0.5">
               Add LaundryHub to your home screen for quick access, order tracking & instant dispatches!
             </p>
           </div>
         </div>
         <button
           @click="dismissBanner"
-          class="text-slate-400 hover:text-white text-base p-1 shrink-0 transition-colors"
+          class="text-gray-500 dark:text-slate-400 hover:text-white text-base p-1 shrink-0 transition-colors"
           title="Dismiss"
         >
           ✕
@@ -90,10 +90,10 @@ function dismissBanner() {
       </div>
 
       <!-- Device Step-by-Step Instructions -->
-      <div v-if="showInstructions" class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-1.5 animate-in fade-in">
+      <div v-if="showInstructions" class="p-3 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-xs text-gray-700 dark:text-slate-300 space-y-1.5 animate-in fade-in">
         <div v-if="isIos">
           <p class="font-bold text-sky-400 mb-1">📱 How to Install on iOS (Safari):</p>
-          <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-400">
+          <ol class="list-decimal list-inside space-y-1 text-[11px] text-gray-500 dark:text-slate-400">
             <li>Tap the <strong>Share</strong> icon in Safari.</li>
             <li>Scroll down and tap <strong>Add to Home Screen ➕</strong>.</li>
             <li>Tap <strong>Add</strong> in top right corner.</li>
@@ -101,7 +101,7 @@ function dismissBanner() {
         </div>
         <div v-else>
           <p class="font-bold text-sky-400 mb-1">📲 How to Install App:</p>
-          <ol class="list-decimal list-inside space-y-1 text-[11px] text-slate-400">
+          <ol class="list-decimal list-inside space-y-1 text-[11px] text-gray-500 dark:text-slate-400">
             <li>Tap the browser menu icon (<strong>⋮</strong> or <strong>Share</strong>).</li>
             <li>Select <strong>Install App</strong> or <strong>Add to Home Screen</strong>.</li>
           </ol>
@@ -117,7 +117,7 @@ function dismissBanner() {
         </button>
         <button
           @click="dismissBanner"
-          class="py-2.5 px-3 rounded-xl bg-slate-800 text-slate-300 font-semibold text-xs hover:bg-slate-700 transition-colors"
+          class="py-2.5 px-3 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 font-semibold text-xs hover:bg-slate-700 transition-colors"
         >
           Later
         </button>

@@ -155,6 +155,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
     Route::post('/notifications/{notification}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
 
+    // Web Push Subscription
+    Route::post('/push-subscriptions', [\App\Http\Controllers\PushSubscriptionController::class, 'update'])->name('push-subscriptions.update');
+
     // Customer Saved Address Book Routes
     Route::get('/addresses', [\App\Http\Controllers\AddressController::class, 'index'])->name('addresses.index');
     Route::post('/addresses', [\App\Http\Controllers\AddressController::class, 'store'])->name('addresses.store');

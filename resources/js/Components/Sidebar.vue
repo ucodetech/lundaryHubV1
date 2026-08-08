@@ -60,17 +60,17 @@ function closeSidebar() {
   <!-- Mobile Backdrop -->
   <div
     v-if="mobileOpen"
-    class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 md:hidden transition-opacity"
+    class="fixed inset-0 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm z-40 md:hidden transition-opacity"
     @click="closeSidebar"
   ></div>
 
   <!-- Sidebar Container -->
   <aside
-    class="fixed top-0 bottom-0 left-0 z-50 w-64 bg-slate-950/95 border-r border-slate-800/80 flex flex-col min-h-screen transition-transform duration-300 ease-in-out md:static md:translate-x-0"
+    class="fixed top-0 bottom-0 left-0 z-50 w-64 bg-gray-50 dark:bg-slate-950/95 border-r border-gray-200 dark:border-slate-800/80 flex flex-col min-h-screen transition-transform duration-300 ease-in-out md:static md:translate-x-0"
     :class="mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
   >
     <!-- Brand Header -->
-    <div class="h-16 flex items-center justify-between px-5 border-b border-slate-800/80">
+    <div class="h-16 flex items-center justify-between px-5 border-b border-gray-200 dark:border-slate-800/80">
       <Link href="/" class="flex items-center gap-3 group" @click="closeSidebar">
         <img
           src="/images/logo.png"
@@ -81,13 +81,13 @@ function closeSidebar() {
           <span class="font-bold text-base leading-tight bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent">
             LaundryHub
           </span>
-          <span class="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Marketplace</span>
+          <span class="text-[10px] text-gray-500 dark:text-slate-500 font-semibold uppercase tracking-wider">Marketplace</span>
         </div>
       </Link>
 
       <!-- Mobile Close Button -->
       <button
-        class="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 transition-colors"
+        class="md:hidden p-1.5 rounded-lg text-gray-500 dark:text-slate-400 hover:text-white hover:bg-slate-900 transition-colors"
         @click="closeSidebar"
         aria-label="Close Sidebar"
       >
@@ -98,12 +98,12 @@ function closeSidebar() {
     </div>
 
     <!-- User Mini Profile -->
-    <div v-if="user" class="p-4 mx-3 my-3 rounded-xl bg-slate-900/90 border border-slate-800/80 flex items-center gap-3">
+    <div v-if="user" class="p-4 mx-3 my-3 rounded-xl bg-white dark:bg-slate-900/90 border border-gray-200 dark:border-slate-800/80 flex items-center gap-3">
       <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center font-bold text-slate-950 text-sm shadow-md">
         {{ user.first_name?.[0] }}{{ user.last_name?.[0] }}
       </div>
       <div class="flex-1 min-w-0">
-        <p class="text-xs font-bold text-slate-200 truncate">{{ user.first_name }} {{ user.last_name }}</p>
+        <p class="text-xs font-bold text-gray-800 dark:text-slate-200 truncate">{{ user.first_name }} {{ user.last_name }}</p>
         <span class="inline-block px-2 py-0.5 mt-0.5 rounded text-[10px] font-semibold border" :class="roleBadgeColor">
           {{ formatRoleName }}
         </span>
@@ -117,7 +117,7 @@ function closeSidebar() {
         href="/dashboard"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-        :class="$page.url === '/dashboard' ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        :class="$page.url === '/dashboard' ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
       >
         <span class="text-base">📊</span>
         <span>Dashboard</span>
@@ -128,7 +128,7 @@ function closeSidebar() {
         :href="ordersHref"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-        :class="$page.url.startsWith(ordersHref) ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        :class="$page.url.startsWith(ordersHref) ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
       >
         <span class="text-base">📦</span>
         <span>{{ ordersLabel }}</span>
@@ -138,7 +138,7 @@ function closeSidebar() {
         href="/referrals"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-        :class="$page.url.startsWith('/referrals') ? 'bg-purple-500/10 text-purple-400 font-semibold border border-purple-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        :class="$page.url.startsWith('/referrals') ? 'bg-purple-500/10 text-purple-400 font-semibold border border-purple-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
       >
         <span class="text-base">🎁</span>
         <span>Referral Rewards</span>
@@ -149,7 +149,7 @@ function closeSidebar() {
         href="/disputes"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-        :class="$page.url.startsWith('/disputes') ? 'bg-amber-500/10 text-amber-400 font-semibold border border-amber-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        :class="$page.url.startsWith('/disputes') ? 'bg-amber-500/10 text-amber-400 font-semibold border border-amber-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
       >
         <span class="text-base">🛡️</span>
         <span>My Support Tickets</span>
@@ -157,7 +157,7 @@ function closeSidebar() {
 
       <!-- Shop Owner Links -->
       <template v-if="role === UserRole.SHOP_OWNER">
-        <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+        <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-gray-500 dark:text-slate-500 uppercase tracking-wider">
           Shop Operations
         </div>
 
@@ -165,7 +165,7 @@ function closeSidebar() {
           href="/shop-admin/orders"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/shop-admin/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/shop-admin/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">📋</span>
           <span>Shop Orders & Legacy</span>
@@ -175,7 +175,7 @@ function closeSidebar() {
           href="/shop-admin/categories"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/shop-admin/categories') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/shop-admin/categories') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">🏷️</span>
           <span>Item Categories</span>
@@ -185,7 +185,7 @@ function closeSidebar() {
           href="/shop-admin/services"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/shop-admin/services') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/shop-admin/services') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">🧺</span>
           <span>Services Catalog</span>
@@ -195,7 +195,7 @@ function closeSidebar() {
           href="/shop-admin/pricing"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/shop-admin/pricing') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/shop-admin/pricing') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">💳</span>
           <span>Pricing Matrix</span>
@@ -205,7 +205,7 @@ function closeSidebar() {
           href="/shop-admin/subscription"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/shop-admin/subscription') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/shop-admin/subscription') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">⚡</span>
           <span>Subscription & Billing</span>
@@ -214,7 +214,7 @@ function closeSidebar() {
 
       <!-- Rider Links -->
       <template v-if="role === UserRole.RIDER">
-        <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+        <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-gray-500 dark:text-slate-500 uppercase tracking-wider">
           Rider Center
         </div>
 
@@ -222,7 +222,7 @@ function closeSidebar() {
           href="/rider/orders"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/rider/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/rider/orders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">📦</span>
           <span>Pickup & Deliveries</span>
@@ -232,7 +232,7 @@ function closeSidebar() {
           href="/rider/subscription"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/rider/subscription') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/rider/subscription') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">💳</span>
           <span>Monthly Pass</span>
@@ -242,7 +242,7 @@ function closeSidebar() {
           href="/rider/payouts"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/rider/payouts') ? 'bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/rider/payouts') ? 'bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">💰</span>
           <span>Earnings & Payouts</span>
@@ -252,7 +252,7 @@ function closeSidebar() {
           href="/rider/profile"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/rider/profile') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/rider/profile') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">🛵</span>
           <span>KYC & Vehicle</span>
@@ -261,7 +261,7 @@ function closeSidebar() {
 
       <!-- Super Admin Links -->
       <template v-if="role === UserRole.SUPER_ADMIN">
-        <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+        <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-gray-500 dark:text-slate-500 uppercase tracking-wider">
           Platform Admin
         </div>
 
@@ -269,7 +269,7 @@ function closeSidebar() {
           href="/admin/shops"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/shops') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/shops') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">🏪</span>
           <span>Dry Cleaners</span>
@@ -279,7 +279,7 @@ function closeSidebar() {
           href="/admin/riders"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/riders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/riders') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">🛵</span>
           <span>Rider Verifications</span>
@@ -289,7 +289,7 @@ function closeSidebar() {
           href="/admin/users"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/users') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/users') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">👥</span>
           <span>User Directory</span>
@@ -299,7 +299,7 @@ function closeSidebar() {
           href="/admin/disputes"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/disputes') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/disputes') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">⚖️</span>
           <span>Dispute Command Center</span>
@@ -309,7 +309,7 @@ function closeSidebar() {
           href="/admin/subscription-plans"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/subscription-plans') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/subscription-plans') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">⚡</span>
           <span>Subscription Config</span>
@@ -319,7 +319,7 @@ function closeSidebar() {
           href="/admin/payouts"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/payouts') ? 'bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/payouts') ? 'bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">💸</span>
           <span>Payout Settlements</span>
@@ -329,7 +329,7 @@ function closeSidebar() {
           href="/admin/analytics"
           @click="closeSidebar"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-          :class="$page.url.startsWith('/admin/analytics') ? 'bg-cyan-500/10 text-cyan-400 font-semibold border border-cyan-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+          :class="$page.url.startsWith('/admin/analytics') ? 'bg-cyan-500/10 text-cyan-400 font-semibold border border-cyan-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
         >
           <span class="text-base">📈</span>
           <span>Financial Analytics</span>
@@ -337,14 +337,14 @@ function closeSidebar() {
       </template>
 
       <!-- Account Settings -->
-      <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+      <div class="pt-5 pb-1 px-3 text-[10px] font-bold text-gray-500 dark:text-slate-500 uppercase tracking-wider">
         Account
       </div>
       <Link
         href="/profile"
         @click="closeSidebar"
         class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all"
-        :class="$page.url.startsWith('/profile') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
+        :class="$page.url.startsWith('/profile') ? 'bg-sky-500/10 text-sky-400 font-semibold border border-sky-500/20 shadow-sm' : 'text-gray-500 dark:text-slate-400 hover:text-slate-200 hover:bg-slate-900/80'"
       >
         <span class="text-base">⚙️</span>
         <span>Profile & Security</span>
@@ -352,7 +352,7 @@ function closeSidebar() {
     </nav>
 
     <!-- Bottom Actions -->
-    <div class="p-4 border-t border-slate-800/80">
+    <div class="p-4 border-t border-gray-200 dark:border-slate-800/80">
       <Link
         href="/logout"
         method="post"

@@ -62,3 +62,27 @@ self.addEventListener('fetch', (event) => {
     })()
   );
 });
+
+self.addEventListener('push', function (e) {
+  if (!(self.Notification && self.Notification.permission === 'granted')) {
+      return;
+  }
+
+  if (e.data) {
+      let msg = e.data.json();
+      e.waitUntil(self.registration.showNotification(msg.title, {
+          body: msg.body,
+          icon: msg.icon || '/icons/icon-192x192.png',
+          data: msg.data
+      }));
+  }
+});
+
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+  if (event.notification.data && event.notification.data.url) {
+      event.waitUntil(
+          clients.openWindow(event.notification.data.url)
+      );
+  }
+});

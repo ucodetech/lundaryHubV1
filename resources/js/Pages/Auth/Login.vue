@@ -22,7 +22,7 @@ const submit = () => {
 <template>
   <Head title="Sign In — LaundryHub" />
 
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 selection:bg-sky-500 selection:text-slate-950 relative">
+  <div class="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-100 flex items-center justify-center p-6 selection:bg-sky-500 selection:text-slate-950 relative">
     <GlobalLoader />
 
     <div class="w-full max-w-md space-y-6">
@@ -35,33 +35,33 @@ const submit = () => {
             LaundryHub
           </span>
         </Link>
-        <h2 class="text-xl font-bold text-slate-200">Sign in to your account</h2>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-slate-200">Sign in to your account</h2>
       </div>
 
-      <form @submit.prevent="submit" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-4 shadow-2xl">
+      <form @submit.prevent="submit" class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-3xl p-8 space-y-4 shadow-2xl">
         <div v-if="form.errors.login" class="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold">
           {{ form.errors.login }}
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Email Address or Phone Number</label>
+          <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Email Address or Phone Number</label>
           <input
             v-model="form.login"
             type="text"
             required
             placeholder="name@domain.com or +2348012345678"
-            class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
+            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
           />
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Password</label>
+          <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Password</label>
           <input
             v-model="form.password"
             type="password"
             required
             placeholder="••••••••"
-            class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
+            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500 focus:ring-0"
           />
         </div>
 
@@ -75,7 +75,7 @@ const submit = () => {
         </button>
 
         <div class="text-center pt-2">
-          <p class="text-xs text-slate-400">
+          <p class="text-xs text-gray-500 dark:text-slate-400">
             Don't have an account?
             <Link href="/register" class="text-sky-400 font-semibold hover:underline">Create Account</Link>
           </p>

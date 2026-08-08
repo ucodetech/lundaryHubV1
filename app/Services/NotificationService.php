@@ -14,7 +14,7 @@ class NotificationService
     {
         $userId = $user instanceof User ? $user->id : $user;
 
-        return Notification::create([
+        $notification = Notification::create([
             'user_id' => $userId,
             'type' => $type,
             'title' => $title,
@@ -22,5 +22,16 @@ class NotificationService
             'link' => $link,
             'is_read' => false,
         ]);
+
+        $userModel = $user instanceof User ? $user : User::find($userId);
+        if ($userModel) {
+            try {
+                $userModel->notify(new \App\Notifications\WebPushAlert($title, $message, $link));
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning("WebPush Notice: " . $e->getMessage());
+            }
+        }
+
+        return $notification;
     }
 }

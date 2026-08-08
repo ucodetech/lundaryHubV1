@@ -169,4 +169,51 @@ class ReferralService
             'rewarded_at' => now(),
         ]);
     }
+
+    /**
+     * Trigger bonus payout when a referred rider completes their first pass payment.
+     */
+    public static function rewardRiderSubscription(User $rider): void
+    {
+        if (!$rider->referred_by_id) {
+            return;
+        }
+
+        $referral = Referral::where('referred_id', $rider->id)->where('status', 'pending')->first();
+        if (!$referral) {
+            return; // Already rewarded or no pending referral
+        }
+
+        $referrer = User::find($rider->referred_by_id);
+        if (!$referrer) {
+            return;
+        }
+
+        $referrerReward = 500.00;
+        $referredReward = 200.00;
+
+        $referrer->increment('bonus_balance', $referrerReward);
+        BonusTransaction::create([
+            'user_id' => $referrer->id,
+            'amount' => $referrerReward,
+            'type' => 'earned_referral',
+            'description' => "🎁 Referral Bonus: Recommending Rider {$rider->first_name} to LaundryHub",
+        ]);
+
+        $rider->increment('bonus_balance', $referredReward);
+        BonusTransaction::create([
+            'user_id' => $rider->id,
+            'amount' => $referredReward,
+            'type' => 'earned_referral',
+            'description' => "🎉 Welcome Referral Bonus: First LaundryHub Rider Pass Payment!",
+        ]);
+
+        $referral->update([
+            'status' => 'rewarded',
+            'reward_type' => 'rider_pass',
+            'referrer_reward' => $referrerReward,
+            'referred_reward' => $referredReward,
+            'rewarded_at' => now(),
+        ]);
+    }
 }

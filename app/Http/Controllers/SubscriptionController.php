@@ -113,6 +113,10 @@ class SubscriptionController extends Controller
                 'payment_reference' => $reference,
             ]);
 
+            if ($plan->target_role === 'rider') {
+                \App\Services\ReferralService::rewardRiderSubscription($user);
+            }
+
             $redirectRoute = ($plan->target_role === 'rider') ? 'rider.subscription' : 'shop.subscription';
             return redirect()->route($redirectRoute)->with('success', "🎉 Subscription to '{$plan->name}' successfully activated!");
         }

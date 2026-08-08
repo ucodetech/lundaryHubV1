@@ -198,10 +198,10 @@ onUnmounted(() => {
   <AppLayout>
     <div class="space-y-8 max-w-6xl mx-auto">
       <!-- Header & Dispatch Toggle -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
         <div>
           <div class="flex items-center gap-3">
-            <h1 class="text-2xl font-bold text-slate-100">Pickup & Delivery Dispatch Center</h1>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Pickup & Delivery Dispatch Center</h1>
             <span
               class="px-3 py-1 rounded-full text-xs font-bold font-mono border"
               :class="isOnline ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'"
@@ -209,7 +209,7 @@ onUnmounted(() => {
               {{ isOnline ? '🟢 ONLINE FOR DISPATCH' : '🟡 OFFLINE' }}
             </span>
           </div>
-          <p class="text-xs text-slate-400 mt-1">
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">
             Negotiate delivery fees directly with customers or accept shop-triggered dispatches in your area
           </p>
         </div>
@@ -218,7 +218,7 @@ onUnmounted(() => {
           <button
             @click="isMuted = !isMuted"
             class="px-3.5 py-2.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5"
-            :class="isMuted ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-slate-900 text-slate-300 border-slate-700 hover:text-white'"
+            :class="isMuted ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-white dark:bg-slate-900 text-gray-700 dark:text-slate-300 border-gray-200 dark:border-slate-700 hover:text-white'"
           >
             <span>{{ isMuted ? '🔕 Muted' : '🔊 Sound On' }}</span>
           </button>
@@ -266,7 +266,7 @@ onUnmounted(() => {
           </div>
           <div>
             <h3 class="text-sm font-bold text-amber-400">Rider Account Verification Pending</h3>
-            <p class="text-xs text-slate-300 mt-0.5 max-w-xl leading-relaxed">
+            <p class="text-xs text-gray-700 dark:text-slate-300 mt-0.5 max-w-xl leading-relaxed">
               Your rider profile and identity documents are currently being audited by Super Admin. You will start receiving live pickup & delivery dispatch requests as soon as your account is approved.
             </p>
           </div>
@@ -283,10 +283,10 @@ onUnmounted(() => {
       <!-- Main Dispatch Center (If Verified) -->
       <template v-else>
         <!-- Offline Warning Banner -->
-        <div v-if="!isOnline" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center space-y-3 shadow-lg">
+        <div v-if="!isOnline" class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 text-center space-y-3 shadow-lg">
           <span class="text-3xl block">🛵</span>
-          <h3 class="text-base font-bold text-slate-200">You Are Currently Offline</h3>
-          <p class="text-xs text-slate-400 max-w-md mx-auto">
+          <h3 class="text-base font-bold text-gray-800 dark:text-slate-200">You Are Currently Offline</h3>
+          <p class="text-xs text-gray-500 dark:text-slate-400 max-w-md mx-auto">
             Toggle your status to <strong class="text-emerald-400">ONLINE</strong> at the top right of this page to view nearby laundry requests and propose delivery fees.
           </p>
         </div>
@@ -295,7 +295,7 @@ onUnmounted(() => {
           <!-- Active Deliveries Section -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <h2 class="text-sm font-bold text-slate-200 flex items-center gap-2">
+              <h2 class="text-sm font-bold text-gray-800 dark:text-slate-200 flex items-center gap-2">
                 <span>🚀 My Active Deliveries</span>
                 <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-mono">
                   {{ myActiveDeliveries?.length || 0 }}
@@ -303,7 +303,7 @@ onUnmounted(() => {
               </h2>
             </div>
 
-            <div v-if="!myActiveDeliveries || myActiveDeliveries.length === 0" class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-8 text-center text-slate-400 text-xs">
+            <div v-if="!myActiveDeliveries || myActiveDeliveries.length === 0" class="bg-gray-100 dark:bg-slate-800/40 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-8 text-center text-gray-500 dark:text-slate-400 text-xs">
               No active delivery assignments right now. Check available nearby dispatch requests below!
             </div>
 
@@ -313,7 +313,7 @@ onUnmounted(() => {
                 :key="order.id"
                 class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-sky-500/30 rounded-2xl p-5 shadow-xl space-y-4"
               >
-                <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-700/60 pb-3">
                   <div>
                     <div class="flex items-center gap-2">
                       <span class="text-xs font-mono font-bold text-sky-400 block">#{{ order.order_number }}</span>
@@ -321,7 +321,7 @@ onUnmounted(() => {
                         {{ order.phase_label }}
                       </span>
                     </div>
-                    <span class="text-[11px] text-slate-400 mt-0.5 block">{{ order.created_at }}</span>
+                    <span class="text-[11px] text-gray-500 dark:text-slate-400 mt-0.5 block">{{ order.created_at }}</span>
                   </div>
                   <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-sky-500/10 text-sky-400 border border-sky-500/20">
                     {{ order.status_label }}
@@ -330,24 +330,24 @@ onUnmounted(() => {
 
                 <!-- Phase-Aware Origin & Destination Routing -->
                 <div class="space-y-2 text-xs">
-                  <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 space-y-1">
+                  <div class="bg-gray-50 dark:bg-slate-950/60 p-3 rounded-xl border border-gray-200 dark:border-slate-800/80 space-y-1">
                     <span class="text-[10px] text-amber-400 uppercase font-bold block">{{ order.origin_title }}</span>
-                    <strong class="text-slate-200 block text-xs">{{ order.origin_name }}</strong>
-                    <p class="text-slate-400 text-[11px]">{{ order.origin_address }}</p>
+                    <strong class="text-gray-800 dark:text-slate-200 block text-xs">{{ order.origin_name }}</strong>
+                    <p class="text-gray-500 dark:text-slate-400 text-[11px]">{{ order.origin_address }}</p>
                     <p class="text-sky-400 text-[11px] font-mono">📞 {{ order.origin_phone }}</p>
                   </div>
 
-                  <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 space-y-1">
+                  <div class="bg-gray-50 dark:bg-slate-950/60 p-3 rounded-xl border border-gray-200 dark:border-slate-800/80 space-y-1">
                     <span class="text-[10px] text-emerald-400 uppercase font-bold block">{{ order.destination_title }}</span>
-                    <strong class="text-slate-200 block text-xs">{{ order.destination_name }}</strong>
-                    <p class="text-slate-400 text-[11px]">{{ order.destination_address }}</p>
+                    <strong class="text-gray-800 dark:text-slate-200 block text-xs">{{ order.destination_name }}</strong>
+                    <p class="text-gray-500 dark:text-slate-400 text-[11px]">{{ order.destination_address }}</p>
                     <p class="text-emerald-400 text-[11px] font-mono">📞 {{ order.destination_phone }}</p>
                   </div>
                 </div>
 
                 <!-- Status Update Controls -->
-                <div class="pt-2 border-t border-slate-700/60 space-y-2">
-                  <span class="text-[11px] font-bold text-slate-300 block">Update Delivery Progress:</span>
+                <div class="pt-2 border-t border-gray-200 dark:border-slate-700/60 space-y-2">
+                  <span class="text-[11px] font-bold text-gray-700 dark:text-slate-300 block">Update Delivery Progress:</span>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <!-- Phase 1: Initial Pickup (Customer -> Shop) -->
                     <template v-if="!order.is_return_delivery">
@@ -394,7 +394,7 @@ onUnmounted(() => {
           </div>
 
           <!-- Available Nearby Pickup Requests & Fee Negotiator Section -->
-          <div class="space-y-4 pt-6 border-t border-slate-800">
+          <div class="space-y-4 pt-6 border-t border-gray-200 dark:border-slate-800">
             <div class="flex items-center justify-between">
               <h2 class="text-sm font-bold text-purple-300 flex items-center gap-2">
                 <span>💬 Negotiate Delivery Fees & Accept Dispatches</span>
@@ -402,16 +402,16 @@ onUnmounted(() => {
                   {{ availableOrders?.length || 0 }}
                 </span>
               </h2>
-              <span class="text-[11px] text-slate-400 flex items-center gap-1.5">
+              <span class="text-[11px] text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 Shop-Triggered Dispatches
               </span>
             </div>
 
-            <div v-if="!availableOrders || availableOrders.length === 0" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-12 text-center space-y-3 shadow-xl">
+            <div v-if="!availableOrders || availableOrders.length === 0" class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-800 rounded-2xl p-12 text-center space-y-3 shadow-xl">
               <span class="text-4xl block">✨</span>
-              <h3 class="text-base font-bold text-slate-200">No Pending Shop Dispatches Right Now</h3>
-              <p class="text-xs text-slate-400 max-w-md mx-auto">
+              <h3 class="text-base font-bold text-gray-800 dark:text-slate-200">No Pending Shop Dispatches Right Now</h3>
+              <p class="text-xs text-gray-500 dark:text-slate-400 max-w-md mx-auto">
                 Dispatches will appear here automatically when nearby dry cleaners trigger a pickup request or mark clothes ready for delivery!
               </p>
             </div>
@@ -420,9 +420,9 @@ onUnmounted(() => {
               <div
                 v-for="order in availableOrders"
                 :key="order.id"
-                class="bg-slate-900/90 border border-slate-800 hover:border-purple-500/40 rounded-2xl p-5 shadow-xl space-y-4 transition-all"
+                class="bg-white dark:bg-slate-900/90 border border-gray-200 dark:border-slate-800 hover:border-purple-500/40 rounded-2xl p-5 shadow-xl space-y-4 transition-all"
               >
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-3">
                   <div>
                     <div class="flex items-center gap-2">
                       <span class="text-xs font-mono font-bold text-purple-400 block">#{{ order.order_number }}</span>
@@ -430,7 +430,7 @@ onUnmounted(() => {
                         {{ order.phase_label }}
                       </span>
                     </div>
-                    <span class="text-[11px] text-slate-400 mt-0.5 block">{{ order.created_at }}</span>
+                    <span class="text-[11px] text-gray-500 dark:text-slate-400 mt-0.5 block">{{ order.created_at }}</span>
                   </div>
                   <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
                     Base Fee: ₦{{ order.delivery_fee }}
@@ -439,17 +439,17 @@ onUnmounted(() => {
 
                 <!-- Phase-Aware Origin & Destination Routing -->
                 <div class="space-y-2 text-xs">
-                  <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/60 space-y-1">
+                  <div class="bg-gray-50 dark:bg-slate-950 p-3 rounded-xl border border-gray-200 dark:border-slate-800/60 space-y-1">
                     <span class="text-[10px] text-amber-400 uppercase font-bold block">{{ order.origin_title }}</span>
-                    <strong class="text-slate-200 block text-xs">{{ order.origin_name }}</strong>
-                    <p class="text-slate-400 text-[11px]">{{ order.origin_address }}</p>
+                    <strong class="text-gray-800 dark:text-slate-200 block text-xs">{{ order.origin_name }}</strong>
+                    <p class="text-gray-500 dark:text-slate-400 text-[11px]">{{ order.origin_address }}</p>
                     <p class="text-sky-400 text-[11px] font-mono">📞 {{ order.origin_phone }}</p>
                   </div>
 
-                  <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/60 space-y-1">
+                  <div class="bg-gray-50 dark:bg-slate-950 p-3 rounded-xl border border-gray-200 dark:border-slate-800/60 space-y-1">
                     <span class="text-[10px] text-emerald-400 uppercase font-bold block">{{ order.destination_title }}</span>
-                    <strong class="text-slate-200 block text-xs">{{ order.destination_name }}</strong>
-                    <p class="text-slate-400 text-[11px]">{{ order.destination_address }}</p>
+                    <strong class="text-gray-800 dark:text-slate-200 block text-xs">{{ order.destination_name }}</strong>
+                    <p class="text-gray-500 dark:text-slate-400 text-[11px]">{{ order.destination_address }}</p>
                     <p class="text-emerald-400 text-[11px] font-mono">📞 {{ order.destination_phone }}</p>
                   </div>
                 </div>
@@ -468,23 +468,23 @@ onUnmounted(() => {
                   <div class="text-base font-black font-mono text-purple-200">
                     ₦{{ Number(order.my_bid.amount).toLocaleString() }}
                   </div>
-                  <p v-if="order.my_bid.note" class="text-[11px] text-slate-300 italic">"{{ order.my_bid.note }}"</p>
+                  <p v-if="order.my_bid.note" class="text-[11px] text-gray-700 dark:text-slate-300 italic">"{{ order.my_bid.note }}"</p>
                 </div>
 
                 <!-- Fee Negotiator Input Form -->
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-3">
-                  <span class="text-[11px] font-bold text-slate-300 block uppercase tracking-wider">🤝 Offer / Negotiate Fee (₦):</span>
+                <div class="bg-gray-50 dark:bg-slate-950 p-3 rounded-xl border border-gray-200 dark:border-slate-800 space-y-3">
+                  <span class="text-[11px] font-bold text-gray-700 dark:text-slate-300 block uppercase tracking-wider">🤝 Offer / Negotiate Fee (₦):</span>
                   
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <div class="relative">
-                      <span class="absolute left-3 top-2.5 text-xs font-bold text-slate-400">₦</span>
+                      <span class="absolute left-3 top-2.5 text-xs font-bold text-gray-500 dark:text-slate-400">₦</span>
                       <input
                         :value="bidAmounts[order.id] ?? Number(order.delivery_fee)"
                         @input="bidAmounts[order.id] = Number(($event.target as HTMLInputElement).value)"
                         type="number"
                         min="100"
                         placeholder="Fee"
-                        class="w-full pl-7 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 font-mono text-xs focus:border-purple-500"
+                        class="w-full pl-7 pr-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 font-mono text-xs focus:border-purple-500"
                       />
                     </div>
 
@@ -493,7 +493,7 @@ onUnmounted(() => {
                       @input="bidNotes[order.id] = ($event.target as HTMLInputElement).value"
                       type="text"
                       placeholder="Note (e.g. ETA 15m)"
-                      class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-xs focus:border-purple-500"
+                      class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs focus:border-purple-500"
                     />
                   </div>
 
@@ -515,7 +515,7 @@ onUnmounted(() => {
                   <button
                     @click="acceptOrderDirectly(order.id)"
                     :disabled="acceptingOrderId === order.id"
-                    class="py-2.5 px-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 font-bold text-xs hover:bg-slate-700 hover:text-white transition-colors flex items-center justify-center gap-1 disabled:opacity-60"
+                    class="py-2.5 px-3 rounded-xl bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-700 hover:text-white transition-colors flex items-center justify-center gap-1 disabled:opacity-60"
                   >
                     <span>⚡ Accept (₦{{ order.delivery_fee }})</span>
                   </button>

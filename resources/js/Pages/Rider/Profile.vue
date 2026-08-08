@@ -139,8 +139,8 @@ onUnmounted(() => {
   <AppLayout>
     <div class="max-w-3xl mx-auto space-y-6">
       <div>
-        <h1 class="text-2xl font-bold text-slate-100">Rider Profile & KYC</h1>
-        <p class="text-xs text-slate-400 mt-1">Vehicle details, live face selfie verification, and identity documents</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Rider Profile & KYC</h1>
+        <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Vehicle details, live face selfie verification, and identity documents</p>
       </div>
 
       <!-- Verified Banner -->
@@ -151,27 +151,27 @@ onUnmounted(() => {
           </div>
           <div>
             <h2 class="text-base font-bold text-emerald-400">Account Verified & Active</h2>
-            <p class="text-xs text-slate-300 mt-0.5">Your rider profile and identity documents have been audited and approved by Super Admin.</p>
+            <p class="text-xs text-gray-700 dark:text-slate-300 mt-0.5">Your rider profile and identity documents have been audited and approved by Super Admin.</p>
           </div>
         </div>
       </div>
 
       <!-- Pending / Verification Status Header -->
-      <div v-else class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div v-else class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <span class="text-xs font-semibold text-slate-400 uppercase">Verification Audit Status</span>
+          <span class="text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase">Verification Audit Status</span>
           <div class="mt-1">
             <Badge :status="profile?.kyc_status ?? 'pending'" />
           </div>
         </div>
-        <p class="text-xs text-slate-400 max-w-xs sm:text-right">
+        <p class="text-xs text-gray-500 dark:text-slate-400 max-w-xs sm:text-right">
           Upload NIN, Driver's License, and capture a Live Face Selfie for account verification.
         </p>
       </div>
 
       <!-- Prepopulated Uploaded Documents Grid -->
-      <div v-if="kycDocs.length > 0" class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-4">
-        <h3 class="font-bold text-slate-200 text-sm flex items-center gap-2">
+      <div v-if="kycDocs.length > 0" class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 space-y-4">
+        <h3 class="font-bold text-gray-800 dark:text-slate-200 text-sm flex items-center gap-2">
           <span>📋 Submitted Verification Documents</span>
           <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-mono">{{ kycDocs.length }}</span>
         </h3>
@@ -180,17 +180,17 @@ onUnmounted(() => {
           <div
             v-for="doc in kycDocs"
             :key="doc.id"
-            class="bg-slate-900/80 border border-slate-800 rounded-xl p-3 space-y-2 shadow-md flex flex-col justify-between"
+            class="bg-white dark:bg-slate-900/80 border border-gray-200 dark:border-slate-800 rounded-xl p-3 space-y-2 shadow-md flex flex-col justify-between"
           >
             <!-- Media Preview -->
-            <div class="relative aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
+            <div class="relative aspect-video rounded-lg overflow-hidden bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 flex items-center justify-center">
               <img
                 v-if="doc.file_path && (doc.file_path.includes('.jpg') || doc.file_path.includes('.jpeg') || doc.file_path.includes('.png') || doc.file_path.includes('cloudinary.com'))"
                 :src="doc.file_path"
                 :alt="doc.document_type"
                 class="w-full h-full object-cover"
               />
-              <div v-else class="text-slate-400 text-xs flex flex-col items-center gap-1">
+              <div v-else class="text-gray-500 dark:text-slate-400 text-xs flex flex-col items-center gap-1">
                 <span class="text-xl">📄</span>
                 <span>PDF Document</span>
               </div>
@@ -198,7 +198,7 @@ onUnmounted(() => {
 
             <!-- Doc Info -->
             <div class="flex items-center justify-between text-xs pt-1">
-              <span class="font-bold text-slate-200 capitalize flex items-center gap-1">
+              <span class="font-bold text-gray-800 dark:text-slate-200 capitalize flex items-center gap-1">
                 <span v-if="doc.document_type === 'selfie'">🤳</span>
                 <span>{{ doc.document_type?.replace('_', ' ') }}</span>
               </span>
@@ -219,15 +219,15 @@ onUnmounted(() => {
       </div>
 
       <!-- Vehicle Details Form -->
-      <form @submit.prevent="updateDetails" class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-4">
-        <h3 class="font-bold text-slate-200 text-sm">Vehicle Information</h3>
+      <form @submit.prevent="updateDetails" class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 space-y-4">
+        <h3 class="font-bold text-gray-800 dark:text-slate-200 text-sm">Vehicle Information</h3>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Vehicle Type</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Vehicle Type</label>
             <select
               v-model="detailsForm.vehicle_type"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+              class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
             >
               <option value="bicycle">Bicycle</option>
               <option value="motorcycle">Motorcycle / Bike</option>
@@ -238,22 +238,22 @@ onUnmounted(() => {
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Plate Number</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Plate Number</label>
             <input
               v-model="detailsForm.vehicle_plate"
               type="text"
               placeholder="LND-452-XY"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+              class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
             />
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">License Number</label>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">License Number</label>
             <input
               v-model="detailsForm.license_number"
               type="text"
               placeholder="DL-98765432"
-              class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+              class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
             />
           </div>
         </div>
@@ -268,10 +268,10 @@ onUnmounted(() => {
       </form>
 
       <!-- Live Face Verification & KYC Document Uploads (Only if not yet verified) -->
-      <div v-if="!isVerified" class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 space-y-6">
+      <div v-if="!isVerified" class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 space-y-6">
         <div>
-          <h3 class="font-bold text-slate-200 text-sm">Rider Identity & Face Verification</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Capture a live face selfie and upload official identity documents.</p>
+          <h3 class="font-bold text-gray-800 dark:text-slate-200 text-sm">Rider Identity & Face Verification</h3>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-0.5">Capture a live face selfie and upload official identity documents.</p>
         </div>
 
         <!-- Live Selfie Trigger Banner -->
@@ -282,7 +282,7 @@ onUnmounted(() => {
             </div>
             <div>
               <h4 class="font-bold text-purple-300 text-xs">Live Face Verification Selfie</h4>
-              <p class="text-[11px] text-slate-400">Position your face in the camera oval frame for real-time verification.</p>
+              <p class="text-[11px] text-gray-500 dark:text-slate-400">Position your face in the camera oval frame for real-time verification.</p>
             </div>
           </div>
 
@@ -297,15 +297,15 @@ onUnmounted(() => {
         </div>
 
         <!-- KYC Document Upload Form -->
-        <form @submit.prevent="uploadDocument" class="space-y-4 pt-2 border-t border-slate-700/60">
-          <h4 class="font-bold text-slate-300 text-xs uppercase">Upload Document File</h4>
+        <form @submit.prevent="uploadDocument" class="space-y-4 pt-2 border-t border-gray-200 dark:border-slate-700/60">
+          <h4 class="font-bold text-gray-700 dark:text-slate-300 text-xs uppercase">Upload Document File</h4>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Document Type *</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Document Type *</label>
               <select
                 v-model="kycForm.document_type"
-                class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-sm focus:border-sky-500"
+                class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:border-sky-500"
               >
                 <option value="national_id">National ID / NIN Slip</option>
                 <option value="drivers_license">Driver's License</option>
@@ -317,13 +317,13 @@ onUnmounted(() => {
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Select File (JPG, PNG, PDF) *</label>
+              <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-1">Select File (JPG, PNG, PDF) *</label>
               <input
                 ref="fileInputRef"
                 type="file"
                 @change="(e: any) => kycForm.file = e.target.files[0]"
                 required
-                class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-100 text-xs"
+                class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 text-xs"
               />
               <span v-if="kycForm.errors.file" class="text-xs text-rose-400 mt-1 block">{{ kycForm.errors.file }}</span>
             </div>
@@ -341,25 +341,25 @@ onUnmounted(() => {
       </div>
 
       <!-- Live WebRTC Camera Modal -->
-      <div v-if="showCameraModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl relative">
+      <div v-if="showCameraModal" class="fixed inset-0 bg-gray-50 dark:bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-4 shadow-2xl relative">
           <div class="flex items-center justify-between">
-            <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
+            <h3 class="text-base font-bold text-gray-900 dark:text-slate-100 flex items-center gap-2">
               <span>🤳</span>
               <span>Live Face Verification Camera</span>
             </h3>
-            <button @click="stopCamera" class="text-slate-400 hover:text-white text-lg">✕</button>
+            <button @click="stopCamera" class="text-gray-500 dark:text-slate-400 hover:text-white text-lg">✕</button>
           </div>
 
           <!-- Camera Stream / Snapshot Preview -->
-          <div class="relative w-full aspect-square bg-slate-950 rounded-2xl border-2 border-dashed border-slate-800 overflow-hidden flex items-center justify-center">
+          <div class="relative w-full aspect-square bg-gray-50 dark:bg-slate-950 rounded-2xl border-2 border-dashed border-gray-200 dark:border-slate-800 overflow-hidden flex items-center justify-center">
             <!-- Canvas (hidden) -->
             <canvas ref="canvasRef" class="hidden"></canvas>
 
             <!-- Error State -->
             <div v-if="cameraError" class="p-6 text-center text-xs text-rose-400 space-y-2">
               <p>⚠️ {{ cameraError }}</p>
-              <button @click="stopCamera" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-200">Close Camera</button>
+              <button @click="stopCamera" class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200">Close Camera</button>
             </div>
 
             <!-- Live Video Stream with Face Positioning Oval Guide -->
@@ -373,7 +373,7 @@ onUnmounted(() => {
 
               <!-- Glowing Face Oval Overlay -->
               <div class="absolute inset-0 border-4 border-dashed border-cyan-400/70 rounded-full m-8 pointer-events-none animate-pulse flex items-center justify-center">
-                <span class="text-[11px] font-bold text-cyan-300 bg-slate-950/80 px-3 py-1 rounded-full shadow-lg">
+                <span class="text-[11px] font-bold text-cyan-300 bg-gray-50 dark:bg-slate-950/80 px-3 py-1 rounded-full shadow-lg">
                   Position Face Here
                 </span>
               </div>
@@ -382,7 +382,7 @@ onUnmounted(() => {
             <!-- Captured Image Preview -->
             <div v-else class="relative w-full h-full">
               <img :src="capturedImage" alt="Captured Selfie" class="w-full h-full object-cover" />
-              <div class="absolute bottom-3 left-3 right-3 bg-slate-950/80 text-emerald-400 text-[11px] font-bold py-1.5 px-3 rounded-xl text-center backdrop-blur-sm border border-emerald-500/30">
+              <div class="absolute bottom-3 left-3 right-3 bg-gray-50 dark:bg-slate-950/80 text-emerald-400 text-[11px] font-bold py-1.5 px-3 rounded-xl text-center backdrop-blur-sm border border-emerald-500/30">
                 ✓ Face Snapshot Captured
               </div>
             </div>
@@ -393,7 +393,7 @@ onUnmounted(() => {
             <button
               type="button"
               @click="stopCamera"
-              class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200"
+              class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-500 dark:text-slate-400 hover:text-slate-200"
             >
               Cancel
             </button>
@@ -412,7 +412,7 @@ onUnmounted(() => {
               <button
                 type="button"
                 @click="retakePhoto"
-                class="px-4 py-2 rounded-xl bg-slate-800 text-slate-200 text-xs font-semibold"
+                class="px-4 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200 text-xs font-semibold"
               >
                 🔄 Retake
               </button>

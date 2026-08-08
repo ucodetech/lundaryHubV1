@@ -290,6 +290,10 @@ class RiderOrderController extends Controller
 
         $newStatus = $validated['status'];
 
+        if ($newStatus === 'completed' || $newStatus === OrderStatus::COMPLETED->value) {
+            return back()->with('error', 'Only customers can confirm receipt and mark an order as completed.');
+        }
+
         if ($newStatus === 'dropped_off_at_shop') {
             // Phase 1 pickup complete: Garments delivered to laundry shop!
             // Hand over order to shop owner for cleaning, reset rider assignment & dispatch flag.

@@ -4,6 +4,7 @@ import Sidebar from '@/Components/Sidebar.vue';
 import TopBar from '@/Components/TopBar.vue';
 import GlobalLoader from '@/Components/GlobalLoader.vue';
 import PwaInstallBanner from '@/Components/PwaInstallBanner.vue';
+import PushManager from '@/Components/PushManager.vue';
 import { usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
@@ -23,7 +24,7 @@ function closeMobileSidebar() {
 </script>
 
 <template>
-  <div class="flex min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-sky-500 selection:text-slate-950">
+  <div class="flex min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 font-sans selection:bg-sky-500 selection:text-slate-950">
     <!-- Central Loader Overlay -->
     <GlobalLoader />
 
@@ -57,5 +58,8 @@ function closeMobileSidebar() {
 
     <!-- Progressive Web App (PWA) Install Prompt -->
     <PwaInstallBanner />
+
+    <!-- Web Push Notifications Registration -->
+    <PushManager />
   </div>
 </template>

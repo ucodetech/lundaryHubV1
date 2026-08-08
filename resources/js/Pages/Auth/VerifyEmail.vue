@@ -18,7 +18,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <template>
   <Head title="Email Verification — LaundryHub" />
 
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 selection:bg-sky-500 selection:text-slate-950">
+  <div class="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-100 flex items-center justify-center p-6 selection:bg-sky-500 selection:text-slate-950">
     <div class="w-full max-w-md space-y-6">
       <div class="text-center space-y-2">
         <Link href="/" class="inline-flex items-center gap-2">
@@ -29,11 +29,11 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
             LaundryHub
           </span>
         </Link>
-        <h2 class="text-xl font-bold text-slate-200">Verify your Email Address</h2>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-slate-200">Verify your Email Address</h2>
       </div>
 
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-6 shadow-2xl">
-        <p class="text-xs text-slate-300 leading-relaxed">
+      <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <p class="text-xs text-gray-700 dark:text-slate-300 leading-relaxed">
           Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
         </p>
 

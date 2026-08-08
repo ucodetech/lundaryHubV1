@@ -27,9 +27,9 @@ const formatStatusText = (status: string) => {
   <AppLayout>
     <div class="space-y-6">
       <!-- Header -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl">
-        <h1 class="text-2xl font-bold text-slate-100">My Laundry Orders</h1>
-        <p class="text-xs text-slate-400 mt-1">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">My Laundry Orders</h1>
+        <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">
           Track real-time cleaning status, delivery progress, and past order history
         </p>
       </div>
@@ -39,7 +39,7 @@ const formatStatusText = (status: string) => {
         <div
           v-for="order in orders.data"
           :key="order.id"
-          class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl hover:border-slate-600 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl hover:border-slate-600 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
         >
           <div class="space-y-2">
             <div class="flex flex-wrap items-center gap-3">
@@ -52,11 +52,11 @@ const formatStatusText = (status: string) => {
               </span>
             </div>
 
-            <div class="text-xs text-slate-300 font-semibold">
+            <div class="text-xs text-gray-700 dark:text-slate-300 font-semibold">
               🏪 {{ order.shop?.name }}
             </div>
 
-            <div class="text-[11px] text-slate-400 flex flex-wrap gap-4 font-mono">
+            <div class="text-[11px] text-gray-500 dark:text-slate-400 flex flex-wrap gap-4 font-mono">
               <span>📅 {{ new Date(order.created_at).toLocaleDateString() }}</span>
               <span>{{ order.fulfillment_type === 'home_delivery' ? '🚚 Home Delivery' : '🏬 Store Self Pickup' }}</span>
               <span class="text-emerald-400 font-bold">₦{{ Number(order.total_amount).toLocaleString() }}</span>
@@ -65,20 +65,20 @@ const formatStatusText = (status: string) => {
 
           <Link
             :href="`/orders/${order.order_number}`"
-            class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-sky-500 text-xs font-bold text-sky-400 transition-all shadow shrink-0"
+            class="px-5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 hover:border-sky-500 text-xs font-bold text-sky-400 transition-all shadow shrink-0"
           >
             Track Order Progress →
           </Link>
         </div>
 
-        <div v-if="!orders.data || orders.data.length === 0" class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-12 text-center text-slate-400 text-xs shadow-xl space-y-4">
+        <div v-if="!orders.data || orders.data.length === 0" class="bg-gray-100 dark:bg-slate-800/40 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-12 text-center text-gray-500 dark:text-slate-400 text-xs shadow-xl space-y-4">
           <span class="text-4xl block">🧺</span>
           <div class="space-y-1">
-            <h3 class="font-bold text-slate-200 text-sm">No Personal Customer Bookings Placed</h3>
-            <p v-if="$page.props.auth?.user?.role === 'shop_owner'" class="text-xs text-slate-400 max-w-md mx-auto">
+            <h3 class="font-bold text-gray-800 dark:text-slate-200 text-sm">No Personal Customer Bookings Placed</h3>
+            <p v-if="$page.props.auth?.user?.role === 'shop_owner'" class="text-xs text-gray-500 dark:text-slate-400 max-w-md mx-auto">
               You have not placed any personal laundry orders as a customer. To manage customer bookings received at your laundry shop, go to <strong>Shop Operations ➔ Shop Orders</strong>.
             </p>
-            <p v-else class="text-xs text-slate-400 max-w-md mx-auto">
+            <p v-else class="text-xs text-gray-500 dark:text-slate-400 max-w-md mx-auto">
               No orders placed yet. Visit a dry cleaner storefront to book your first laundry order!
             </p>
           </div>
@@ -86,7 +86,7 @@ const formatStatusText = (status: string) => {
             <Link v-if="$page.props.auth?.user?.role === 'shop_owner'" href="/shop-admin/orders" class="px-5 py-2.5 rounded-xl bg-sky-500 text-slate-950 font-bold text-xs shadow-lg hover:scale-105 transition-all">
               📋 Go to Shop Customer Orders ➔
             </Link>
-            <Link href="/" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-bold text-xs hover:text-white">
+            <Link href="/" class="px-5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-800 dark:text-slate-200 font-bold text-xs hover:text-white">
               Browse Shop Marketplace
             </Link>
           </div>

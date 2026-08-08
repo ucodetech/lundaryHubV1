@@ -134,12 +134,12 @@ const suspendShop = async (shopId: number) => {
     <div class="space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-slate-100">Dry Cleaning Shops Audit</h1>
-          <p class="text-xs text-slate-400 mt-1">Review shop storefront registrations, audit uploaded KYC media, approve shops, and manage Paystack virtual settlement accounts.</p>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Dry Cleaning Shops Audit</h1>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Review shop storefront registrations, audit uploaded KYC media, approve shops, and manage Paystack virtual settlement accounts.</p>
         </div>
 
         <div class="flex items-center gap-3 text-xs">
-          <span class="px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300">
+          <span class="px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300">
             Total Shops: <strong class="text-sky-400 font-mono">{{ shops.total || 0 }}</strong>
           </span>
         </div>
@@ -153,11 +153,11 @@ const suspendShop = async (shopId: number) => {
       />
 
       <!-- Shops Data Table -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
         <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-700/80 bg-slate-900/50 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              <tr class="border-b border-gray-200 dark:border-slate-700/80 bg-white dark:bg-slate-900/50 text-[11px] font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                 <th class="py-3.5 px-4">Shop Details</th>
                 <th class="py-3.5 px-4">Owner</th>
                 <th class="py-3.5 px-4">Paystack Virtual Account</th>
@@ -176,7 +176,7 @@ const suspendShop = async (shopId: number) => {
                       {{ shop.name[0] }}
                     </div>
                     <div>
-                      <div class="font-bold text-slate-100 text-sm flex items-center gap-1.5">
+                      <div class="font-bold text-gray-900 dark:text-slate-100 text-sm flex items-center gap-1.5">
                         <span>{{ shop.name }}</span>
                         <a
                           :href="`/shop/${shop.slug}`"
@@ -187,7 +187,7 @@ const suspendShop = async (shopId: number) => {
                           🔗
                         </a>
                       </div>
-                      <p class="text-[11px] text-slate-400">{{ shop.address }}</p>
+                      <p class="text-[11px] text-gray-500 dark:text-slate-400">{{ shop.address }}</p>
                     </div>
                   </div>
                 </td>
@@ -195,10 +195,10 @@ const suspendShop = async (shopId: number) => {
                 <!-- Owner -->
                 <td class="py-4 px-4">
                   <div v-if="shop.owner">
-                    <div class="font-semibold text-slate-200">{{ shop.owner.first_name }} {{ shop.owner.last_name }}</div>
-                    <div class="text-[11px] text-slate-400 font-mono">{{ shop.phone }}</div>
+                    <div class="font-semibold text-gray-800 dark:text-slate-200">{{ shop.owner.first_name }} {{ shop.owner.last_name }}</div>
+                    <div class="text-[11px] text-gray-500 dark:text-slate-400 font-mono">{{ shop.phone }}</div>
                   </div>
-                  <span v-else class="text-slate-500 italic">No Owner Assigned</span>
+                  <span v-else class="text-gray-500 dark:text-slate-500 italic">No Owner Assigned</span>
                 </td>
 
                 <!-- Paystack Virtual Account Details -->
@@ -207,7 +207,7 @@ const suspendShop = async (shopId: number) => {
                     <span class="text-emerald-400 font-mono font-bold text-xs block">
                       {{ (shop.virtual_account || shop.virtualAccount).account_number || 'Pending Number' }}
                     </span>
-                    <span class="text-[10px] text-slate-300 block">
+                    <span class="text-[10px] text-gray-700 dark:text-slate-300 block">
                       {{ (shop.virtual_account || shop.virtualAccount).bank_name || 'Wema Bank' }}
                     </span>
                   </div>
@@ -226,7 +226,7 @@ const suspendShop = async (shopId: number) => {
                 <td class="py-4 px-4">
                   <button
                     @click="openShopModal(shop)"
-                    class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-sky-500 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                    class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 hover:border-sky-500 text-gray-800 dark:text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-all"
                   >
                     <span>📷</span>
                     <span>KYC Audit ({{ getKycDocs(shop).length }})</span>
@@ -242,7 +242,7 @@ const suspendShop = async (shopId: number) => {
                 <td class="py-4 px-4 text-right space-x-2">
                   <button
                     @click="openShopModal(shop)"
-                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-700/60 text-slate-200 hover:bg-slate-700 transition-all"
+                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-700/60 text-gray-800 dark:text-slate-200 hover:bg-slate-700 transition-all"
                   >
                     Audit
                   </button>
@@ -274,7 +274,7 @@ const suspendShop = async (shopId: number) => {
               </tr>
 
               <tr v-if="!shops.data || shops.data.length === 0">
-                <td colspan="6" class="py-12 text-center text-slate-400 text-xs">
+                <td colspan="6" class="py-12 text-center text-gray-500 dark:text-slate-400 text-xs">
                   No dry cleaner shops matching the selected filters.
                 </td>
               </tr>
@@ -287,36 +287,36 @@ const suspendShop = async (shopId: number) => {
     <!-- Shop Details & KYC Audit Modal -->
     <div
       v-if="showModal && selectedShop"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-50 dark:bg-slate-950/80 backdrop-blur-sm animate-in fade-in"
       @click.self="closeModal"
     >
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl custom-scrollbar flex flex-col">
+      <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl custom-scrollbar flex flex-col">
         <!-- Modal Header -->
-        <div class="p-6 border-b border-slate-800/80 flex items-start justify-between bg-slate-950/50 sticky top-0 z-10">
+        <div class="p-6 border-b border-gray-200 dark:border-slate-800/80 flex items-start justify-between bg-gray-50 dark:bg-slate-950/50 sticky top-0 z-10">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-500 to-cyan-400 flex items-center justify-center font-extrabold text-slate-950 text-xl shadow-lg">
               {{ selectedShop.name[0] }}
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h3 class="text-lg font-bold text-slate-100">{{ selectedShop.name }}</h3>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-slate-100">{{ selectedShop.name }}</h3>
                 <Badge :status="selectedShop.status" />
               </div>
-              <p class="text-xs text-slate-400 font-mono mt-0.5">Slug: {{ selectedShop.slug }}</p>
+              <p class="text-xs text-gray-500 dark:text-slate-400 font-mono mt-0.5">Slug: {{ selectedShop.slug }}</p>
             </div>
           </div>
-          <button @click="closeModal" class="text-slate-400 hover:text-slate-200 text-lg p-1">✕</button>
+          <button @click="closeModal" class="text-gray-500 dark:text-slate-400 hover:text-slate-200 text-lg p-1">✕</button>
         </div>
 
         <!-- Modal Content Body -->
         <div class="p-6 space-y-6">
           <!-- Overview Description -->
           <div>
-            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Shop Overview & Structure</h4>
-            <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80 space-y-2 text-sm text-slate-300">
+            <h4 class="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-2">Shop Overview & Structure</h4>
+            <div class="bg-gray-50 dark:bg-slate-950/60 p-4 rounded-xl border border-gray-200 dark:border-slate-800/80 space-y-2 text-sm text-gray-700 dark:text-slate-300">
               <p>{{ selectedShop.description || 'No description provided.' }}</p>
               <div class="flex items-center gap-3 pt-2 text-xs">
-                <span class="text-slate-500">Business Structure:</span>
+                <span class="text-gray-500 dark:text-slate-500">Business Structure:</span>
                 <span class="font-bold text-purple-400">
                   {{ selectedShop.business_type === 'cac_registered' ? '🏛️ CAC Registered Business' : '🏪 Independent Operator' }}
                 </span>
@@ -337,24 +337,24 @@ const suspendShop = async (shopId: number) => {
               </button>
             </div>
 
-            <div v-if="selectedShop.virtual_account || selectedShop.virtualAccount" class="bg-slate-950/80 p-4 rounded-xl border border-emerald-500/30 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+            <div v-if="selectedShop.virtual_account || selectedShop.virtualAccount" class="bg-gray-50 dark:bg-slate-950/80 p-4 rounded-xl border border-emerald-500/30 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
               <div>
-                <span class="text-[10px] text-slate-400 uppercase block font-sans">Bank Name</span>
-                <strong class="text-slate-200 text-sm block">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).bank_name || 'Wema Bank' }}</strong>
+                <span class="text-[10px] text-gray-500 dark:text-slate-400 uppercase block font-sans">Bank Name</span>
+                <strong class="text-gray-800 dark:text-slate-200 text-sm block">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).bank_name || 'Wema Bank' }}</strong>
               </div>
 
               <div>
-                <span class="text-[10px] text-slate-400 uppercase block font-sans">Account Number</span>
+                <span class="text-[10px] text-gray-500 dark:text-slate-400 uppercase block font-sans">Account Number</span>
                 <strong class="text-emerald-400 text-base block font-bold">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).account_number || 'Pending' }}</strong>
               </div>
 
               <div>
-                <span class="text-[10px] text-slate-400 uppercase block font-sans">Account Name</span>
-                <strong class="text-slate-200 text-xs block truncate">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).account_name || selectedShop.name }}</strong>
+                <span class="text-[10px] text-gray-500 dark:text-slate-400 uppercase block font-sans">Account Name</span>
+                <strong class="text-gray-800 dark:text-slate-200 text-xs block truncate">{{ (selectedShop.virtual_account || selectedShop.virtualAccount).account_name || selectedShop.name }}</strong>
               </div>
             </div>
 
-            <div v-else class="bg-slate-950/40 p-4 rounded-xl border border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+            <div v-else class="bg-gray-50 dark:bg-slate-950/40 p-4 rounded-xl border border-gray-200 dark:border-slate-800 text-xs text-gray-500 dark:text-slate-400 flex items-center justify-between">
               <span>No virtual account provisioned yet for this shop.</span>
               <button
                 @click="generateVirtualAccount(selectedShop.id)"
@@ -373,10 +373,10 @@ const suspendShop = async (shopId: number) => {
               <div
                 v-for="doc in getKycDocs(selectedShop)"
                 :key="doc.id"
-                class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 space-y-2"
+                class="bg-gray-50 dark:bg-slate-950/60 p-4 rounded-xl border border-gray-200 dark:border-slate-800 space-y-2"
               >
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-slate-200 capitalize">
+                  <span class="text-xs font-bold text-gray-800 dark:text-slate-200 capitalize">
                     {{ doc.document_type.replace('_', ' ') }}
                   </span>
                   <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 uppercase font-mono">
@@ -385,7 +385,7 @@ const suspendShop = async (shopId: number) => {
                 </div>
 
                 <div v-if="doc.file_path.match(/\.(jpg|jpeg|png|webp)$/i)" class="mt-2">
-                  <img :src="doc.file_path" class="h-36 w-full object-cover rounded-xl border border-slate-800" />
+                  <img :src="doc.file_path" class="h-36 w-full object-cover rounded-xl border border-gray-200 dark:border-slate-800" />
                 </div>
                 <div v-else class="mt-2 pt-2">
                   <a :href="doc.file_path" target="_blank" class="px-3 py-1.5 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/20 text-xs font-semibold hover:underline inline-flex items-center gap-1">
@@ -394,39 +394,39 @@ const suspendShop = async (shopId: number) => {
                 </div>
               </div>
             </div>
-            <div v-else class="p-6 text-center text-xs text-slate-400 bg-slate-950/40 rounded-xl border border-slate-800">
+            <div v-else class="p-6 text-center text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-950/40 rounded-xl border border-gray-200 dark:border-slate-800">
               No KYC files uploaded by shop owner yet.
             </div>
           </div>
 
           <!-- Contact & Location Coordinates -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 space-y-2">
+            <div class="bg-gray-50 dark:bg-slate-950/40 p-4 rounded-xl border border-gray-200 dark:border-slate-800/60 space-y-2">
               <h4 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Contact & Google Address</h4>
-              <div class="text-xs space-y-1 text-slate-300">
-                <p><span class="text-slate-500">Phone:</span> {{ selectedShop.phone }}</p>
-                <p><span class="text-slate-500">Email:</span> {{ selectedShop.email }}</p>
-                <p><span class="text-slate-500">Address:</span> {{ selectedShop.address }}</p>
-                <p v-if="selectedShop.latitude && selectedShop.longitude" class="text-slate-400 text-[11px]">
-                  <span class="text-slate-500">GPS Pin:</span> {{ selectedShop.latitude }}, {{ selectedShop.longitude }}
+              <div class="text-xs space-y-1 text-gray-700 dark:text-slate-300">
+                <p><span class="text-gray-500 dark:text-slate-500">Phone:</span> {{ selectedShop.phone }}</p>
+                <p><span class="text-gray-500 dark:text-slate-500">Email:</span> {{ selectedShop.email }}</p>
+                <p><span class="text-gray-500 dark:text-slate-500">Address:</span> {{ selectedShop.address }}</p>
+                <p v-if="selectedShop.latitude && selectedShop.longitude" class="text-gray-500 dark:text-slate-400 text-[11px]">
+                  <span class="text-gray-500 dark:text-slate-500">GPS Pin:</span> {{ selectedShop.latitude }}, {{ selectedShop.longitude }}
                 </p>
               </div>
             </div>
 
-            <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 space-y-2">
+            <div class="bg-gray-50 dark:bg-slate-950/40 p-4 rounded-xl border border-gray-200 dark:border-slate-800/60 space-y-2">
               <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Operational Parameters</h4>
-              <div class="text-xs space-y-1 text-slate-300">
-                <p><span class="text-slate-500">Delivery Fee:</span> ₦{{ Number(selectedShop.delivery_fee).toLocaleString() }}</p>
-                <p><span class="text-slate-500">Pickup Radius:</span> {{ selectedShop.pickup_radius_km }} km</p>
-                <p><span class="text-slate-500">Verified Status:</span> {{ selectedShop.is_verified ? 'Verified & Approved ✓' : 'Unverified / Pending' }}</p>
-                <p><span class="text-slate-500">Registered Date:</span> {{ new Date(selectedShop.created_at).toLocaleDateString() }}</p>
+              <div class="text-xs space-y-1 text-gray-700 dark:text-slate-300">
+                <p><span class="text-gray-500 dark:text-slate-500">Delivery Fee:</span> ₦{{ Number(selectedShop.delivery_fee).toLocaleString() }}</p>
+                <p><span class="text-gray-500 dark:text-slate-500">Pickup Radius:</span> {{ selectedShop.pickup_radius_km }} km</p>
+                <p><span class="text-gray-500 dark:text-slate-500">Verified Status:</span> {{ selectedShop.is_verified ? 'Verified & Approved ✓' : 'Unverified / Pending' }}</p>
+                <p><span class="text-gray-500 dark:text-slate-500">Registered Date:</span> {{ new Date(selectedShop.created_at).toLocaleDateString() }}</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Modal Footer Actions -->
-        <div class="p-6 border-t border-slate-800/80 bg-slate-950/50 flex flex-wrap items-center justify-between gap-3 sticky bottom-0 z-10">
+        <div class="p-6 border-t border-gray-200 dark:border-slate-800/80 bg-gray-50 dark:bg-slate-950/50 flex flex-wrap items-center justify-between gap-3 sticky bottom-0 z-10">
           <div class="flex items-center gap-2">
             <button
               v-if="selectedShop.status !== 'active'"
@@ -452,7 +452,7 @@ const suspendShop = async (shopId: number) => {
             </button>
           </div>
 
-          <button @click="closeModal" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+          <button @click="closeModal" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 hover:bg-slate-700 transition-all">
             Close Audit
           </button>
         </div>

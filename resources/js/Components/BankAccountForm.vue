@@ -84,13 +84,13 @@ const saveBankDetails = () => {
 </script>
 
 <template>
-  <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4 shadow-xl">
-    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+  <div class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-2xl p-6 space-y-4 shadow-xl">
+    <div class="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-3">
       <div class="flex items-center gap-2">
         <span class="text-xl">🏦</span>
         <div>
-          <h3 class="text-sm font-bold text-slate-100">Verified Bank Account Settlement Details</h3>
-          <p class="text-[11px] text-slate-400">Paystack NUBAN Account Name Auto-Verification</p>
+          <h3 class="text-sm font-bold text-gray-900 dark:text-slate-100">Verified Bank Account Settlement Details</h3>
+          <p class="text-[11px] text-gray-500 dark:text-slate-400">Paystack NUBAN Account Name Auto-Verification</p>
         </div>
       </div>
       <span v-if="existingAccount?.is_verified" class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
@@ -102,12 +102,12 @@ const saveBankDetails = () => {
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
         <!-- Select Bank -->
         <div>
-          <label class="block font-bold text-slate-300 uppercase mb-1">Select Bank *</label>
+          <label class="block font-bold text-gray-700 dark:text-slate-300 uppercase mb-1">Select Bank *</label>
           <select
             v-model="form.bank_code"
             @change="onBankChange"
             required
-            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 focus:border-sky-500"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 focus:border-sky-500"
           >
             <option value="" disabled>-- Select Commercial / Microfinance Bank --</option>
             <option v-for="b in banks" :key="b.code" :value="b.code">
@@ -118,7 +118,7 @@ const saveBankDetails = () => {
 
         <!-- Account Number -->
         <div>
-          <label class="block font-bold text-slate-300 uppercase mb-1">10-Digit NUBAN Account Number *</label>
+          <label class="block font-bold text-gray-700 dark:text-slate-300 uppercase mb-1">10-Digit NUBAN Account Number *</label>
           <div class="relative">
             <input
               v-model="form.account_number"
@@ -126,7 +126,7 @@ const saveBankDetails = () => {
               maxlength="10"
               required
               placeholder="e.g. 0123456789"
-              class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 font-mono focus:border-sky-500"
+              class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 font-mono focus:border-sky-500"
             />
             <div v-if="resolving" class="absolute right-3 top-3">
               <svg class="w-4 h-4 text-sky-400 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -140,21 +140,21 @@ const saveBankDetails = () => {
 
       <!-- Account Name Verification Box -->
       <div>
-        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Account Holder Official Name</label>
+        <label class="block text-[10px] font-bold text-gray-500 dark:text-slate-400 uppercase mb-1">Account Holder Official Name</label>
         <div class="flex items-center gap-2">
           <input
             v-model="form.account_name"
             type="text"
             readonly
             placeholder="Auto-verifies upon entering 10-digit NUBAN..."
-            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/80 border text-xs font-bold font-mono"
-            :class="resolveSuccess ? 'border-emerald-500/50 text-emerald-300' : 'border-slate-800 text-slate-300'"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-slate-950/80 border text-xs font-bold font-mono"
+            :class="resolveSuccess ? 'border-emerald-500/50 text-emerald-300' : 'border-gray-200 dark:border-slate-800 text-gray-700 dark:text-slate-300'"
           />
           <button
             type="button"
             @click="resolveNUBAN"
             :disabled="resolving || form.account_number.length !== 10"
-            class="px-3.5 py-2.5 rounded-xl bg-slate-800 text-xs font-bold text-slate-300 hover:text-white shrink-0 disabled:opacity-50"
+            class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-slate-800 text-xs font-bold text-gray-700 dark:text-slate-300 hover:text-white shrink-0 disabled:opacity-50"
           >
             Verify
           </button>

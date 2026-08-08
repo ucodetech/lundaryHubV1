@@ -26,9 +26,9 @@ const goToCheckout = () => {
   <AppLayout>
     <div class="max-w-2xl mx-auto space-y-6">
       <!-- Header -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-3">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-3">
         <div class="flex items-center justify-between">
-          <h1 class="text-2xl font-bold text-slate-100">Rider Monthly Dispatch Pass</h1>
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Rider Monthly Dispatch Pass</h1>
           <span
             class="px-3 py-1 rounded-full text-xs font-mono font-bold border"
             :class="isPassActive ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'"
@@ -36,33 +36,33 @@ const goToCheckout = () => {
             {{ isPassActive ? '🟢 PASS ACTIVE' : '🔴 PASS EXPIRED / INACTIVE' }}
           </span>
         </div>
-        <p class="text-xs text-slate-400">
+        <p class="text-xs text-gray-500 dark:text-slate-400">
           Pay flat monthly subscription pass fee to accept unlimited customer laundry delivery dispatches
         </p>
       </div>
 
       <!-- Pass Card -->
-      <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-slate-700/80 rounded-3xl p-8 shadow-2xl space-y-6">
+      <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-gray-200 dark:border-slate-700/80 rounded-3xl p-8 shadow-2xl space-y-6">
         <div class="flex items-center justify-between">
           <div>
             <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block">Monthly Access Fee</span>
-            <h2 class="text-4xl font-black text-slate-100 font-mono mt-1">
+            <h2 class="text-4xl font-black text-gray-900 dark:text-slate-100 font-mono mt-1">
               ₦{{ Number(plan?.price || 2000).toLocaleString() }}
-              <span class="text-xs font-normal text-slate-400">/ 30 Days</span>
+              <span class="text-xs font-normal text-gray-500 dark:text-slate-400">/ 30 Days</span>
             </h2>
           </div>
           <span class="text-5xl">🛵</span>
         </div>
 
-        <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-          <div class="flex justify-between text-slate-300">
+        <div class="bg-gray-50 dark:bg-slate-950/80 p-4 rounded-xl border border-gray-200 dark:border-slate-800 space-y-2 text-xs">
+          <div class="flex justify-between text-gray-700 dark:text-slate-300">
             <span>Pass Status:</span>
             <strong :class="isPassActive ? 'text-emerald-400' : 'text-amber-400'">
               {{ isPassActive ? 'Active & Ready for Dispatch' : 'Pass Required to Go Online' }}
             </strong>
           </div>
 
-          <div v-if="activeSubscription" class="flex justify-between text-slate-400 font-mono pt-1 border-t border-slate-800">
+          <div v-if="activeSubscription" class="flex justify-between text-gray-500 dark:text-slate-400 font-mono pt-1 border-t border-gray-200 dark:border-slate-800">
             <span>Expires On:</span>
             <span class="text-sky-400 font-bold">{{ new Date(activeSubscription.ends_at).toLocaleDateString() }}</span>
           </div>
@@ -70,8 +70,8 @@ const goToCheckout = () => {
 
         <!-- Benefits Checklist -->
         <div class="space-y-2 pt-2">
-          <h3 class="text-xs font-bold text-slate-300 uppercase">Rider Pass Benefits:</h3>
-          <ul class="text-xs text-slate-300 space-y-2">
+          <h3 class="text-xs font-bold text-gray-700 dark:text-slate-300 uppercase">Rider Pass Benefits:</h3>
+          <ul class="text-xs text-gray-700 dark:text-slate-300 space-y-2">
             <li class="flex items-center gap-2">
               <span class="text-emerald-400 font-bold">✓</span>
               <span>Unlimited customer laundry pickup and delivery requests</span>

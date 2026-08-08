@@ -25,11 +25,11 @@ const subscribeToPlan = (plan: any) => {
   <AppLayout>
     <div class="space-y-8">
       <!-- Header & Active Banner -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
+      <div class="bg-gray-100 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-2xl p-6 shadow-xl space-y-4">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 class="text-2xl font-bold text-slate-100">Shop Subscription & Billing</h1>
-            <p class="text-xs text-slate-400 mt-1">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Shop Subscription & Billing</h1>
+            <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">
               Select or upgrade your dry cleaning storefront monthly subscription plan
             </p>
           </div>
@@ -43,7 +43,7 @@ const subscribeToPlan = (plan: any) => {
         </div>
 
         <!-- Expiration Alert -->
-        <div v-if="activeSubscription" class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 flex items-center justify-between text-xs text-slate-300">
+        <div v-if="activeSubscription" class="bg-gray-50 dark:bg-slate-950/80 p-4 rounded-xl border border-gray-200 dark:border-slate-800 flex items-center justify-between text-xs text-gray-700 dark:text-slate-300">
           <span>
             Current subscription expires on <strong class="text-sky-400 font-mono">{{ new Date(activeSubscription.ends_at).toLocaleDateString() }}</strong>.
           </span>
@@ -56,8 +56,8 @@ const subscribeToPlan = (plan: any) => {
         <div
           v-for="plan in plans"
           :key="plan.id"
-          class="bg-slate-800/60 border rounded-2xl p-8 flex flex-col justify-between space-y-6 shadow-xl relative overflow-hidden transition-all hover:scale-[1.02]"
-          :class="activeSubscription?.plan_key === plan.key && isSubActive ? 'border-emerald-500 shadow-emerald-500/10' : 'border-slate-700/60'"
+          class="bg-gray-100 dark:bg-slate-800/60 border rounded-2xl p-8 flex flex-col justify-between space-y-6 shadow-xl relative overflow-hidden transition-all hover:scale-[1.02]"
+          :class="activeSubscription?.plan_key === plan.key && isSubActive ? 'border-emerald-500 shadow-emerald-500/10' : 'border-gray-200 dark:border-slate-700/60'"
         >
           <div class="space-y-4">
             <div class="flex items-center justify-between">
@@ -67,15 +67,15 @@ const subscribeToPlan = (plan: any) => {
               </span>
             </div>
 
-            <div class="font-mono font-black text-3xl text-slate-100">
+            <div class="font-mono font-black text-3xl text-gray-900 dark:text-slate-100">
               ₦{{ Number(plan.price).toLocaleString() }}
-              <span class="text-xs font-normal text-slate-400">/ 30 days</span>
+              <span class="text-xs font-normal text-gray-500 dark:text-slate-400">/ 30 days</span>
             </div>
 
-            <p class="text-xs text-slate-400 leading-relaxed">{{ plan.description }}</p>
+            <p class="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{{ plan.description }}</p>
 
             <!-- Features -->
-            <ul v-if="plan.features" class="space-y-2 text-xs text-slate-300 pt-3 border-t border-slate-700/60">
+            <ul v-if="plan.features" class="space-y-2 text-xs text-gray-700 dark:text-slate-300 pt-3 border-t border-gray-200 dark:border-slate-700/60">
               <li v-for="(feat, fIdx) in plan.features" :key="fIdx" class="flex items-center gap-2">
                 <span class="text-emerald-400 font-bold">✓</span>
                 <span>{{ feat }}</span>
@@ -87,7 +87,7 @@ const subscribeToPlan = (plan: any) => {
             @click="subscribeToPlan(plan)"
             :disabled="loadingPlanId === plan.id"
             class="w-full py-3.5 rounded-xl font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
-            :class="activeSubscription?.plan_key === plan.key && isSubActive ? 'bg-slate-900 border border-slate-700 text-slate-300 hover:text-white' : 'bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 hover:scale-105'"
+            :class="activeSubscription?.plan_key === plan.key && isSubActive ? 'bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300 hover:text-white' : 'bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 hover:scale-105'"
           >
             <svg v-if="loadingPlanId === plan.id" class="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
