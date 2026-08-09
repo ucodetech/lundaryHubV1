@@ -123,6 +123,48 @@ defineProps<{
       </div>
     </section>
 
+    <!-- App & Rider Features Section -->
+    <section class="px-6 sm:px-12 py-16 sm:py-24 bg-white dark:bg-slate-900/50 border-y border-gray-200 dark:border-slate-800/80">
+      <div class="max-w-7xl mx-auto space-y-16">
+        <div class="text-center space-y-4 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-black text-gray-900 dark:text-slate-100">Smart Laundry at Your Fingertips</h2>
+          <p class="text-gray-500 dark:text-slate-400">Experience a seamless workflow from booking to delivery with our state-of-the-art platform designed for both customers and businesses.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="space-y-6 order-2 md:order-1">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Book in Seconds with Our Premium App Interface</h3>
+            <p class="text-gray-500 dark:text-slate-400">Browse verified dry cleaners near you, calculate pricing instantly, and schedule a pickup with just a few taps. Real-time updates keep you informed at every step of the cleaning process.</p>
+            <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-sky-500">✓</span> Real-time Pricing</li>
+              <li class="flex items-center gap-2"><span class="text-sky-500">✓</span> Instant Booking</li>
+              <li class="flex items-center gap-2"><span class="text-sky-500">✓</span> Order Tracking</li>
+            </ul>
+          </div>
+          <div class="relative order-1 md:order-2">
+            <div class="absolute -inset-4 bg-gradient-to-tl from-sky-500/20 to-teal-500/20 blur-3xl opacity-50 rounded-full"></div>
+            <img src="/images/laundry-app.png" alt="Laundry Booking App" class="relative z-10 w-full max-w-sm mx-auto h-auto object-cover rounded-3xl shadow-2xl border border-white/10" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center pt-8">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-cyan-500/20 to-sky-500/20 blur-3xl opacity-50 rounded-full"></div>
+            <img src="/images/laundry-rider.png" alt="Fast Laundry Delivery Rider" class="relative z-10 w-full max-w-sm mx-auto h-auto object-cover rounded-3xl shadow-2xl border border-white/10" />
+          </div>
+          <div class="space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-slate-100">Fast & Reliable Door-to-Door Delivery Network</h3>
+            <p class="text-gray-500 dark:text-slate-400">Our dedicated network of delivery riders ensures your clothes are picked up safely and returned to you fresh, folded, and exactly when you need them.</p>
+            <ul class="space-y-3 text-sm font-medium text-gray-700 dark:text-slate-300">
+              <li class="flex items-center gap-2"><span class="text-sky-500">✓</span> Verified Delivery Partners</li>
+              <li class="flex items-center gap-2"><span class="text-sky-500">✓</span> Fast Turnaround Times</li>
+              <li class="flex items-center gap-2"><span class="text-sky-500">✓</span> Safe Handling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-slate-800/80 py-8 px-6 text-center text-xs text-gray-500 dark:text-slate-500">
       © {{ new Date().getFullYear() }} LaundryHub Platform. All rights reserved. Powered by Laravel 12 & Vue 3.
