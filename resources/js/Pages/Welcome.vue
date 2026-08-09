@@ -43,27 +43,42 @@ defineProps<{
     </header>
 
     <!-- Hero Section -->
-    <section class="px-6 sm:px-12 py-16 sm:py-24 max-w-6xl mx-auto text-center space-y-8">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold">
-        ✨ The Next-Gen Dry Cleaning Marketplace Platform
-      </div>
+    <section class="px-6 sm:px-12 py-16 sm:py-24 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Text Content -->
+        <div class="space-y-8 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold">
+            ✨ The Next-Gen Dry Cleaning Marketplace Platform
+          </div>
 
-      <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-gray-900 dark:text-slate-100 max-w-4xl mx-auto leading-tight">
-        Every Dry Cleaner Gets Their Digital Storefront.
-        <span class="bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent">Customers & Riders Connect Seamlessly.</span>
-      </h1>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 dark:text-slate-100 leading-tight">
+            Every Dry Cleaner Gets Their Digital Storefront. <br />
+            <span class="bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent">Customers & Riders Connect Seamlessly.</span>
+          </h1>
 
-      <p class="text-base sm:text-lg text-gray-500 dark:text-slate-400 max-w-2xl mx-auto">
-        LaundryHub empowers dry cleaning shops to own their custom digital shopfront while providing customers with instant pricing, rider dispatching, and real-time tracking.
-      </p>
+          <p class="text-base sm:text-lg text-gray-500 dark:text-slate-400 max-w-xl mx-auto md:mx-0">
+            LaundryHub empowers dry cleaning shops to own their custom digital shopfront while providing customers with instant pricing, rider dispatching, and real-time tracking.
+          </p>
 
-      <div class="flex flex-wrap justify-center gap-4 pt-4">
-        <Link href="/register?role=shop_owner" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 font-black text-base shadow-xl shadow-sky-500/25 hover:scale-105 transition-transform">
-          Register Your Dry Cleaning Shop
-        </Link>
-        <Link href="/register?role=customer" class="px-8 py-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-800 dark:text-slate-200 font-bold text-base hover:bg-slate-800 transition-colors">
-          Book Laundry Pickup
-        </Link>
+          <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+            <Link href="/register?role=shop_owner" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 font-black text-base shadow-xl shadow-sky-500/25 hover:scale-105 transition-transform">
+              Register Your Dry Cleaning Shop
+            </Link>
+            <Link href="/register?role=customer" class="px-8 py-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 text-gray-800 dark:text-slate-200 font-bold text-base hover:bg-slate-800 transition-colors">
+              Book Laundry Pickup
+            </Link>
+          </div>
+        </div>
+
+        <!-- Image Content -->
+        <div class="relative w-full max-w-md mx-auto md:max-w-none">
+          <div class="absolute -inset-4 bg-gradient-to-tr from-sky-500/30 to-cyan-500/30 blur-3xl opacity-50 rounded-full"></div>
+          <img 
+            src="/images/laundry-hero.png" 
+            alt="Modern Laundry Machine" 
+            class="relative z-10 w-full h-auto object-cover rounded-3xl shadow-2xl border border-white/10"
+          />
+        </div>
       </div>
     </section>
 
