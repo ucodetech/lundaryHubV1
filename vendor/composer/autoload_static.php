@@ -47,22 +47,22 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
     );
 
     public static $prefixLengthsPsr4 = array (
-        'v' =>
+        'v' => 
         array (
             'voku\\' => 5,
         ),
-        'W' =>
+        'W' => 
         array (
             'Whoops\\' => 7,
         ),
-        'T' =>
+        'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tighten\\Ziggy\\' => 14,
             'Tests\\' => 6,
             'Termwind\\' => 9,
         ),
-        'S' =>
+        'S' => 
         array (
             'Symfony\\Polyfill\\Uuid\\' => 22,
             'Symfony\\Polyfill\\Php85\\' => 23,
@@ -97,12 +97,12 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
             'Spatie\\Permission\\' => 18,
             'Spatie\\LaravelPackageTools\\' => 27,
         ),
-        'R' =>
+        'R' => 
         array (
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
-        'P' =>
+        'P' => 
         array (
             'Pusher\\' => 7,
             'Psy\\' => 4,
@@ -116,19 +116,22 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
         ),
-        'N' =>
+        'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
             'NotificationChannels\\WebPush\\' => 29,
             'Nette\\' => 6,
+            'Native\\Mobile\\' => 14,
+            'Native\\Laravel\\' => 15,
+            'Native\\Electron\\' => 16,
         ),
-        'M' =>
+        'M' => 
         array (
             'Monolog\\' => 8,
             'Mockery\\' => 8,
             'Minishlink\\WebPush\\' => 19,
         ),
-        'L' =>
+        'L' => 
         array (
             'League\\Uri\\' => 11,
             'League\\MimeTypeDetection\\' => 25,
@@ -140,17 +143,17 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Prompts\\' => 16,
         ),
-        'J' =>
+        'J' => 
         array (
             'Jose\\Component\\' => 15,
         ),
-        'I' =>
+        'I' => 
         array (
             'Inertia\\' => 8,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
         ),
-        'G' =>
+        'G' => 
         array (
             'GuzzleHttp\\UriTemplate\\' => 23,
             'GuzzleHttp\\Psr7\\' => 16,
@@ -158,16 +161,16 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
             'GuzzleHttp\\' => 11,
             'GrahamCampbell\\ResultType\\' => 26,
         ),
-        'F' =>
+        'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
             'Faker\\' => 6,
         ),
-        'E' =>
+        'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
         ),
-        'D' =>
+        'D' => 
         array (
             'Dotenv\\' => 7,
             'Doctrine\\Inflector\\' => 19,
@@ -177,391 +180,403 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
             'Database\\Seeders\\' => 17,
             'Database\\Factories\\' => 19,
         ),
-        'C' =>
+        'C' => 
         array (
             'Cron\\' => 5,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
-        'B' =>
+        'B' => 
         array (
             'Brick\\Math\\' => 11,
             'Base64Url\\' => 10,
         ),
-        'A' =>
+        'A' => 
         array (
             'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'voku\\' =>
+        'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
         ),
-        'Whoops\\' =>
+        'Whoops\\' => 
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
-        'TijsVerkoyen\\CssToInlineStyles\\' =>
+        'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
         ),
-        'Tighten\\Ziggy\\' =>
+        'Tighten\\Ziggy\\' => 
         array (
             0 => __DIR__ . '/..' . '/tightenco/ziggy/src',
         ),
-        'Tests\\' =>
+        'Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Termwind\\' =>
+        'Termwind\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/termwind/src',
         ),
-        'Symfony\\Polyfill\\Uuid\\' =>
+        'Symfony\\Polyfill\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-uuid',
         ),
-        'Symfony\\Polyfill\\Php85\\' =>
+        'Symfony\\Polyfill\\Php85\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php85',
         ),
-        'Symfony\\Polyfill\\Php84\\' =>
+        'Symfony\\Polyfill\\Php84\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php84',
         ),
-        'Symfony\\Polyfill\\Php83\\' =>
+        'Symfony\\Polyfill\\Php83\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
         ),
-        'Symfony\\Polyfill\\Php80\\' =>
+        'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' =>
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
         ),
-        'Symfony\\Polyfill\\Intl\\Idn\\' =>
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
         ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
         ),
-        'Symfony\\Polyfill\\Ctype\\' =>
+        'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Translation\\' =>
+        'Symfony\\Contracts\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation-contracts',
         ),
-        'Symfony\\Contracts\\Service\\' =>
+        'Symfony\\Contracts\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Contracts\\EventDispatcher\\' =>
+        'Symfony\\Contracts\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
-        'Symfony\\Component\\VarDumper\\' =>
+        'Symfony\\Component\\VarDumper\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
-        'Symfony\\Component\\Uid\\' =>
+        'Symfony\\Component\\Uid\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/uid',
         ),
-        'Symfony\\Component\\Translation\\' =>
+        'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
-        'Symfony\\Component\\String\\' =>
+        'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Routing\\' =>
+        'Symfony\\Component\\Routing\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/routing',
         ),
-        'Symfony\\Component\\Process\\' =>
+        'Symfony\\Component\\Process\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\Mime\\' =>
+        'Symfony\\Component\\Mime\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mime',
         ),
-        'Symfony\\Component\\Mailer\\' =>
+        'Symfony\\Component\\Mailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mailer',
         ),
-        'Symfony\\Component\\HttpKernel\\' =>
+        'Symfony\\Component\\HttpKernel\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-kernel',
         ),
-        'Symfony\\Component\\HttpFoundation\\' =>
+        'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
-        'Symfony\\Component\\Finder\\' =>
+        'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        'Symfony\\Component\\EventDispatcher\\' =>
+        'Symfony\\Component\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
-        'Symfony\\Component\\ErrorHandler\\' =>
+        'Symfony\\Component\\ErrorHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
-        'Symfony\\Component\\CssSelector\\' =>
+        'Symfony\\Component\\CssSelector\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/css-selector',
         ),
-        'Symfony\\Component\\Console\\' =>
+        'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Symfony\\Component\\Clock\\' =>
+        'Symfony\\Component\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/clock',
         ),
-        'SpomkyLabs\\Pki\\' =>
+        'SpomkyLabs\\Pki\\' => 
         array (
             0 => __DIR__ . '/..' . '/spomky-labs/pki-framework/src',
         ),
-        'Spatie\\Permission\\' =>
+        'Spatie\\Permission\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
         ),
-        'Spatie\\LaravelPackageTools\\' =>
+        'Spatie\\LaravelPackageTools\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-package-tools/src',
         ),
-        'Ramsey\\Uuid\\' =>
+        'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
         ),
-        'Ramsey\\Collection\\' =>
+        'Ramsey\\Collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
-        'Pusher\\' =>
+        'Pusher\\' => 
         array (
             0 => __DIR__ . '/..' . '/pusher/pusher-php-server/src',
         ),
-        'Psy\\' =>
+        'Psy\\' => 
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src',
         ),
-        'Psr\\SimpleCache\\' =>
+        'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\Log\\' =>
+        'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Psr\\Http\\Message\\' =>
+        'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Http\\Client\\' =>
+        'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
-        'Psr\\EventDispatcher\\' =>
+        'Psr\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Psr\\Container\\' =>
+        'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Psr\\Clock\\' =>
+        'Psr\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
         ),
-        'PhpParser\\' =>
+        'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
-        'PhpOption\\' =>
+        'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'NunoMaduro\\Collision\\' =>
+        'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
         ),
-        'NotificationChannels\\WebPush\\' =>
+        'NotificationChannels\\WebPush\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel-notification-channels/webpush/src',
         ),
-        'Nette\\' =>
+        'Nette\\' => 
         array (
             0 => __DIR__ . '/..' . '/nette/schema/src',
             1 => __DIR__ . '/..' . '/nette/utils/src',
         ),
-        'Monolog\\' =>
+        'Native\\Mobile\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nativephp/mobile/src',
+        ),
+        'Native\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nativephp/laravel/src',
+        ),
+        'Native\\Electron\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nativephp/electron/src',
+        ),
+        'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'Mockery\\' =>
+        'Mockery\\' => 
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
         ),
-        'Minishlink\\WebPush\\' =>
+        'Minishlink\\WebPush\\' => 
         array (
             0 => __DIR__ . '/..' . '/minishlink/web-push/src',
         ),
-        'League\\Uri\\' =>
+        'League\\Uri\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/uri',
             1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
-        'League\\MimeTypeDetection\\' =>
+        'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
         ),
-        'League\\Flysystem\\Local\\' =>
+        'League\\Flysystem\\Local\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem-local',
         ),
-        'League\\Flysystem\\' =>
+        'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
-        'League\\Config\\' =>
+        'League\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/config/src',
         ),
-        'League\\CommonMark\\' =>
+        'League\\CommonMark\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
         ),
-        'Laravel\\Tinker\\' =>
+        'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
-        'Laravel\\SerializableClosure\\' =>
+        'Laravel\\SerializableClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
         ),
-        'Laravel\\Prompts\\' =>
+        'Laravel\\Prompts\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
         ),
-        'Jose\\Component\\' =>
+        'Jose\\Component\\' => 
         array (
             0 => __DIR__ . '/..' . '/web-token/jwt-library',
         ),
-        'Inertia\\' =>
+        'Inertia\\' => 
         array (
             0 => __DIR__ . '/..' . '/inertiajs/inertia-laravel/src',
         ),
-        'Illuminate\\Support\\' =>
+        'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
             1 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections',
             2 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Conditionable',
             3 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Reflection',
         ),
-        'Illuminate\\' =>
+        'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
-        'GuzzleHttp\\UriTemplate\\' =>
+        'GuzzleHttp\\UriTemplate\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/uri-template/src',
         ),
-        'GuzzleHttp\\Psr7\\' =>
+        'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'GuzzleHttp\\Promise\\' =>
+        'GuzzleHttp\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
-        'GuzzleHttp\\' =>
+        'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'GrahamCampbell\\ResultType\\' =>
+        'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
-        'Fruitcake\\Cors\\' =>
+        'Fruitcake\\Cors\\' => 
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
-        'Faker\\' =>
+        'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
-        'Egulias\\EmailValidator\\' =>
+        'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
-        'Dotenv\\' =>
+        'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'Doctrine\\Inflector\\' =>
+        'Doctrine\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/src',
         ),
-        'Doctrine\\Common\\Lexer\\' =>
+        'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
         ),
-        'Dflydev\\DotAccessData\\' =>
+        'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
         ),
-        'DeepCopy\\' =>
+        'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'Database\\Seeders\\' =>
+        'Database\\Seeders\\' => 
         array (
             0 => __DIR__ . '/../..' . '/database/seeders',
         ),
-        'Database\\Factories\\' =>
+        'Database\\Factories\\' => 
         array (
             0 => __DIR__ . '/../..' . '/database/factories',
         ),
-        'Cron\\' =>
+        'Cron\\' => 
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
-        'Carbon\\Doctrine\\' =>
+        'Carbon\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
         ),
-        'Carbon\\' =>
+        'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
-        'Brick\\Math\\' =>
+        'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'Base64Url\\' =>
+        'Base64Url\\' => 
         array (
             0 => __DIR__ . '/..' . '/spomky-labs/base64url/src',
         ),
-        'App\\' =>
+        'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
@@ -605,6 +620,7 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
         'App\\Http\\Controllers\\PaystackController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaystackController.php',
         'App\\Http\\Controllers\\PriceController' => __DIR__ . '/../..' . '/app/Http/Controllers/PriceController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
+        'App\\Http\\Controllers\\PushSubscriptionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PushSubscriptionController.php',
         'App\\Http\\Controllers\\ReferralController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReferralController.php',
         'App\\Http\\Controllers\\RiderOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/RiderOrderController.php',
         'App\\Http\\Controllers\\RiderPayoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/RiderPayoutController.php',
@@ -649,6 +665,7 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
         'App\\Models\\SubscriptionPlan' => __DIR__ . '/../..' . '/app/Models/SubscriptionPlan.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserBankAccount' => __DIR__ . '/../..' . '/app/Models/UserBankAccount.php',
+        'App\\Notifications\\WebPushAlert' => __DIR__ . '/../..' . '/app/Notifications/WebPushAlert.php',
         'App\\Policies\\CategoryPolicy' => __DIR__ . '/../..' . '/app/Policies/CategoryPolicy.php',
         'App\\Policies\\PricePolicy' => __DIR__ . '/../..' . '/app/Policies/PricePolicy.php',
         'App\\Policies\\ServicePolicy' => __DIR__ . '/../..' . '/app/Policies/ServicePolicy.php',
@@ -4187,6 +4204,440 @@ class ComposerStaticInit952e2cb7f805335c665987e6cc323c07
         'Monolog\\Test\\MonologTestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/MonologTestCase.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'Native\\Electron\\Commands\\BuildCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Commands/BuildCommand.php',
+        'Native\\Electron\\Commands\\BundleCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Commands/BundleCommand.php',
+        'Native\\Electron\\Commands\\DevelopCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Commands/DevelopCommand.php',
+        'Native\\Electron\\Commands\\InstallCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Commands/InstallCommand.php',
+        'Native\\Electron\\Commands\\PublishCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Commands/PublishCommand.php',
+        'Native\\Electron\\Commands\\ResetCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Commands/ResetCommand.php',
+        'Native\\Electron\\ElectronServiceProvider' => __DIR__ . '/..' . '/nativephp/electron/src/ElectronServiceProvider.php',
+        'Native\\Electron\\Facades\\Updater' => __DIR__ . '/..' . '/nativephp/electron/src/Facades/Updater.php',
+        'Native\\Electron\\Traits\\CleansEnvFile' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/CleansEnvFile.php',
+        'Native\\Electron\\Traits\\CopiesBundleToBuildDirectory' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/CopiesBundleToBuildDirectory.php',
+        'Native\\Electron\\Traits\\CopiesCertificateAuthority' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/CopiesCertificateAuthority.php',
+        'Native\\Electron\\Traits\\CopiesToBuildDirectory' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/CopiesToBuildDirectory.php',
+        'Native\\Electron\\Traits\\Developer' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/Developer.php',
+        'Native\\Electron\\Traits\\ExecuteCommand' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/ExecuteCommand.php',
+        'Native\\Electron\\Traits\\HandlesZephpyr' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/HandlesZephpyr.php',
+        'Native\\Electron\\Traits\\HasPreAndPostProcessing' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/HasPreAndPostProcessing.php',
+        'Native\\Electron\\Traits\\Installer' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/Installer.php',
+        'Native\\Electron\\Traits\\InstallsAppIcon' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/InstallsAppIcon.php',
+        'Native\\Electron\\Traits\\LocatesPhpBinary' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/LocatesPhpBinary.php',
+        'Native\\Electron\\Traits\\OsAndArch' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/OsAndArch.php',
+        'Native\\Electron\\Traits\\PatchesPackagesJson' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/PatchesPackagesJson.php',
+        'Native\\Electron\\Traits\\PrunesVendorDirectory' => __DIR__ . '/..' . '/nativephp/electron/src/Traits/PrunesVendorDirectory.php',
+        'Native\\Electron\\Updater\\Contracts\\Updater' => __DIR__ . '/..' . '/nativephp/electron/src/Updater/Contracts/Updater.php',
+        'Native\\Electron\\Updater\\GitHubProvider' => __DIR__ . '/..' . '/nativephp/electron/src/Updater/GitHubProvider.php',
+        'Native\\Electron\\Updater\\S3Provider' => __DIR__ . '/..' . '/nativephp/electron/src/Updater/S3Provider.php',
+        'Native\\Electron\\Updater\\SpacesProvider' => __DIR__ . '/..' . '/nativephp/electron/src/Updater/SpacesProvider.php',
+        'Native\\Electron\\Updater\\UpdaterManager' => __DIR__ . '/..' . '/nativephp/electron/src/Updater/UpdaterManager.php',
+        'Native\\Laravel\\Alert' => __DIR__ . '/..' . '/nativephp/laravel/src/Alert.php',
+        'Native\\Laravel\\App' => __DIR__ . '/..' . '/nativephp/laravel/src/App.php',
+        'Native\\Laravel\\AutoUpdater' => __DIR__ . '/..' . '/nativephp/laravel/src/AutoUpdater.php',
+        'Native\\Laravel\\ChildProcess' => __DIR__ . '/..' . '/nativephp/laravel/src/ChildProcess.php',
+        'Native\\Laravel\\Client\\Client' => __DIR__ . '/..' . '/nativephp/laravel/src/Client/Client.php',
+        'Native\\Laravel\\Clipboard' => __DIR__ . '/..' . '/nativephp/laravel/src/Clipboard.php',
+        'Native\\Laravel\\Commands\\DebugCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/DebugCommand.php',
+        'Native\\Laravel\\Commands\\FreshCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/FreshCommand.php',
+        'Native\\Laravel\\Commands\\LoadPHPConfigurationCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/LoadPHPConfigurationCommand.php',
+        'Native\\Laravel\\Commands\\LoadStartupConfigurationCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/LoadStartupConfigurationCommand.php',
+        'Native\\Laravel\\Commands\\MigrateCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/MigrateCommand.php',
+        'Native\\Laravel\\Commands\\SeedDatabaseCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/SeedDatabaseCommand.php',
+        'Native\\Laravel\\Commands\\WipeDatabaseCommand' => __DIR__ . '/..' . '/nativephp/laravel/src/Commands/WipeDatabaseCommand.php',
+        'Native\\Laravel\\Concerns\\DetectsWindowId' => __DIR__ . '/..' . '/nativephp/laravel/src/Concerns/DetectsWindowId.php',
+        'Native\\Laravel\\Concerns\\HasDimensions' => __DIR__ . '/..' . '/nativephp/laravel/src/Concerns/HasDimensions.php',
+        'Native\\Laravel\\Concerns\\HasPositioner' => __DIR__ . '/..' . '/nativephp/laravel/src/Concerns/HasPositioner.php',
+        'Native\\Laravel\\Concerns\\HasUrl' => __DIR__ . '/..' . '/nativephp/laravel/src/Concerns/HasUrl.php',
+        'Native\\Laravel\\Concerns\\HasVibrancy' => __DIR__ . '/..' . '/nativephp/laravel/src/Concerns/HasVibrancy.php',
+        'Native\\Laravel\\ContextMenu' => __DIR__ . '/..' . '/nativephp/laravel/src/ContextMenu.php',
+        'Native\\Laravel\\Contracts\\ChildProcess' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/ChildProcess.php',
+        'Native\\Laravel\\Contracts\\GlobalShortcut' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/GlobalShortcut.php',
+        'Native\\Laravel\\Contracts\\MenuItem' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/MenuItem.php',
+        'Native\\Laravel\\Contracts\\PowerMonitor' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/PowerMonitor.php',
+        'Native\\Laravel\\Contracts\\ProvidesPhpIni' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/ProvidesPhpIni.php',
+        'Native\\Laravel\\Contracts\\QueueWorker' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/QueueWorker.php',
+        'Native\\Laravel\\Contracts\\WindowManager' => __DIR__ . '/..' . '/nativephp/laravel/src/Contracts/WindowManager.php',
+        'Native\\Laravel\\DTOs\\QueueConfig' => __DIR__ . '/..' . '/nativephp/laravel/src/DTOs/QueueConfig.php',
+        'Native\\Laravel\\DataObjects\\Printer' => __DIR__ . '/..' . '/nativephp/laravel/src/DataObjects/Printer.php',
+        'Native\\Laravel\\Dialog' => __DIR__ . '/..' . '/nativephp/laravel/src/Dialog.php',
+        'Native\\Laravel\\Dock' => __DIR__ . '/..' . '/nativephp/laravel/src/Dock.php',
+        'Native\\Laravel\\Enums\\PowerStatesEnum' => __DIR__ . '/..' . '/nativephp/laravel/src/Enums/PowerStatesEnum.php',
+        'Native\\Laravel\\Enums\\RolesEnum' => __DIR__ . '/..' . '/nativephp/laravel/src/Enums/RolesEnum.php',
+        'Native\\Laravel\\Enums\\SystemIdleStatesEnum' => __DIR__ . '/..' . '/nativephp/laravel/src/Enums/SystemIdleStatesEnum.php',
+        'Native\\Laravel\\Enums\\SystemThemesEnum' => __DIR__ . '/..' . '/nativephp/laravel/src/Enums/SystemThemesEnum.php',
+        'Native\\Laravel\\Enums\\ThermalStatesEnum' => __DIR__ . '/..' . '/nativephp/laravel/src/Enums/ThermalStatesEnum.php',
+        'Native\\Laravel\\Events\\App\\ApplicationBooted' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/App/ApplicationBooted.php',
+        'Native\\Laravel\\Events\\App\\OpenFile' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/App/OpenFile.php',
+        'Native\\Laravel\\Events\\App\\OpenedFromURL' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/App/OpenedFromURL.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\CheckingForUpdate' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/CheckingForUpdate.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\DownloadProgress' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/DownloadProgress.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\Error' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/Error.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\UpdateAvailable' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/UpdateAvailable.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\UpdateCancelled' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/UpdateCancelled.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\UpdateDownloaded' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/UpdateDownloaded.php',
+        'Native\\Laravel\\Events\\AutoUpdater\\UpdateNotAvailable' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/AutoUpdater/UpdateNotAvailable.php',
+        'Native\\Laravel\\Events\\ChildProcess\\ErrorReceived' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/ChildProcess/ErrorReceived.php',
+        'Native\\Laravel\\Events\\ChildProcess\\MessageReceived' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/ChildProcess/MessageReceived.php',
+        'Native\\Laravel\\Events\\ChildProcess\\ProcessExited' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/ChildProcess/ProcessExited.php',
+        'Native\\Laravel\\Events\\ChildProcess\\ProcessSpawned' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/ChildProcess/ProcessSpawned.php',
+        'Native\\Laravel\\Events\\ChildProcess\\StartupError' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/ChildProcess/StartupError.php',
+        'Native\\Laravel\\Events\\EventWatcher' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/EventWatcher.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarClicked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarClicked.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarCreated' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarCreated.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarDoubleClicked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarDoubleClicked.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarDroppedFiles' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarDroppedFiles.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarHidden' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarHidden.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarRightClicked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarRightClicked.php',
+        'Native\\Laravel\\Events\\MenuBar\\MenuBarShown' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/MenuBar/MenuBarShown.php',
+        'Native\\Laravel\\Events\\Menu\\MenuItemClicked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Menu/MenuItemClicked.php',
+        'Native\\Laravel\\Events\\Notifications\\NotificationActionClicked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Notifications/NotificationActionClicked.php',
+        'Native\\Laravel\\Events\\Notifications\\NotificationClicked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Notifications/NotificationClicked.php',
+        'Native\\Laravel\\Events\\Notifications\\NotificationClosed' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Notifications/NotificationClosed.php',
+        'Native\\Laravel\\Events\\Notifications\\NotificationReply' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Notifications/NotificationReply.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\PowerStateChanged' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/PowerStateChanged.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\ScreenLocked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/ScreenLocked.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\ScreenUnlocked' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/ScreenUnlocked.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\Shutdown' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/Shutdown.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\SpeedLimitChanged' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/SpeedLimitChanged.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\ThermalStateChanged' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/ThermalStateChanged.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\UserDidBecomeActive' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/UserDidBecomeActive.php',
+        'Native\\Laravel\\Events\\PowerMonitor\\UserDidResignActive' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/PowerMonitor/UserDidResignActive.php',
+        'Native\\Laravel\\Events\\Settings\\SettingChanged' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Settings/SettingChanged.php',
+        'Native\\Laravel\\Events\\Windows\\WindowBlurred' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowBlurred.php',
+        'Native\\Laravel\\Events\\Windows\\WindowClosed' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowClosed.php',
+        'Native\\Laravel\\Events\\Windows\\WindowFocused' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowFocused.php',
+        'Native\\Laravel\\Events\\Windows\\WindowHidden' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowHidden.php',
+        'Native\\Laravel\\Events\\Windows\\WindowMaximized' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowMaximized.php',
+        'Native\\Laravel\\Events\\Windows\\WindowMinimized' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowMinimized.php',
+        'Native\\Laravel\\Events\\Windows\\WindowResized' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowResized.php',
+        'Native\\Laravel\\Events\\Windows\\WindowShown' => __DIR__ . '/..' . '/nativephp/laravel/src/Events/Windows/WindowShown.php',
+        'Native\\Laravel\\Exceptions\\Handler' => __DIR__ . '/..' . '/nativephp/laravel/src/Exceptions/Handler.php',
+        'Native\\Laravel\\Facades\\Alert' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Alert.php',
+        'Native\\Laravel\\Facades\\App' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/App.php',
+        'Native\\Laravel\\Facades\\AutoUpdater' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/AutoUpdater.php',
+        'Native\\Laravel\\Facades\\ChildProcess' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/ChildProcess.php',
+        'Native\\Laravel\\Facades\\Clipboard' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Clipboard.php',
+        'Native\\Laravel\\Facades\\ContextMenu' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/ContextMenu.php',
+        'Native\\Laravel\\Facades\\Dock' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Dock.php',
+        'Native\\Laravel\\Facades\\GlobalShortcut' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/GlobalShortcut.php',
+        'Native\\Laravel\\Facades\\Menu' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Menu.php',
+        'Native\\Laravel\\Facades\\MenuBar' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/MenuBar.php',
+        'Native\\Laravel\\Facades\\Notification' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Notification.php',
+        'Native\\Laravel\\Facades\\PowerMonitor' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/PowerMonitor.php',
+        'Native\\Laravel\\Facades\\Process' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Process.php',
+        'Native\\Laravel\\Facades\\QueueWorker' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/QueueWorker.php',
+        'Native\\Laravel\\Facades\\Screen' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Screen.php',
+        'Native\\Laravel\\Facades\\Settings' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Settings.php',
+        'Native\\Laravel\\Facades\\Shell' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Shell.php',
+        'Native\\Laravel\\Facades\\System' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/System.php',
+        'Native\\Laravel\\Facades\\Window' => __DIR__ . '/..' . '/nativephp/laravel/src/Facades/Window.php',
+        'Native\\Laravel\\Fakes\\ChildProcessFake' => __DIR__ . '/..' . '/nativephp/laravel/src/Fakes/ChildProcessFake.php',
+        'Native\\Laravel\\Fakes\\GlobalShortcutFake' => __DIR__ . '/..' . '/nativephp/laravel/src/Fakes/GlobalShortcutFake.php',
+        'Native\\Laravel\\Fakes\\PowerMonitorFake' => __DIR__ . '/..' . '/nativephp/laravel/src/Fakes/PowerMonitorFake.php',
+        'Native\\Laravel\\Fakes\\QueueWorkerFake' => __DIR__ . '/..' . '/nativephp/laravel/src/Fakes/QueueWorkerFake.php',
+        'Native\\Laravel\\Fakes\\WindowManagerFake' => __DIR__ . '/..' . '/nativephp/laravel/src/Fakes/WindowManagerFake.php',
+        'Native\\Laravel\\GlobalShortcut' => __DIR__ . '/..' . '/nativephp/laravel/src/GlobalShortcut.php',
+        'Native\\Laravel\\Http\\Controllers\\CreateSecurityCookieController' => __DIR__ . '/..' . '/nativephp/laravel/src/Http/Controllers/CreateSecurityCookieController.php',
+        'Native\\Laravel\\Http\\Controllers\\DispatchEventFromAppController' => __DIR__ . '/..' . '/nativephp/laravel/src/Http/Controllers/DispatchEventFromAppController.php',
+        'Native\\Laravel\\Http\\Controllers\\NativeAppBootedController' => __DIR__ . '/..' . '/nativephp/laravel/src/Http/Controllers/NativeAppBootedController.php',
+        'Native\\Laravel\\Http\\Middleware\\PreventRegularBrowserAccess' => __DIR__ . '/..' . '/nativephp/laravel/src/Http/Middleware/PreventRegularBrowserAccess.php',
+        'Native\\Laravel\\Logging\\LogWatcher' => __DIR__ . '/..' . '/nativephp/laravel/src/Logging/LogWatcher.php',
+        'Native\\Laravel\\MenuBar\\MenuBar' => __DIR__ . '/..' . '/nativephp/laravel/src/MenuBar/MenuBar.php',
+        'Native\\Laravel\\MenuBar\\MenuBarManager' => __DIR__ . '/..' . '/nativephp/laravel/src/MenuBar/MenuBarManager.php',
+        'Native\\Laravel\\MenuBar\\PendingCreateMenuBar' => __DIR__ . '/..' . '/nativephp/laravel/src/MenuBar/PendingCreateMenuBar.php',
+        'Native\\Laravel\\Menu\\Items\\Checkbox' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/Checkbox.php',
+        'Native\\Laravel\\Menu\\Items\\Label' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/Label.php',
+        'Native\\Laravel\\Menu\\Items\\Link' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/Link.php',
+        'Native\\Laravel\\Menu\\Items\\MenuItem' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/MenuItem.php',
+        'Native\\Laravel\\Menu\\Items\\Radio' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/Radio.php',
+        'Native\\Laravel\\Menu\\Items\\Role' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/Role.php',
+        'Native\\Laravel\\Menu\\Items\\Separator' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Items/Separator.php',
+        'Native\\Laravel\\Menu\\Menu' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/Menu.php',
+        'Native\\Laravel\\Menu\\MenuBuilder' => __DIR__ . '/..' . '/nativephp/laravel/src/Menu/MenuBuilder.php',
+        'Native\\Laravel\\NativeServiceProvider' => __DIR__ . '/..' . '/nativephp/laravel/src/NativeServiceProvider.php',
+        'Native\\Laravel\\Notification' => __DIR__ . '/..' . '/nativephp/laravel/src/Notification.php',
+        'Native\\Laravel\\PowerMonitor' => __DIR__ . '/..' . '/nativephp/laravel/src/PowerMonitor.php',
+        'Native\\Laravel\\Process' => __DIR__ . '/..' . '/nativephp/laravel/src/Process.php',
+        'Native\\Laravel\\ProgressBar' => __DIR__ . '/..' . '/nativephp/laravel/src/ProgressBar.php',
+        'Native\\Laravel\\QueueWorker' => __DIR__ . '/..' . '/nativephp/laravel/src/QueueWorker.php',
+        'Native\\Laravel\\Screen' => __DIR__ . '/..' . '/nativephp/laravel/src/Screen.php',
+        'Native\\Laravel\\Settings' => __DIR__ . '/..' . '/nativephp/laravel/src/Settings.php',
+        'Native\\Laravel\\Shell' => __DIR__ . '/..' . '/nativephp/laravel/src/Shell.php',
+        'Native\\Laravel\\Support\\Environment' => __DIR__ . '/..' . '/nativephp/laravel/src/Support/Environment.php',
+        'Native\\Laravel\\Support\\Timezones' => __DIR__ . '/..' . '/nativephp/laravel/src/Support/Timezones.php',
+        'Native\\Laravel\\System' => __DIR__ . '/..' . '/nativephp/laravel/src/System.php',
+        'Native\\Laravel\\Windows\\PendingOpenWindow' => __DIR__ . '/..' . '/nativephp/laravel/src/Windows/PendingOpenWindow.php',
+        'Native\\Laravel\\Windows\\Window' => __DIR__ . '/..' . '/nativephp/laravel/src/Windows/Window.php',
+        'Native\\Laravel\\Windows\\WindowManager' => __DIR__ . '/..' . '/nativephp/laravel/src/Windows/WindowManager.php',
+        'Native\\Mobile\\Attributes\\Computed' => __DIR__ . '/..' . '/nativephp/mobile/src/Attributes/Computed.php',
+        'Native\\Mobile\\Attributes\\Lazy' => __DIR__ . '/..' . '/nativephp/mobile/src/Attributes/Lazy.php',
+        'Native\\Mobile\\Attributes\\Locked' => __DIR__ . '/..' . '/nativephp/mobile/src/Attributes/Locked.php',
+        'Native\\Mobile\\Attributes\\On' => __DIR__ . '/..' . '/nativephp/mobile/src/Attributes/On.php',
+        'Native\\Mobile\\Attributes\\OnNative' => __DIR__ . '/..' . '/nativephp/mobile/src/Attributes/OnNative.php',
+        'Native\\Mobile\\Attributes\\Poll' => __DIR__ . '/..' . '/nativephp/mobile/src/Attributes/Poll.php',
+        'Native\\Mobile\\Biometrics' => __DIR__ . '/..' . '/nativephp/mobile/src/Biometrics.php',
+        'Native\\Mobile\\Browser' => __DIR__ . '/..' . '/nativephp/mobile/src/Browser.php',
+        'Native\\Mobile\\Camera' => __DIR__ . '/..' . '/nativephp/mobile/src/Camera.php',
+        'Native\\Mobile\\Commands\\BuildIosAppCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/BuildIosAppCommand.php',
+        'Native\\Mobile\\Commands\\CheckBuildNumberCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/CheckBuildNumberCommand.php',
+        'Native\\Mobile\\Commands\\CredentialsCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/CredentialsCommand.php',
+        'Native\\Mobile\\Commands\\DebugCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/DebugCommand.php',
+        'Native\\Mobile\\Commands\\InstallCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/InstallCommand.php',
+        'Native\\Mobile\\Commands\\JumpCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/JumpCommand.php',
+        'Native\\Mobile\\Commands\\LaunchEmulatorCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/LaunchEmulatorCommand.php',
+        'Native\\Mobile\\Commands\\MakeNativeComponentCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/MakeNativeComponentCommand.php',
+        'Native\\Mobile\\Commands\\MakeNativeTestCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/MakeNativeTestCommand.php',
+        'Native\\Mobile\\Commands\\OpenProjectCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/OpenProjectCommand.php',
+        'Native\\Mobile\\Commands\\PackageCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PackageCommand.php',
+        'Native\\Mobile\\Commands\\PluginBoostCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginBoostCommand.php',
+        'Native\\Mobile\\Commands\\PluginCreateCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginCreateCommand.php',
+        'Native\\Mobile\\Commands\\PluginInstallAgentCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginInstallAgentCommand.php',
+        'Native\\Mobile\\Commands\\PluginListCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginListCommand.php',
+        'Native\\Mobile\\Commands\\PluginMakeHookCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginMakeHookCommand.php',
+        'Native\\Mobile\\Commands\\PluginRegisterCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginRegisterCommand.php',
+        'Native\\Mobile\\Commands\\PluginUninstallCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginUninstallCommand.php',
+        'Native\\Mobile\\Commands\\PluginValidateCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/PluginValidateCommand.php',
+        'Native\\Mobile\\Commands\\ReleaseCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/ReleaseCommand.php',
+        'Native\\Mobile\\Commands\\RemoveNativeComponentCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/RemoveNativeComponentCommand.php',
+        'Native\\Mobile\\Commands\\RunCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/RunCommand.php',
+        'Native\\Mobile\\Commands\\SimCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/SimCommand.php',
+        'Native\\Mobile\\Commands\\TailCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/TailCommand.php',
+        'Native\\Mobile\\Commands\\ValidateCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/ValidateCommand.php',
+        'Native\\Mobile\\Commands\\VersionCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/VersionCommand.php',
+        'Native\\Mobile\\Commands\\WatchCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Commands/WatchCommand.php',
+        'Native\\Mobile\\Concerns\\ChecksLatestBuildNumber' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/ChecksLatestBuildNumber.php',
+        'Native\\Mobile\\Concerns\\CleansEnvFile' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/CleansEnvFile.php',
+        'Native\\Mobile\\Concerns\\CreatesAndroidCredentials' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/CreatesAndroidCredentials.php',
+        'Native\\Mobile\\Concerns\\CreatesIosCredentials' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/CreatesIosCredentials.php',
+        'Native\\Mobile\\Concerns\\DisplaysMarketingBanners' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/DisplaysMarketingBanners.php',
+        'Native\\Mobile\\Concerns\\HandlesNativeCallbacks' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/HandlesNativeCallbacks.php',
+        'Native\\Mobile\\Concerns\\HasPlatformIcon' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/HasPlatformIcon.php',
+        'Native\\Mobile\\Concerns\\InstallsAndroid' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/InstallsAndroid.php',
+        'Native\\Mobile\\Concerns\\InstallsAndroidSplashScreen' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/InstallsAndroidSplashScreen.php',
+        'Native\\Mobile\\Concerns\\InstallsAppIcon' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/InstallsAppIcon.php',
+        'Native\\Mobile\\Concerns\\InstallsIos' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/InstallsIos.php',
+        'Native\\Mobile\\Concerns\\InstallsSplashScreen' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/InstallsSplashScreen.php',
+        'Native\\Mobile\\Concerns\\InteractsWithWatchTerminal' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/InteractsWithWatchTerminal.php',
+        'Native\\Mobile\\Concerns\\LaunchesAndroidEmulator' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/LaunchesAndroidEmulator.php',
+        'Native\\Mobile\\Concerns\\ManagesIosSigning' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/ManagesIosSigning.php',
+        'Native\\Mobile\\Concerns\\ManagesPollingWatcher' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/ManagesPollingWatcher.php',
+        'Native\\Mobile\\Concerns\\ManagesViteDevServer' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/ManagesViteDevServer.php',
+        'Native\\Mobile\\Concerns\\ManagesWatchman' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/ManagesWatchman.php',
+        'Native\\Mobile\\Concerns\\OpensAndroidProject' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/OpensAndroidProject.php',
+        'Native\\Mobile\\Concerns\\OpensIosProject' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/OpensIosProject.php',
+        'Native\\Mobile\\Concerns\\PackagesIos' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/PackagesIos.php',
+        'Native\\Mobile\\Concerns\\PlatformFileOperations' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/PlatformFileOperations.php',
+        'Native\\Mobile\\Concerns\\PreparesBuild' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/PreparesBuild.php',
+        'Native\\Mobile\\Concerns\\PublishesToPlayStore' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/PublishesToPlayStore.php',
+        'Native\\Mobile\\Concerns\\RunsAndroid' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/RunsAndroid.php',
+        'Native\\Mobile\\Concerns\\RunsIos' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/RunsIos.php',
+        'Native\\Mobile\\Concerns\\ValidatesAppConfig' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/ValidatesAppConfig.php',
+        'Native\\Mobile\\Concerns\\WatchesAndroid' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/WatchesAndroid.php',
+        'Native\\Mobile\\Concerns\\WatchesIos' => __DIR__ . '/..' . '/nativephp/mobile/src/Concerns/WatchesIos.php',
+        'Native\\Mobile\\Contracts\\GatedBridge' => __DIR__ . '/..' . '/nativephp/mobile/src/Contracts/GatedBridge.php',
+        'Native\\Mobile\\Device' => __DIR__ . '/..' . '/nativephp/mobile/src/Device.php',
+        'Native\\Mobile\\Dialog' => __DIR__ . '/..' . '/nativephp/mobile/src/Dialog.php',
+        'Native\\Mobile\\Edge\\BenchmarkComponent' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/BenchmarkComponent.php',
+        'Native\\Mobile\\Edge\\BenchmarkReferenceData' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/BenchmarkReferenceData.php',
+        'Native\\Mobile\\Edge\\CallbackRegistry' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/CallbackRegistry.php',
+        'Native\\Mobile\\Edge\\ChromeContributorRegistry' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/ChromeContributorRegistry.php',
+        'Native\\Mobile\\Edge\\ComponentRegistry' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/ComponentRegistry.php',
+        'Native\\Mobile\\Edge\\ComponentTagFrame' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/ComponentTagFrame.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Canvas' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Canvas.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Circle' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Circle.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Column' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Column.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Divider' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Divider.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\GestureArea' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/GestureArea.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Image' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Image.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\LazyGrid' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/LazyGrid.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Line' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Line.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\NativeBladeComponent' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/NativeBladeComponent.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Pressable' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Pressable.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Rect' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Rect.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Refreshable' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Refreshable.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Row' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Row.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\ScrollView' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/ScrollView.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Spacer' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Spacer.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Stack' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Stack.php',
+        'Native\\Mobile\\Edge\\Components\\Native\\Text' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Components/Native/Text.php',
+        'Native\\Mobile\\Edge\\Concerns\\HasA11y' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Concerns/HasA11y.php',
+        'Native\\Mobile\\Edge\\Concerns\\HasVirtualListWindow' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Concerns/HasVirtualListWindow.php',
+        'Native\\Mobile\\Edge\\Contracts\\NativeRouteFallback' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Contracts/NativeRouteFallback.php',
+        'Native\\Mobile\\Edge\\Contracts\\TreeObserver' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Contracts/TreeObserver.php',
+        'Native\\Mobile\\Edge\\Element' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Element.php',
+        'Native\\Mobile\\Edge\\ElementRegistry' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/ElementRegistry.php',
+        'Native\\Mobile\\Edge\\Elements\\ActivityIndicator' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/ActivityIndicator.php',
+        'Native\\Mobile\\Edge\\Elements\\BottomBar' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/BottomBar.php',
+        'Native\\Mobile\\Edge\\Elements\\BottomNav' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/BottomNav.php',
+        'Native\\Mobile\\Edge\\Elements\\BottomNavItem' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/BottomNavItem.php',
+        'Native\\Mobile\\Edge\\Elements\\BottomSheet' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/BottomSheet.php',
+        'Native\\Mobile\\Edge\\Elements\\Button' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Button.php',
+        'Native\\Mobile\\Edge\\Elements\\Canvas' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Canvas.php',
+        'Native\\Mobile\\Edge\\Elements\\Circle' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Circle.php',
+        'Native\\Mobile\\Edge\\Elements\\Column' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Column.php',
+        'Native\\Mobile\\Edge\\Elements\\Divider' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Divider.php',
+        'Native\\Mobile\\Edge\\Elements\\Fab' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Fab.php',
+        'Native\\Mobile\\Edge\\Elements\\GestureArea' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/GestureArea.php',
+        'Native\\Mobile\\Edge\\Elements\\Icon' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Icon.php',
+        'Native\\Mobile\\Edge\\Elements\\Image' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Image.php',
+        'Native\\Mobile\\Edge\\Elements\\LazyGrid' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/LazyGrid.php',
+        'Native\\Mobile\\Edge\\Elements\\Line' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Line.php',
+        'Native\\Mobile\\Edge\\Elements\\NativeRootStack' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/NativeRootStack.php',
+        'Native\\Mobile\\Edge\\Elements\\NativeRootTabs' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/NativeRootTabs.php',
+        'Native\\Mobile\\Edge\\Elements\\Pressable' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Pressable.php',
+        'Native\\Mobile\\Edge\\Elements\\Rect' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Rect.php',
+        'Native\\Mobile\\Edge\\Elements\\Refreshable' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Refreshable.php',
+        'Native\\Mobile\\Edge\\Elements\\Row' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Row.php',
+        'Native\\Mobile\\Edge\\Elements\\ScrollView' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/ScrollView.php',
+        'Native\\Mobile\\Edge\\Elements\\SearchItem' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/SearchItem.php',
+        'Native\\Mobile\\Edge\\Elements\\SideNav' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/SideNav.php',
+        'Native\\Mobile\\Edge\\Elements\\SideNavGroup' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/SideNavGroup.php',
+        'Native\\Mobile\\Edge\\Elements\\SideNavHeader' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/SideNavHeader.php',
+        'Native\\Mobile\\Edge\\Elements\\SideNavItem' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/SideNavItem.php',
+        'Native\\Mobile\\Edge\\Elements\\Spacer' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Spacer.php',
+        'Native\\Mobile\\Edge\\Elements\\Stack' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Stack.php',
+        'Native\\Mobile\\Edge\\Elements\\TabAccessory' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/TabAccessory.php',
+        'Native\\Mobile\\Edge\\Elements\\Text' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Text.php',
+        'Native\\Mobile\\Edge\\Elements\\TextInput' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/TextInput.php',
+        'Native\\Mobile\\Edge\\Elements\\Toggle' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/Toggle.php',
+        'Native\\Mobile\\Edge\\Elements\\TopBar' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/TopBar.php',
+        'Native\\Mobile\\Edge\\Elements\\TopBarAction' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/TopBarAction.php',
+        'Native\\Mobile\\Edge\\Elements\\TopBarTitle' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Elements/TopBarTitle.php',
+        'Native\\Mobile\\Edge\\Enums\\AlignItems' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Enums/AlignItems.php',
+        'Native\\Mobile\\Edge\\Enums\\AlignSelf' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Enums/AlignSelf.php',
+        'Native\\Mobile\\Edge\\Enums\\Concerns\\ResolvesAlignmentValue' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Enums/Concerns/ResolvesAlignmentValue.php',
+        'Native\\Mobile\\Edge\\Enums\\JustifyContent' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Enums/JustifyContent.php',
+        'Native\\Mobile\\Edge\\Enums\\TextAlign' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Enums/TextAlign.php',
+        'Native\\Mobile\\Edge\\Exceptions\\ComponentSlotNotSupportedException' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Exceptions/ComponentSlotNotSupportedException.php',
+        'Native\\Mobile\\Edge\\Exceptions\\LockedPropertyException' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Exceptions/LockedPropertyException.php',
+        'Native\\Mobile\\Edge\\FlexWrap' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/FlexWrap.php',
+        'Native\\Mobile\\Edge\\Justify' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Justify.php',
+        'Native\\Mobile\\Edge\\Layouts\\Builders\\NavAction' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/Builders/NavAction.php',
+        'Native\\Mobile\\Edge\\Layouts\\Builders\\NavBar' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/Builders/NavBar.php',
+        'Native\\Mobile\\Edge\\Layouts\\Builders\\NavBarOptions' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/Builders/NavBarOptions.php',
+        'Native\\Mobile\\Edge\\Layouts\\Builders\\Tab' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/Builders/Tab.php',
+        'Native\\Mobile\\Edge\\Layouts\\Builders\\TabBar' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/Builders/TabBar.php',
+        'Native\\Mobile\\Edge\\Layouts\\Builders\\TabBarOptions' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/Builders/TabBarOptions.php',
+        'Native\\Mobile\\Edge\\Layouts\\NativeLayout' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Layouts/NativeLayout.php',
+        'Native\\Mobile\\Edge\\NativeComponent' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/NativeComponent.php',
+        'Native\\Mobile\\Edge\\NativeDumpException' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/NativeDumpException.php',
+        'Native\\Mobile\\Edge\\NativeElementCollector' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/NativeElementCollector.php',
+        'Native\\Mobile\\Edge\\NativeRouter' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/NativeRouter.php',
+        'Native\\Mobile\\Edge\\NativeTagPrecompiler' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/NativeTagPrecompiler.php',
+        'Native\\Mobile\\Edge\\NavigationIntent' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/NavigationIntent.php',
+        'Native\\Mobile\\Edge\\SharedValue' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/SharedValue.php',
+        'Native\\Mobile\\Edge\\TailwindParser' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/TailwindParser.php',
+        'Native\\Mobile\\Edge\\Transition' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/Transition.php',
+        'Native\\Mobile\\Edge\\TreeObservers' => __DIR__ . '/..' . '/nativephp/mobile/src/Edge/TreeObservers.php',
+        'Native\\Mobile\\Events\\Alert\\ButtonPressed' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Alert/ButtonPressed.php',
+        'Native\\Mobile\\Events\\App\\UpdateInstalled' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/App/UpdateInstalled.php',
+        'Native\\Mobile\\Events\\Biometric\\Completed' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Biometric/Completed.php',
+        'Native\\Mobile\\Events\\Camera\\PermissionDenied' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Camera/PermissionDenied.php',
+        'Native\\Mobile\\Events\\Camera\\PhotoCancelled' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Camera/PhotoCancelled.php',
+        'Native\\Mobile\\Events\\Camera\\PhotoTaken' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Camera/PhotoTaken.php',
+        'Native\\Mobile\\Events\\Camera\\VideoCancelled' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Camera/VideoCancelled.php',
+        'Native\\Mobile\\Events\\Camera\\VideoRecorded' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Camera/VideoRecorded.php',
+        'Native\\Mobile\\Events\\Concerns\\BroadcastsGlobally' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Concerns/BroadcastsGlobally.php',
+        'Native\\Mobile\\Events\\Gallery\\MediaSelected' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Gallery/MediaSelected.php',
+        'Native\\Mobile\\Events\\Geolocation\\LocationReceived' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Geolocation/LocationReceived.php',
+        'Native\\Mobile\\Events\\Geolocation\\LocationUpdated' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Geolocation/LocationUpdated.php',
+        'Native\\Mobile\\Events\\Geolocation\\PermissionRequestResult' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Geolocation/PermissionRequestResult.php',
+        'Native\\Mobile\\Events\\Geolocation\\PermissionStatusReceived' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Geolocation/PermissionStatusReceived.php',
+        'Native\\Mobile\\Events\\Microphone\\MicrophoneCancelled' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Microphone/MicrophoneCancelled.php',
+        'Native\\Mobile\\Events\\Microphone\\MicrophoneRecorded' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Microphone/MicrophoneRecorded.php',
+        'Native\\Mobile\\Events\\Motion\\ShakeDetected' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Motion/ShakeDetected.php',
+        'Native\\Mobile\\Events\\PushNotification\\TokenGenerated' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/PushNotification/TokenGenerated.php',
+        'Native\\Mobile\\Events\\Scanner\\CodeScanned' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Scanner/CodeScanned.php',
+        'Native\\Mobile\\Events\\Scanner\\ScannerCancelled' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Scanner/ScannerCancelled.php',
+        'Native\\Mobile\\Events\\Screen\\ScreenMounted' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Screen/ScreenMounted.php',
+        'Native\\Mobile\\Events\\Screen\\ScreenResumed' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Screen/ScreenResumed.php',
+        'Native\\Mobile\\Events\\Screen\\ScreenUnmounted' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Screen/ScreenUnmounted.php',
+        'Native\\Mobile\\Events\\System\\AppearanceChanged' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/System/AppearanceChanged.php',
+        'Native\\Mobile\\Events\\Wallet\\PaymentCancelled' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Wallet/PaymentCancelled.php',
+        'Native\\Mobile\\Events\\Wallet\\PaymentCompleted' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Wallet/PaymentCompleted.php',
+        'Native\\Mobile\\Events\\Wallet\\PaymentFailed' => __DIR__ . '/..' . '/nativephp/mobile/src/Events/Wallet/PaymentFailed.php',
+        'Native\\Mobile\\Exceptions\\PluginConflictException' => __DIR__ . '/..' . '/nativephp/mobile/src/Exceptions/PluginConflictException.php',
+        'Native\\Mobile\\Exceptions\\WatchPromptCancelled' => __DIR__ . '/..' . '/nativephp/mobile/src/Exceptions/WatchPromptCancelled.php',
+        'Native\\Mobile\\Facades\\Biometrics' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Biometrics.php',
+        'Native\\Mobile\\Facades\\Browser' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Browser.php',
+        'Native\\Mobile\\Facades\\Camera' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Camera.php',
+        'Native\\Mobile\\Facades\\Device' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Device.php',
+        'Native\\Mobile\\Facades\\Dialog' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Dialog.php',
+        'Native\\Mobile\\Facades\\File' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/File.php',
+        'Native\\Mobile\\Facades\\Geolocation' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Geolocation.php',
+        'Native\\Mobile\\Facades\\Haptics' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Haptics.php',
+        'Native\\Mobile\\Facades\\Microphone' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Microphone.php',
+        'Native\\Mobile\\Facades\\MobileWallet' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/MobileWallet.php',
+        'Native\\Mobile\\Facades\\Network' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Network.php',
+        'Native\\Mobile\\Facades\\PushNotifications' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/PushNotifications.php',
+        'Native\\Mobile\\Facades\\Scanner' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Scanner.php',
+        'Native\\Mobile\\Facades\\SecureStorage' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/SecureStorage.php',
+        'Native\\Mobile\\Facades\\Share' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/Share.php',
+        'Native\\Mobile\\Facades\\System' => __DIR__ . '/..' . '/nativephp/mobile/src/Facades/System.php',
+        'Native\\Mobile\\File' => __DIR__ . '/..' . '/nativephp/mobile/src/File.php',
+        'Native\\Mobile\\Geolocation' => __DIR__ . '/..' . '/nativephp/mobile/src/Geolocation.php',
+        'Native\\Mobile\\Haptics' => __DIR__ . '/..' . '/nativephp/mobile/src/Haptics.php',
+        'Native\\Mobile\\Http\\Controllers\\DispatchEventFromAppController' => __DIR__ . '/..' . '/nativephp/mobile/src/Http/Controllers/DispatchEventFromAppController.php',
+        'Native\\Mobile\\Http\\Controllers\\NativeCallController' => __DIR__ . '/..' . '/nativephp/mobile/src/Http/Controllers/NativeCallController.php',
+        'Native\\Mobile\\Http\\Middleware\\HonorsRequestedNativeScreen' => __DIR__ . '/..' . '/nativephp/mobile/src/Http/Middleware/HonorsRequestedNativeScreen.php',
+        'Native\\Mobile\\Icon\\AndroidSymbol' => __DIR__ . '/..' . '/nativephp/mobile/src/Icon/AndroidSymbol.php',
+        'Native\\Mobile\\Icon\\IconResolver' => __DIR__ . '/..' . '/nativephp/mobile/src/Icon/IconResolver.php',
+        'Native\\Mobile\\Icon\\IosSymbol' => __DIR__ . '/..' . '/nativephp/mobile/src/Icon/IosSymbol.php',
+        'Native\\Mobile\\JumpBridge' => __DIR__ . '/..' . '/nativephp/mobile/src/JumpBridge.php',
+        'Native\\Mobile\\Microphone' => __DIR__ . '/..' . '/nativephp/mobile/src/Microphone.php',
+        'Native\\Mobile\\MobileWallet' => __DIR__ . '/..' . '/nativephp/mobile/src/MobileWallet.php',
+        'Native\\Mobile\\NativeServiceProvider' => __DIR__ . '/..' . '/nativephp/mobile/src/NativeServiceProvider.php',
+        'Native\\Mobile\\Network' => __DIR__ . '/..' . '/nativephp/mobile/src/Network.php',
+        'Native\\Mobile\\PendingAlert' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingAlert.php',
+        'Native\\Mobile\\PendingBiometric' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingBiometric.php',
+        'Native\\Mobile\\PendingGeolocation' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingGeolocation.php',
+        'Native\\Mobile\\PendingLocationWatch' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingLocationWatch.php',
+        'Native\\Mobile\\PendingMediaPicker' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingMediaPicker.php',
+        'Native\\Mobile\\PendingMicrophone' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingMicrophone.php',
+        'Native\\Mobile\\PendingPhotoCapture' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingPhotoCapture.php',
+        'Native\\Mobile\\PendingPushNotificationEnrollment' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingPushNotificationEnrollment.php',
+        'Native\\Mobile\\PendingScanner' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingScanner.php',
+        'Native\\Mobile\\PendingVideoRecorder' => __DIR__ . '/..' . '/nativephp/mobile/src/PendingVideoRecorder.php',
+        'Native\\Mobile\\Platform' => __DIR__ . '/..' . '/nativephp/mobile/src/Platform.php',
+        'Native\\Mobile\\Plugins\\Commands\\NativePluginHookCommand' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/Commands/NativePluginHookCommand.php',
+        'Native\\Mobile\\Plugins\\Compilers\\AndroidPluginCompiler' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/Compilers/AndroidPluginCompiler.php',
+        'Native\\Mobile\\Plugins\\Compilers\\IOSPluginCompiler' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/Compilers/IOSPluginCompiler.php',
+        'Native\\Mobile\\Plugins\\Plugin' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/Plugin.php',
+        'Native\\Mobile\\Plugins\\PluginDiscovery' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/PluginDiscovery.php',
+        'Native\\Mobile\\Plugins\\PluginHookRunner' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/PluginHookRunner.php',
+        'Native\\Mobile\\Plugins\\PluginManifest' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/PluginManifest.php',
+        'Native\\Mobile\\Plugins\\PluginRegistry' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/PluginRegistry.php',
+        'Native\\Mobile\\Plugins\\PluginSecretsValidator' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/PluginSecretsValidator.php',
+        'Native\\Mobile\\Plugins\\SwiftSourceFilter' => __DIR__ . '/..' . '/nativephp/mobile/src/Plugins/SwiftSourceFilter.php',
+        'Native\\Mobile\\PushNotifications' => __DIR__ . '/..' . '/nativephp/mobile/src/PushNotifications.php',
+        'Native\\Mobile\\Runtime' => __DIR__ . '/..' . '/nativephp/mobile/src/Runtime.php',
+        'Native\\Mobile\\Scanner' => __DIR__ . '/..' . '/nativephp/mobile/src/Scanner.php',
+        'Native\\Mobile\\SecureStorage' => __DIR__ . '/..' . '/nativephp/mobile/src/SecureStorage.php',
+        'Native\\Mobile\\SecureStorageAccessibility' => __DIR__ . '/..' . '/nativephp/mobile/src/SecureStorageAccessibility.php',
+        'Native\\Mobile\\SecureStorageResult' => __DIR__ . '/..' . '/nativephp/mobile/src/SecureStorageResult.php',
+        'Native\\Mobile\\SecureStorageStatus' => __DIR__ . '/..' . '/nativephp/mobile/src/SecureStorageStatus.php',
+        'Native\\Mobile\\Server\\FileWatcher' => __DIR__ . '/..' . '/nativephp/mobile/src/Server/FileWatcher.php',
+        'Native\\Mobile\\Server\\MdnsAdvertiser' => __DIR__ . '/..' . '/nativephp/mobile/src/Server/MdnsAdvertiser.php',
+        'Native\\Mobile\\Share' => __DIR__ . '/..' . '/nativephp/mobile/src/Share.php',
+        'Native\\Mobile\\Support\\BundleExclusions' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/BundleExclusions.php',
+        'Native\\Mobile\\Support\\BundleFileManager' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/BundleFileManager.php',
+        'Native\\Mobile\\Support\\Ios\\PhpUrlGenerator' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/Ios/PhpUrlGenerator.php',
+        'Native\\Mobile\\Support\\Ios\\Request' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/Ios/Request.php',
+        'Native\\Mobile\\Support\\NativeCallbacks' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/NativeCallbacks.php',
+        'Native\\Mobile\\Support\\PhpBinaries' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/PhpBinaries.php',
+        'Native\\Mobile\\Support\\Stub' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/Stub.php',
+        'Native\\Mobile\\Support\\Watch\\WatchConsole' => __DIR__ . '/..' . '/nativephp/mobile/src/Support/Watch/WatchConsole.php',
+        'Native\\Mobile\\System' => __DIR__ . '/..' . '/nativephp/mobile/src/System.php',
+        'Native\\Mobile\\Testing\\FakeBridge' => __DIR__ . '/..' . '/nativephp/mobile/src/Testing/FakeBridge.php',
+        'Native\\Mobile\\Testing\\Native' => __DIR__ . '/..' . '/nativephp/mobile/src/Testing/Native.php',
+        'Native\\Mobile\\Testing\\PestExpectations' => __DIR__ . '/..' . '/nativephp/mobile/src/Testing/PestExpectations.php',
+        'Native\\Mobile\\Testing\\TestDumpHandler' => __DIR__ . '/..' . '/nativephp/mobile/src/Testing/TestDumpHandler.php',
+        'Native\\Mobile\\Testing\\TestableComponent' => __DIR__ . '/..' . '/nativephp/mobile/src/Testing/TestableComponent.php',
+        'Native\\Mobile\\Testing\\TreeSpy' => __DIR__ . '/..' . '/nativephp/mobile/src/Testing/TreeSpy.php',
+        'Native\\Mobile\\Validation\\BladeTemplateAnalyzer' => __DIR__ . '/..' . '/nativephp/mobile/src/Validation/BladeTemplateAnalyzer.php',
+        'Native\\Mobile\\Validation\\NativeComponentAnalyzer' => __DIR__ . '/..' . '/nativephp/mobile/src/Validation/NativeComponentAnalyzer.php',
+        'Native\\Mobile\\Validation\\RouteAnalyzer' => __DIR__ . '/..' . '/nativephp/mobile/src/Validation/RouteAnalyzer.php',
+        'Native\\Mobile\\Validation\\ValidationResult' => __DIR__ . '/..' . '/nativephp/mobile/src/Validation/ValidationResult.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DeprecatedException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DirectoryNotFoundException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
