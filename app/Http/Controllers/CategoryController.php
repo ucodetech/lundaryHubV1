@@ -61,24 +61,29 @@ class CategoryController extends Controller
     {
         $shop = app(ShopContext::class)->get() ?? $request->user()?->ownedShops()?->firstOrFail();
 
+        $cleanName = trim(preg_replace('/\s*\(Master Template\)\s*/i', '', $category->name));
+
         $existing = Category::withoutGlobalScopes()
             ->where('shop_id', $shop->id)
-            ->where('name', $category->name)
+            ->where(function ($q) use ($category, $cleanName) {
+                $q->where('name', $category->name)
+                  ->orWhere('name', $cleanName);
+            })
             ->first();
 
         if ($existing) {
-            return back()->with('error', "Category '{$category->name}' already exists in your shop catalog.");
+            return back()->with('error', "Category '{$cleanName}' already exists in your shop catalog.");
         }
 
         Category::create([
             'shop_id' => $shop->id,
-            'name' => $category->name,
+            'name' => $cleanName,
             'icon' => $category->icon,
             'sort_order' => $category->sort_order,
             'is_active' => true,
         ]);
 
-        return back()->with('success', "Master template category '{$category->name}' cloned to your shop.");
+        return back()->with('success', "Master template category '{$cleanName}' cloned to your shop.");
     }
 
     public function update(Request $request, Category $category): RedirectResponse

@@ -78,7 +78,7 @@ class ShopController extends Controller
 
     public function show(string $slug): Response
     {
-        $shop = Shop::where('slug', $slug)->with(['settings', 'categories', 'services', 'prices.category', 'prices.service'])->firstOrFail();
+        $shop = Shop::where('slug', $slug)->with(['settings', 'categories', 'services', 'prices.category', 'prices.service', 'virtualAccount'])->firstOrFail();
         $shop->has_active_subscription = $shop->hasActiveSubscription();
 
         return Inertia::render('Shop/Show', [

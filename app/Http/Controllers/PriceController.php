@@ -95,34 +95,44 @@ class PriceController extends Controller
     {
         $shop = app(ShopContext::class)->get() ?? $request->user()?->ownedShops()?->firstOrFail();
 
-        // Find or clone category
+        // Find or clone category with clean name matching
         $masterCat = $price->category;
+        $cleanCatName = trim(preg_replace('/\s*\(Master Template\)\s*/i', '', $masterCat->name));
+
         $shopCat = Category::withoutGlobalScopes()
             ->where('shop_id', $shop->id)
-            ->where('name', $masterCat->name)
+            ->where(function ($q) use ($masterCat, $cleanCatName) {
+                $q->where('name', $masterCat->name)
+                  ->orWhere('name', $cleanCatName);
+            })
             ->first();
 
         if (!$shopCat) {
             $shopCat = Category::create([
                 'shop_id' => $shop->id,
-                'name' => $masterCat->name,
+                'name' => $cleanCatName,
                 'icon' => $masterCat->icon,
                 'sort_order' => $masterCat->sort_order,
                 'is_active' => true,
             ]);
         }
 
-        // Find or clone service
+        // Find or clone service with clean name matching
         $masterSvc = $price->service;
+        $cleanSvcName = trim(preg_replace('/\s*\(Master Template\)\s*/i', '', $masterSvc->name));
+
         $shopSvc = Service::withoutGlobalScopes()
             ->where('shop_id', $shop->id)
-            ->where('name', $masterSvc->name)
+            ->where(function ($q) use ($masterSvc, $cleanSvcName) {
+                $q->where('name', $masterSvc->name)
+                  ->orWhere('name', $cleanSvcName);
+            })
             ->first();
 
         if (!$shopSvc) {
             $shopSvc = Service::create([
                 'shop_id' => $shop->id,
-                'name' => $masterSvc->name,
+                'name' => $cleanSvcName,
                 'description' => $masterSvc->description,
                 'sort_order' => $masterSvc->sort_order,
                 'is_active' => true,
@@ -153,14 +163,19 @@ class PriceController extends Controller
             $masterCategories = Category::withoutGlobalScopes()->whereNull('shop_id')->get();
             $categoryMap = [];
             foreach ($masterCategories as $mc) {
+                $cleanCatName = trim(preg_replace('/\s*\(Master Template\)\s*/i', '', $mc->name));
+
                 $sc = Category::withoutGlobalScopes()
                     ->where('shop_id', $shop->id)
-                    ->where('name', $mc->name)
+                    ->where(function ($q) use ($mc, $cleanCatName) {
+                        $q->where('name', $mc->name)
+                          ->orWhere('name', $cleanCatName);
+                    })
                     ->first();
                 if (!$sc) {
                     $sc = Category::create([
                         'shop_id' => $shop->id,
-                        'name' => $mc->name,
+                        'name' => $cleanCatName,
                         'icon' => $mc->icon,
                         'sort_order' => $mc->sort_order,
                         'is_active' => true,
@@ -172,14 +187,19 @@ class PriceController extends Controller
             $masterServices = Service::withoutGlobalScopes()->whereNull('shop_id')->get();
             $serviceMap = [];
             foreach ($masterServices as $ms) {
+                $cleanSvcName = trim(preg_replace('/\s*\(Master Template\)\s*/i', '', $ms->name));
+
                 $ss = Service::withoutGlobalScopes()
                     ->where('shop_id', $shop->id)
-                    ->where('name', $ms->name)
+                    ->where(function ($q) use ($ms, $cleanSvcName) {
+                        $q->where('name', $ms->name)
+                          ->orWhere('name', $cleanSvcName);
+                    })
                     ->first();
                 if (!$ss) {
                     $ss = Service::create([
                         'shop_id' => $shop->id,
-                        'name' => $ms->name,
+                        'name' => $cleanSvcName,
                         'description' => $ms->description,
                         'sort_order' => $ms->sort_order,
                         'is_active' => true,

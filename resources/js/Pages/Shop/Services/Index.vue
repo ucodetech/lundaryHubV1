@@ -91,6 +91,17 @@ const cloneService = (serviceId: number) => {
     preserveScroll: true,
   });
 };
+
+const normalizeName = (name: string) => {
+  if (!name) return '';
+  return name.replace(/\s*\(Master Template\)\s*/gi, '').trim().toLowerCase();
+};
+
+const isServiceCloned = (masterSvc: any) => {
+  if (!props.services || props.services.length === 0) return false;
+  const mName = normalizeName(masterSvc.name);
+  return props.services.some((s: any) => normalizeName(s.name) === mName);
+};
 </script>
 
 <template>
@@ -203,13 +214,21 @@ const cloneService = (serviceId: number) => {
 
             <!-- Actions: Clone for Shop Owner, Edit & Delete for Super Admin -->
             <div class="flex items-center gap-1.5 shrink-0">
-              <button
-                v-if="isShopOwner"
-                @click="cloneService(masterSvc.id)"
-                class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-all"
-              >
-                📋 Clone to Shop
-              </button>
+              <template v-if="isShopOwner">
+                <span
+                  v-if="isServiceCloned(masterSvc)"
+                  class="px-2.5 py-1 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                >
+                  ✓ Already Cloned
+                </span>
+                <button
+                  v-else
+                  @click="cloneService(masterSvc.id)"
+                  class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-all"
+                >
+                  📋 Clone to Shop
+                </button>
+              </template>
 
               <template v-if="isSuperAdmin">
                 <button

@@ -90,6 +90,18 @@ class ShopVerificationController extends Controller
             $this->createVirtualAccountForShop($shop);
         }
 
+        // Real-time Dashboard Reload Signal to Shop Owner
+        try {
+            event(new \App\Events\UserApprovedEvent(
+                userId: $shop->owner_id,
+                role: 'shop_owner',
+                title: '🎉 Storefront Verified & Approved!',
+                message: "Congratulations! '{$shop->name}' is now verified. A 1-Month Free Trial pass has been activated on your account."
+            ));
+        } catch (\Throwable $e) {
+            Log::warning("Shop approval signal notice: " . $e->getMessage());
+        }
+
         return back()->with('success', "Shop '{$shop->name}' verified with 1-Month Free Trial!");
     }
 

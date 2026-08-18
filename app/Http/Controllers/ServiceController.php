@@ -61,24 +61,29 @@ class ServiceController extends Controller
     {
         $shop = app(ShopContext::class)->get() ?? $request->user()?->ownedShops()?->firstOrFail();
 
+        $cleanName = trim(preg_replace('/\s*\(Master Template\)\s*/i', '', $service->name));
+
         $existing = Service::withoutGlobalScopes()
             ->where('shop_id', $shop->id)
-            ->where('name', $service->name)
+            ->where(function ($q) use ($service, $cleanName) {
+                $q->where('name', $service->name)
+                  ->orWhere('name', $cleanName);
+            })
             ->first();
 
         if ($existing) {
-            return back()->with('error', "Service '{$service->name}' already exists in your shop catalog.");
+            return back()->with('error', "Service '{$cleanName}' already exists in your shop catalog.");
         }
 
         Service::create([
             'shop_id' => $shop->id,
-            'name' => $service->name,
+            'name' => $cleanName,
             'description' => $service->description,
             'sort_order' => $service->sort_order,
             'is_active' => true,
         ]);
 
-        return back()->with('success', "Master template service '{$service->name}' cloned to your shop.");
+        return back()->with('success', "Master template service '{$cleanName}' cloned to your shop.");
     }
 
     public function update(Request $request, Service $service): RedirectResponse

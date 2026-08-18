@@ -65,6 +65,18 @@ class RiderProfileController extends Controller
         $docType = DocumentType::from($request->document_type);
         $this->riderService->uploadKycDocument($profile, $docType, $cloudinaryUrl);
 
+        // Real-time Push Notification to Admin
+        try {
+            event(new \App\Events\AdminNotificationEvent(
+                title: '🛵 Rider KYC Document Uploaded!',
+                message: "Rider {$user->first_name} {$user->last_name} uploaded {$docType->label()} for audit.",
+                type: 'kyc_submitted',
+                url: '/admin/riders'
+            ));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning("Rider KYC notification notice: " . $e->getMessage());
+        }
+
         return back()->with('success', 'Rider KYC document uploaded to Cloudinary successfully.');
     }
 

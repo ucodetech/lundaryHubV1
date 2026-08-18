@@ -39,12 +39,20 @@ class PaystackService
                     'metadata' => [
                         'order_id' => $order->id,
                         'order_number' => $order->order_number,
+                        'shop_id' => $order->shop_id,
                         'shop_name' => $order->shop?->name,
+                        'shop_virtual_account' => $order->shop?->virtualAccount?->account_number ?? null,
+                        'shop_bank' => $order->shop?->virtualAccount?->bank_name ?? null,
                         'custom_fields' => [
                             [
                                 'display_name' => 'Order Number',
                                 'variable_name' => 'order_number',
                                 'value' => $order->order_number,
+                            ],
+                            [
+                                'display_name' => 'Shop Virtual Account',
+                                'variable_name' => 'shop_virtual_account',
+                                'value' => $order->shop?->virtualAccount?->account_number ? "{$order->shop->virtualAccount->account_number} ({$order->shop->virtualAccount->bank_name})" : 'N/A',
                             ],
                             [
                                 'display_name' => 'Fulfillment Type',

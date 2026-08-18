@@ -58,6 +58,18 @@ class RiderVerificationController extends Controller
     {
         $this->riderService->approveKyc($rider);
 
+        // Real-time Dashboard Reload Signal to Rider
+        try {
+            event(new \App\Events\UserApprovedEvent(
+                userId: $rider->user_id,
+                role: 'rider',
+                title: '🟢 Rider KYC Approved!',
+                message: "Congratulations! Your KYC verification has been approved by Admin. Get your Monthly Pass to go online!"
+            ));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning("Rider approval signal notice: " . $e->getMessage());
+        }
+
         return back()->with('success', "Rider '{$rider->user->name}' KYC approved! They must purchase a Monthly Rider Pass to go online.");
     }
 

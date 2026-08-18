@@ -7,9 +7,16 @@
 .env.production.local
 !.env.example
 
-public/hot
-hot
+/public/hot
+storage/*.key
 
 .DS_Store
 Thumbs.db
 *.log
+*.apk
+*.exe
+*.zip
+*.jks
+nativephp.lock
+
+

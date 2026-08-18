@@ -57,6 +57,30 @@ class RegisteredUserController extends Controller
             \App\Services\ReferralService::recordRegistration($user, $request->referral_code);
         }
 
+        // Real-time Push Notification to Admin
+        try {
+            $roleLabel = $roleEnum->label();
+            $notificationType = $roleEnum === UserRole::RIDER ? 'rider_registered' : 'user_registered';
+            event(new \App\Events\AdminNotificationEvent(
+                title: "New {$roleLabel} Registered!",
+                message: "{$user->first_name} {$user->last_name} ({$user->phone}) registered as {$roleLabel}.",
+                type: $notificationType,
+                url: '/admin/users'
+            ));
+
+            // Web Push notification to Super Admins
+            $superAdmins = User::role(UserRole::SUPER_ADMIN->value)->get();
+            foreach ($superAdmins as $adminUser) {
+                $adminUser->notify(new \App\Notifications\WebPushAlert(
+                    title: "🔔 New {$roleLabel} Joined",
+                    body: "{$user->first_name} {$user->last_name} registered ({$user->email}).",
+                    url: '/admin/users'
+                ));
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning("Admin registration notification notice: " . $e->getMessage());
+        }
+
         Auth::login($user);
 
         if ($roleEnum === UserRole::SHOP_OWNER) {

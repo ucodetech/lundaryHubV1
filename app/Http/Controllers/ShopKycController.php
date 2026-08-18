@@ -76,6 +76,27 @@ class ShopKycController extends Controller
             }
         }
 
+        // Real-time Push Notification to Admin
+        try {
+            event(new \App\Events\AdminNotificationEvent(
+                title: '🏪 Shop Storefront Submitted for KYC!',
+                message: "Shop '{$shop->name}' submitted verification documents for audit.",
+                type: 'kyc_submitted',
+                url: '/admin/shops'
+            ));
+
+            $superAdmins = \App\Models\User::role(\App\Enums\UserRole::SUPER_ADMIN->value)->get();
+            foreach ($superAdmins as $adminUser) {
+                $adminUser->notify(new \App\Notifications\WebPushAlert(
+                    title: '📋 Shop KYC Audit Submitted',
+                    body: "Shop '{$shop->name}' uploaded KYC verification files.",
+                    url: '/admin/shops'
+                ));
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning("Shop KYC notification notice: " . $e->getMessage());
+        }
+
         return back()->with('success', 'Shop KYC verification documents uploaded to Cloudinary successfully! Super Admin will audit your store.');
     }
 }

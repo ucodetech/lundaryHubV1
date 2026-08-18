@@ -5,12 +5,17 @@ import TopBar from '@/Components/TopBar.vue';
 import GlobalLoader from '@/Components/GlobalLoader.vue';
 import PwaInstallBanner from '@/Components/PwaInstallBanner.vue';
 import PushManager from '@/Components/PushManager.vue';
-import { usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { usePage, router } from '@inertiajs/vue3';
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
+import customSwal from '@/Utils/swal';
+import { UserRole } from '@/Enums/UserRole';
 
 const page = usePage();
+const currentUser = computed(() => page.props.auth?.user);
 const flashSuccess = computed(() => page.props.flash?.success);
 const flashError = computed(() => page.props.flash?.error);
+const flashWarning = computed(() => page.props.flash?.warning);
+const flashInfo = computed(() => page.props.flash?.info);
 
 const mobileOpen = ref(false);
 
@@ -21,6 +26,118 @@ function toggleMobileSidebar() {
 function closeMobileSidebar() {
   mobileOpen.value = false;
 }
+
+watch(
+  () => page.props.flash,
+  (flash: any) => {
+    if (!flash) return;
+
+    if (flash.success) {
+      customSwal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: 'Success',
+        text: flash.success,
+        showConfirmButton: false,
+        timer: 4500,
+        timerProgressBar: true,
+      });
+    }
+
+    if (flash.error) {
+      customSwal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'error',
+        title: 'Notice',
+        text: flash.error,
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+      });
+    }
+
+    if (flash.warning) {
+      customSwal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Warning',
+        text: flash.warning,
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+      });
+    }
+
+    if (flash.info) {
+      customSwal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'info',
+        title: 'Information',
+        text: flash.info,
+        showConfirmButton: false,
+        timer: 4500,
+        timerProgressBar: true,
+      });
+    }
+  },
+  { immediate: true, deep: true }
+);
+
+onMounted(() => {
+  if (typeof window !== 'undefined' && window.Echo) {
+    // 1. Listen for Real-Time Admin Notifications (Super Admin & Support)
+    if (currentUser.value && (currentUser.value.role === UserRole.SUPER_ADMIN || currentUser.value.role === UserRole.SUPPORT)) {
+      window.Echo.channel('admin-notifications')
+        .listen('.admin.notification', (data: any) => {
+          const title = data.notificationData?.title || '🔔 Real-time Admin Notification';
+          const message = data.notificationData?.message || 'New system event registered.';
+          
+          customSwal.fire({
+            title: title,
+            text: message,
+            icon: 'info',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 6000,
+            timerProgressBar: true,
+          });
+
+          // Also trigger silent Inertia reload to keep lists fresh
+          router.reload({ preserveScroll: true });
+        });
+    }
+
+    // 2. Listen for Approval Reload Signal on user's channel
+    if (currentUser.value?.id) {
+      window.Echo.channel(`user.${currentUser.value.id}`)
+        .listen('.user.approved', (data: any) => {
+          const payload = data.approvalData || {};
+          customSwal.fire({
+            title: payload.title || '🎉 Account Approved!',
+            text: payload.message || 'Your status has been updated.',
+            icon: 'success',
+            confirmButtonText: 'Great!',
+          }).then(() => {
+            // Auto reload current page/dashboard
+            router.reload();
+          });
+        });
+    }
+  }
+});
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined' && window.Echo) {
+    if (currentUser.value?.id) {
+      window.Echo.leaveChannel(`user.${currentUser.value.id}`);
+    }
+  }
+});
 </script>
 
 <template>

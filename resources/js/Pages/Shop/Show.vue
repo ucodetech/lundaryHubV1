@@ -447,6 +447,49 @@ const submitOrderBooking = () => {
             ></textarea>
           </div>
 
+          <!-- Payment Method Selector (Paystack/Transfer vs Cash) -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase mb-2">Payment Option *</label>
+            <div class="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                @click="checkoutForm.payment_method = 'paystack'"
+                class="p-3.5 rounded-xl border text-left transition-all"
+                :class="checkoutForm.payment_method === 'paystack' ? 'bg-sky-500/10 border-sky-500 text-sky-400 font-bold' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400'"
+              >
+                <div class="text-xs">💳 Online / Transfer</div>
+                <div class="text-[10px] text-gray-500 dark:text-slate-400 mt-0.5">Paystack / Shop DVA</div>
+              </button>
+
+              <button
+                type="button"
+                @click="checkoutForm.payment_method = 'cash_on_delivery'"
+                class="p-3.5 rounded-xl border text-left transition-all"
+                :class="checkoutForm.payment_method === 'cash_on_delivery' ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400 font-bold' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-400'"
+              >
+                <div class="text-xs">💵 Cash Option</div>
+                <div class="text-[10px] text-gray-500 dark:text-slate-400 mt-0.5">Pay on Delivery / Pickup</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Shop Owner Dedicated Virtual Account Box (If Available & Online Payment Selected) -->
+          <div
+            v-if="checkoutForm.payment_method === 'paystack' && shop.virtual_account?.account_number"
+            class="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-xs space-y-1.5"
+          >
+            <div class="flex items-center justify-between text-purple-300 font-bold">
+              <span>🏛️ Shop Direct Virtual Account</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/20 text-purple-300 font-mono">Instant Settlement</span>
+            </div>
+            <div class="text-gray-300 space-y-0.5 font-mono text-[11px]">
+              <div>Bank: <strong class="text-white">{{ shop.virtual_account.bank_name || 'Wema Bank' }}</strong></div>
+              <div>Account #: <strong class="text-purple-300 text-sm tracking-wider">{{ shop.virtual_account.account_number }}</strong></div>
+              <div>Account Name: <strong class="text-white">{{ shop.virtual_account.account_name || shop.name }}</strong></div>
+            </div>
+            <p class="text-[10px] text-purple-300/80 pt-1">Payments made to this virtual account go directly to {{ shop.name }}!</p>
+          </div>
+
           <!-- Total Calculation Card -->
           <div class="bg-gray-50 dark:bg-slate-950 p-4 rounded-xl border border-gray-200 dark:border-slate-800 space-y-2 text-xs font-mono">
             <div class="flex justify-between text-gray-500 dark:text-slate-400">
@@ -466,9 +509,11 @@ const submitOrderBooking = () => {
           <button
             type="submit"
             :disabled="checkoutForm.processing"
-            class="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 text-slate-950 font-bold text-sm shadow-xl shadow-sky-500/20 hover:scale-[1.02] transition-transform disabled:opacity-60"
+            class="w-full py-3.5 rounded-xl text-slate-950 font-bold text-sm shadow-xl hover:scale-[1.02] transition-transform disabled:opacity-60"
+            :class="checkoutForm.payment_method === 'cash_on_delivery' ? 'bg-gradient-to-r from-emerald-400 to-teal-400 shadow-emerald-500/20' : 'bg-gradient-to-r from-sky-500 to-cyan-500 shadow-sky-500/20'"
           >
-            Confirm & Pay ₦{{ totalPayable.toLocaleString() }} via Paystack →
+            <span v-if="checkoutForm.payment_method === 'cash_on_delivery'">Confirm Order (Pay ₦{{ totalPayable.toLocaleString() }} Cash) →</span>
+            <span v-else>Confirm & Pay ₦{{ totalPayable.toLocaleString() }} Online →</span>
           </button>
         </form>
       </div>

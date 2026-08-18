@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
         <title inertia>{{ config('app.name', 'LaundryHub') }}</title>
 
         <!-- Favicon & PWA Icons -->
@@ -29,9 +29,9 @@
 
         <!-- Scripts -->
         <script>
-            window.PUSHER_APP_KEY = "{{ env('PUSHER_APP_KEY') }}";
-            window.PUSHER_APP_CLUSTER = "{{ env('PUSHER_APP_CLUSTER', 'mt1') }}";
-            window.VAPID_PUBLIC_KEY = "{{ env('VAPID_PUBLIC_KEY') }}";
+            window.PUSHER_APP_KEY = "{{ config('broadcasting.connections.pusher.key') ?: env('PUSHER_APP_KEY') }}";
+            window.PUSHER_APP_CLUSTER = "{{ config('broadcasting.connections.pusher.options.cluster') ?: env('PUSHER_APP_CLUSTER', 'mt1') }}";
+            window.VAPID_PUBLIC_KEY = "{{ config('webpush.vapid.public_key') ?: env('VAPID_PUBLIC_KEY') }}";
         </script>
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])

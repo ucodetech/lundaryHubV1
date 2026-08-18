@@ -85,6 +85,21 @@ const cloneAllMasterTemplates = async () => {
       preserveScroll: true,
     });
   }
+const normalizeName = (name: string) => {
+  if (!name) return '';
+  return name.replace(/\s*\(Master Template\)\s*/gi, '').trim().toLowerCase();
+};
+
+const isMasterPriceCloned = (mPrice: any) => {
+  if (!props.prices || props.prices.length === 0) return false;
+  const mCatName = normalizeName(mPrice.category?.name);
+  const mSvcName = normalizeName(mPrice.service?.name);
+
+  return props.prices.some((p: any) => {
+    const pCatName = normalizeName(p.category?.name);
+    const pSvcName = normalizeName(p.service?.name);
+    return pCatName === mCatName && pSvcName === mSvcName;
+  });
 };
 </script>
 
@@ -247,7 +262,14 @@ const cloneAllMasterTemplates = async () => {
                 <td class="py-3 px-6 text-xs text-gray-500 dark:text-slate-400">{{ mPrice.service?.name }}</td>
                 <td class="py-3 px-6 text-right text-xs font-semibold text-purple-300">₦{{ Number(mPrice.amount).toLocaleString() }}</td>
                 <td v-if="isShopOwner" class="py-3 px-6 text-right">
+                  <span
+                    v-if="isMasterPriceCloned(mPrice)"
+                    class="px-2.5 py-1 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                  >
+                    ✓ Already Cloned
+                  </span>
                   <button
+                    v-else
                     @click="cloneMasterPrice(mPrice.id)"
                     class="px-3 py-1 rounded-xl text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 transition-all"
                   >
